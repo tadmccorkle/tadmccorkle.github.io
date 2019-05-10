@@ -35,6 +35,8 @@ comments:
     # Mailgun domain
     domain: "SgKlxFqzl3JdLsW8vhFBW4BCctefcenKdudh+4lWZyPc1g+gKHSUcoivPB/UraLj7a71SldhmWZkaF4JwKSb5uD835/D6s0np5aoP013t9RZBFf3zpjRypH0Kl5gxJCK+RvqMXwrDoIsH7qj00dM0StUQwkIu9LdAC4bhP6dPA8=" # !
 
+    fromAddress: tad@mg.tadmccorkle.com
+
   transforms:
     email: md5
 
