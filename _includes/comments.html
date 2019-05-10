@@ -1,0 +1,34 @@
+<section>
+  {% if site.data.comments[page.slug] %}
+    <hr>
+    <div>
+      <h2>
+        Comments
+      </h2>
+      {% assign comments = site.data.comments[page.slug] | where_exp: 'comment', 'comment.replying_to == ""' %}
+      {% assign comments_by_date = comments | sort: 'date' | reverse %}
+      {% for comment in comments_by_date %}
+        {% assign       index = forloop.length | plus: 1 | minus: forloop.index %}
+        {% assign replying_to = comment.replying_to | to_integer                %}
+        {% assign       email = comment.email                                   %}
+        {% assign        name = comment.name                                    %}
+        {% assign         url = comment.url                                     %}
+        {% assign        date = comment.date                                    %}
+        {% assign     message = comment.message                                 %}
+        {% assign       class = 'comment-parent'                                %}
+
+        {% include comment.html replying_to=replying_to
+                                message=message
+                                class=class
+                                email=email
+                                index=index
+                                date=date
+                                name=name
+                                url=url %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div id="respond" class="full-width">
+    {% include comment-form.html %}
+  </div>
+</section>

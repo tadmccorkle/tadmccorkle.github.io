@@ -1,0 +1,61 @@
+<article id="comment{% unless include.r %}{{ index | prepend: '-' }}{% else %}{{ include.index | prepend: '-' }}{% endunless %}" class="comment {{ include.class }}">
+  <img class="comment-icon" alt="gravatar" src="https://www.gravatar.com/avatar/{{ comment.email }}?d=mm&s=80">
+  <div class="comment-text-container">
+    <header class="comment-meta">
+      <div class="comment-name">
+        <b>
+          {{ include.name }}
+        </b>
+      </div>
+      <div class="comment-date">
+        {% if include.date %}
+          {% if include.index %}
+            <a href="#comment{{ include.index | prepend: '-' }}" title="Permalink to this comment">
+          {% endif %}
+          {{ include.date | date_to_long_string }}
+          {% if include.index %}
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </header>
+    <div>
+      <p class="comment-message">
+        {{ include.message | markdownify | remove: '<p>' | remove: '</p>' }}
+      </p>
+    </div>
+
+    {% unless include.replying_to != 0 %}
+      <div class="comment-reply">
+        <a rel="nofollow" onclick="return addComment.moveForm('comment-{{ include.index }}', '{{ include.index }}', 'respond', '{{ page.slug }}')">
+          &hookrightarrow; Reply to {{ include.name }}
+        </a>
+      </div>
+    {% endunless %}
+
+  </div>
+
+  {% capture i %}{{ include.index }}{% endcapture %}
+  {% assign replies = site.data.comments[page.slug] | where_exp: 'comment', 'comment.replying_to == i' %}
+  {% assign replies_by_date = replies | sort: 'date' %}
+  {% for reply in replies_by_date %}
+    {% assign       index = forloop.index | prepend: '-' | prepend: include.index %}
+    {% assign replying_to = reply.replying_to | to_integer                        %}
+    {% assign       email = reply.email                                           %}
+    {% assign        name = reply.name                                            %}
+    {% assign         url = reply.url                                             %}
+    {% assign        date = reply.date                                            %}
+    {% assign     message = reply.message                                         %}
+    {% assign       class = 'comment-child'                                       %}
+
+    {% include comment.html replying_to=replying_to
+                            message=message
+                            class=class
+                            email=email
+                            index=index
+                            date=date
+                            name=name
+                            url=url %}
+  {% endfor %}
+
+</article>

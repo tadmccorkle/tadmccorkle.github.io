@@ -1,0 +1,37 @@
+---
+layout: default
+---
+
+<div class="page-top"></div>
+<section class="contact-container">
+  <header>
+    <h1>
+      {{ page.title }}
+    </h1>
+  </header>
+  <section class="contact-content">
+    <div class="contact-message-container">
+      {{ content }}
+    </div>
+    <form class="contact-form" action="{{ site.formspree }}" method="POST">
+      <fieldset class="contact-field">
+        <label for="name" class="contact-label">Name
+          <input id="name" class="contact-input" name="name" type="text" tabindex="1" required="true" autofocus>
+        </label>
+      </fieldset>
+      <fieldset class="contact-field">
+        <label for="email" class="contact-label">Email
+          <input id="email" class="contact-input" name="email" type="email" tabindex="2" required="true">
+        </label>
+      </fieldset>
+      <fieldset class="contact-field">
+        <label for="message" class="contact-message-label">Message
+          <textarea id="message" class="contact-message-input" name="message" tabindex="3" required="true"></textarea>
+        </label>
+      </fieldset>
+      <fieldset class="contact-field">
+        <button class="submit" name="submit" type="submit" data-submit="...Sending">Submit</button>
+      </fieldset>
+    </form>
+  </section>
+</section>

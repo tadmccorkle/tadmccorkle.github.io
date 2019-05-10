@@ -1,0 +1,27 @@
+<ul class="blog-posts no-indentation">
+  {% assign post_count = include.posts.size %}
+  {% assign page_count = post_count | times:1.0 |divided_by:site.num_pagination | ceil %}
+  {% assign index = page.page_num | minus:1 %}
+  {% assign start = site.num_pagination | times:index %}
+  {% for post in include.posts limit:site.num_pagination offset:start %}
+    {% include post-snippet-list-item.html post=post %}
+  {% endfor %}
+</ul>
+{% if page_count > 1 %}
+  <div class="prev-next">
+    {% if page.page_num == 2 %}
+      <a class="prev-next-post prev-post" href="{{ include.base_url }}">
+        &larr; Newer Posts
+      </a>
+    {% elsif page.page_num != 1 %}
+      <a class="prev-next-post prev-post" href="{{ include.base_url }}page/{{ page.page_num | minus:1 }}">
+        &larr; Newer Posts
+      </a>
+    {% endif %}
+    {% if page.page_num != page_count %}
+      <a class="prev-next-post" href="{{ include.base_url }}page/{{ page.page_num | plus:1 }}">
+        Older Posts &rarr;
+      </a>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+
+  {% include head.html %}
+
+  <body>
+    <div class="site-content">
+
+      {% include header.html %}
+
+      <main class="page-content">
+
+        {{ content }}
+
+      </main>
+
+      {% include footer.html %}
+
+    </div>
+
+    <!-- load remaining scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    {% if site.main_js %}
+      <script type="text/javascript" src="{{ '/assets/js/main.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    {% else %}
+      <script type="text/javascript" src="{{ '/assets/js/site-nav.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+      {% if page.layout == 'blog-post' %}
+        {% comment %} either include 'scroll-up.js' or 'side-links.js' here {% endcomment %}
+        <script type="text/javascript" src="{{ '/assets/js/scroll-up.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+      {% endif %}
+      {% if page.comments %}
+        <script type="text/javascript" src="{{ '/assets/js/comments.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+      {% endif %}
+    {% endif %}
+    {% if page.layout contains 'post' %}
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5c64015d4bf7dde4"></script>
+    {% endif %}
+    {% if jekyll.environment == 'production' and site.google_analytics %}
+      {% include google_analytics.html %}
+    {% endif %}
+
+    <!-- this site needs js -->
+    <noscript>
+      <p><strong>This web page requires JavaScript to be enabled.</strong></p>
+      <p>JavaScript is an object-oriented computer programming language 
+        commonly used to create interactive effects within web browsers.</p>
+      <p><a href="https://goo.gl/koeeaJ">How to enable JavaScript?</a></p>
+    </noscript>
+
+  </body>
+</html>

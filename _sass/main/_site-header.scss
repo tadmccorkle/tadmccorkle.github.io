@@ -1,0 +1,108 @@
+/**
+ * File: _site-header.scss
+ * Author: Tad McCorkle
+ * File for styling the site header.
+ *
+ * Elements:
+ * - .header-container
+ * - .site-nav
+ * - .site-header-logo
+ * - .site-title
+ * - .site-tagline
+ * - .main-tageline
+ *   - .hide
+ * - .alt-tagline
+ *   - .show
+ *
+ * Imports:
+ * - Hamburger Menu
+ * - Header Links
+ */
+
+
+/* main site-header styling */
+
+.header-container {
+  margin: auto;
+  max-width: $max-page-width;
+}
+
+.site-nav {
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem 0;
+  border-bottom: $content-border-size solid $content-border-color;
+  @include screen-b {
+    flex-wrap: wrap;
+  }
+  @include only-screen-b {
+    padding-bottom: 1.1rem;
+  }
+  @include screen-c {
+    align-items: center;
+  }
+}
+
+.site-header-logo {
+  flex: 1;
+}
+
+.site-title {
+  @include ease-in(color);
+  font-family: $header-logo-font-family;
+  font-size: $site-title-font-size;
+  font-weight: $bold-montserrat-weight;
+  letter-spacing: -1px;
+  color: $header-logo-font-color;
+  text-decoration: none;
+  @include screen-f {
+    font-size: $site-title-font-size-f;
+  }
+
+  &:hover {
+    color: $highlight-font-color;
+  }
+}
+
+.site-tagline {
+  position: relative;
+  font-family: $header-logo-font-family;
+  font-size: $site-tagline-font-size;
+  @include screen-f {
+    font-size: $site-tagline-font-size-f;
+  }
+}
+
+.main-tagline {
+  @include ease-in-out(opacity);
+  opacity: 1;
+
+  &.hide {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+.alt-tagline {
+  @include ease-in-out(opacity);
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  visibility: hidden;
+
+  &.show {
+    opacity: 1;
+    position: relative;
+    pointer-events: all;
+    visibility: visible;
+  }
+}
+
+
+/* import components to site header */
+
+@import
+  'components/hamburger',
+  'components/header-links'
+;

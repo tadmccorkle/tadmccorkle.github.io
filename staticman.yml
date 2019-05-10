@@ -1,0 +1,44 @@
+# (*): Required
+# (!): Encrypted - https://api.staticman.net/v3/encrypt/{TEXT TO BE ENCRYPTED}
+
+comments:
+  allowedFields: ["name", "email", "message", "replying_to"] # *
+  requiredFields: ["name", "message"]
+
+  branch: "master" # *
+  commitMessage: "New comment."
+  path: "_data/comments/{options.slug}" # *
+  filename: "comment-{@timestamp}" # *
+  format: "yaml"
+  moderation: true
+
+  # List of fields to be populated automatically by Staticman and included in
+  # the data file. Keys are the name of the field. The value can be an object
+  # with a `type` property, which configures the generated field, or any value
+  # to be used directly (e.g. a string, number or array)
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: "iso8601"
+
+  # Name of the site. Used in notification emails.
+  name: "tadmccorkle.com"
+
+  allowedOrigins: ["tadmccorkle.com"]
+  notifications:
+    enabled: true
+
+    # Mailgun API key
+    apiKey: "gRrXk2F8WsxQE5RJnMpq+v88YBTQPNYmQBmY7M5c5zgBUq3GrxuUlCuEUXgV7g2996J+8e6FLs5yqarvwZSNXrHoc6Tz8kfaok+pYAom//IyFXUQih1Fes7Q4ijXkoV6XDs72pnj4WwrFHE7gFqPmCYiGGAjL0ZbG3K7op91a9w=" # !
+
+    # Mailgun domain
+    domain: "SgKlxFqzl3JdLsW8vhFBW4BCctefcenKdudh+4lWZyPc1g+gKHSUcoivPB/UraLj7a71SldhmWZkaF4JwKSb5uD835/D6s0np5aoP013t9RZBFf3zpjRypH0Kl5gxJCK+RvqMXwrDoIsH7qj00dM0StUQwkIu9LdAC4bhP6dPA8=" # !
+
+  transforms:
+    email: md5
+
+  reCaptcha: # copied from _config.yml
+    enabled: true
+    siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
+    secret: "GqDIVHDsB7wanK4h2ixPokbGoaGJq//oaGapBnZH/BuzPZVXNl1sf+dB1JmEWJS0MHam88z0Fblgroz1/83FLyee0KpPlJdTXg/HxdR8C/ULEtUaqQiA8T5X5A8XAU3A8vSJrbehT6DQ4KpoITnm3jEJ9TNltR7C40/wymTJ53w=" # !

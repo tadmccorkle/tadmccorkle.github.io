@@ -1,0 +1,190 @@
+# config file for entire blog
+
+# site settings
+title           : Tad McCorkle
+tagline         : Husband, Engineer, Etc.
+alt_taglines    :
+  - Christ Follower
+  - Husband
+  - Engineer
+  - Developer
+  - Avid Learner
+  - Aspiring Runner
+  - Coffee Lover
+intro           : Hi! I'm Tad. Thanks for checking out my site!
+description     : >-
+  A site about my adventures in programming, entertainment,
+  and whatever else I feel like talking about. By Tad McCorkle.
+baseurl         : ""
+url             : https://tadmccorkle.com
+email           : tad.mccorkle@gmail.com
+github_username : tadmccorkle
+repository      : tadmccorkle/tadmccorkle.github.io
+main_js         : true
+# scroll_links    : false
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-redirect-from
+
+# post collections
+collections:
+  about_posts:
+    output: true
+  category:
+    output: true
+  tag:
+    output: true
+  living:
+    output: true
+
+# main pages
+about           : &about          "/"
+about_title     : &about_title    "About"
+blog            : &blog           "/blog/"
+blog_title      : &blog_title     "The Blog"
+projects        : &projects       "/projects/"
+projects_title  : &projects_title "My Projects"
+contact         : &contact        "/contact/"
+contact_title   : &contact_title  "Contact Me"
+
+about_nav       : "About"
+blog_nav        : "Blog"
+projects_nav    : "Projects"
+contact_nav     : "Contact"
+copyright       : "&COPY; 2019 - Tad McCorkle"
+
+category_title  : &category_title "Categories"
+tag_title       : &tag_title      "Tags"
+living_title    : &living_title   "Living Posts"
+category_url    :                 "/blog/categories/"
+tag_url         : &tag_url        "/blog/tags/"
+living_url      : &living_url     "/blog/living-posts/"
+living_tag      :                 "living post"
+
+defaults:
+  -
+    scope: # all about posts
+      path              : ""
+      type              : "about_posts"
+    values:
+      layout            : "home"
+      permalink         : "/about/:title/"
+  -
+    scope: # all blog posts
+      path              : ""
+      type              : "posts"
+    values:
+      layout            : "blog-post"
+      comments          : true
+      category          : "Other"
+      permalink         : "/blog/posts/:title/"
+      excerpt_separator : <!-- more -->
+  -
+    scope: # posts by category
+      path              : ""
+      type              : "category"
+    values:
+      layout            : "blog-home"
+      title             : *category_title
+      permalink         : "/blog/categories/:path"
+  -
+    scope: # posts by tag
+      path              : ""
+      type              : "tag"
+    values:
+      layout            : "blog-home"
+      title             : *tag_title
+      permalink         : *tag_url
+  -
+    scope: # living posts (have tag 'living post')
+      path              : ""
+      type              : "living"
+    values:
+      layout            : "blog-home"
+      title             : *living_title
+      permalink         : *living_url
+      redirect_from     : "/blog/living_posts/"
+  -
+    scope: # about/home page
+      path              : "index.md"
+      type              : "pages"
+    values:
+      layout            : "home"
+      title             : *about_title
+      permalink         : *about
+      redirect_from     : "/about/"
+  -
+    scope: # blog page
+      path              : "/blog/*"
+      type              : "pages"
+    values:
+      layout            : "blog-home"
+      title             : *blog_title
+  -
+    scope: # projects page
+      path              : "projects.md"
+      type              : "pages"
+    values:
+      layout            : "projects"
+      title             : *projects_title
+      permalink         : *projects
+      redirect_from     : "/my-projects/"
+  -
+    scope: # contact page
+      path              : "contact.md"
+      type              : "pages"
+    values:
+      layout            : "contact"
+      title             : *contact_title
+      permalink         : *contact
+      redirect_from     : "/contact-me/"
+
+# non-plugin pagination
+num_pagination          : 2
+# num_pagination          : 15
+
+# build settings
+markdown                : kramdown
+kramdown:
+  input                 : GFM
+  syntax_highlighter    : rouge
+highlighter             : rouge
+sass:
+  sass_dir              : _sass
+  style                 : compressed
+
+# atom feed
+author    : Tad McCorkle
+feed_path : /blog/feed.xml
+feed:
+  path    : /blog/feed.xml
+
+# social
+github    : https://github.com/tadmccorkle
+linkedin  : https://www.linkedin.com/in/christopher-mccorkle-b268a4115/
+instagram : https://www.instagram.com/tadmccorkle
+
+# other social
+student_github: https://github.com/toastytad
+
+# analytics
+google_analytics: UA-131396488-1
+
+# comments
+staticman: https://api.staticman.net/v3/entry/github/tadmccorkle/tadmccorkle.github.io/master/comments
+reCaptcha:
+  siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
+  secret: "GqDIVHDsB7wanK4h2ixPokbGoaGJq//oaGapBnZH/BuzPZVXNl1sf+dB1JmEWJS0MHam88z0Fblgroz1/83FLyee0KpPlJdTXg/HxdR8C/ULEtUaqQiA8T5X5A8XAU3A8vSJrbehT6DQ4KpoITnm3jEJ9TNltR7C40/wymTJ53w=" # !
+
+# contact form
+formspree: https://formspree.io/tad.mccorkle@gmail.com
+
+# Exclude from processing.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - paginate.py
+  # - assets/images/posts/drafts

@@ -1,0 +1,102 @@
+// ---------------------------------------------------------------
+// File: _transitions.scss
+// Author: Tad McCorkle
+// Transitions and related elements used throughout the site are
+// defined here.
+// ---------------------------------------------------------------
+
+@mixin ease-in($prop: all, $time: $transition-duration) {
+  transition: $prop $time ease-in;
+}
+
+@mixin ease-out($prop: all, $time: $transition-duration) {
+  transition: $prop $time ease-out;
+}
+
+@mixin ease-in-out($prop: all, $time: $transition-duration) {
+  transition: $prop $time ease-in-out;
+}
+
+@mixin underline {
+  &:before {
+    @include ease-in-out;
+    content: '';
+    cursor: default;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    bottom: -0.4em;
+    width: 100%;
+    height: 2px;
+    background-color: $header-link-inactive-underline-color;
+    visibility: hidden;
+    transform: scaleX(0);
+  }
+
+  &:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+
+  &.active:before {
+    background-color: $header-link-active-underline-color;
+    visibility: visible;
+    transform: scaleX(1);
+  }
+}
+
+@mixin underline-comment {
+  &:before {
+    @include ease-in-out;
+    content: '';
+    cursor: default;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: $comment-field-focus-border-color;
+    visibility: hidden;
+    transform: scaleX(0);
+  }
+
+  &:focus-within:before {
+    visibility: visible;
+    transform: scaleX(1);
+  }
+}
+
+@mixin arrow($content, $right, $inactive-transform, $active-transform) {
+  &:after {
+    @include ease-in;
+    content: $content;
+    cursor: default;
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    right: $right;
+    top: 0;
+    color: $header-link-arrow-color;
+    visibility: hidden;
+    transform: $inactive-transform;
+  }
+
+  &:hover:after {
+    visibility: visible;
+    transform: $active-transform;
+  }
+
+  &.active:after {
+    visibility: visible;
+    transform: $active-transform;
+  }
+}
+
+@mixin arrow-right {
+  @include arrow('>', -1em, scaleY(0), scaleY(1));
+}
+
+@mixin arrow-down {
+  @include arrow('\25bc', -0.9em, scaleX(0), scaleX(0.6));
+}
