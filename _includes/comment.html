@@ -20,9 +20,7 @@
       </div>
     </header>
     <div>
-      <p class="comment-message">
-        {{ include.message | markdownify | remove: '<p>' | remove: '</p>' }}
-      </p>
+      {{ include.message | markdownify | replace: '<p>', '<p class="comment-message">' }}
     </div>
 
     {% unless include.replying_to != 0 %}
