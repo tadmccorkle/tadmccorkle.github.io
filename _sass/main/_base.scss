@@ -1,0 +1,193 @@
+/**
+ * File: _base.scss
+ * Author: Tad McCorkle
+ * File for base element styling.
+ *
+ * Abstract SASS Elements:
+ * - caption
+ *
+ * Elements:
+ * - html
+ * - body
+ * - p
+ * - li
+ * - a
+ * - i, em
+ * - b, strong
+ * - h1, h2, h3, h4, h5, h6
+ *   - b
+ *   - strong
+ * - table
+ * - th
+ * - tbody
+ *   - tr
+ * - td
+ * - img
+ *   - .no-border
+ *   - .left, .align-left
+ *   - .right, .align-right
+ *   - .no-border
+ * - figcaption
+ * - .with-caption
+ * - .left-figure-caption
+ * - .center-figure-caption
+ * - .left-table-caption
+ * - .center-table-caption
+ * - .right-table-caption
+ * - .screen-c
+ */
+
+
+// extensions
+
+%caption {
+  width: 95%;
+  margin: auto;
+  font-size: $caption-font-size;
+  @include screen-f {
+    font-size: $caption-font-size-f;
+  }
+}
+
+
+// implementation
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1rem;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background-color: $main-background-color;
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+li {
+  font-family: $main-text-font-family;
+}
+
+a {
+  font: inherit;
+}
+
+i,
+em {
+  font-style: italic;
+}
+
+a {
+  cursor: pointer;
+}
+
+b,
+strong {
+  font-weight: $bold-lora-weight;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  >b, >strong {
+    font-weight: $bold-montserrat-weight;
+  }
+}
+
+table {
+  margin: auto;
+  width: 95%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  font-style: italic;
+  font-size: $table-header-font-size;
+  border-bottom: 2px solid $table-header-border-color;
+  padding: 0.6em 0.5em;
+  @include screen-f {
+    font-size: $table-header-font-size-f;
+  }
+}
+
+tbody tr {
+  border-bottom: 1px solid $table-content-border-color;
+
+  &:hover {
+    background-color: $text-background-color;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid $table-footer-border-color;
+  }
+}
+
+td {
+  padding: 0.4em 0.5em;
+  font-size: $table-content-font-size;
+  @include screen-f {
+    font-size: $table-content-font-size-f;
+  }
+}
+
+img {
+  max-width: 100%;
+  box-sizing: border-box;
+  border: $image-border-size solid $image-border-color;
+
+  &.no-border {
+    border: none;
+  }
+
+  &.left, &.align-left {
+    margin: 5px 15px 2px 0;
+  }
+
+  &.right, &.align-right {
+    margin: 5px 0 2px 15px;
+  }
+}
+
+figcaption {
+  @extend %caption;
+  padding-top: 0.5em;
+}
+
+.with-caption {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.left-figure-caption {
+  text-align: left;
+}
+
+.center-figure-caption {
+  text-align: center;
+}
+
+.left-table-caption {
+  @extend %caption;
+  text-align: left;
+}
+
+.center-table-caption {
+  @extend %caption;
+  text-align: center;
+}
+
+.right-table-caption {
+  @extend %caption;
+  text-align: center;
+}
+
+.screen-c {
+  display: none;
+  @include screen-c {
+    display: initial;
+  }
+}

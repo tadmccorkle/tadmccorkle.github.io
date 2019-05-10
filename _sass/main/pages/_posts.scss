@@ -1,0 +1,306 @@
+/**
+ * File: _posts.scss
+ * Author: Tad McCorkle
+ * File for styling post-specific content.
+ *
+ * Abstract SASS Elements:
+ * - post-meta
+ * - post-link-list-item
+ * - post-link
+ *
+ * Elements:
+ * - .post-container
+ * - .post
+ * - .post-links
+ * - .post-horizontal-padding
+ * - .post-vertical-padding
+ * - .blog-posts
+ * - .post-title
+ * - .upper-post-meta
+ * - .post-snippet-meta
+ * - .post-snippet
+ * - .lower-post-meta-icons
+ * - .post-link-heading
+ * - .post-top-links
+ * - .blog-link-list-item
+ * - .blog-link
+ * - .post-link-list-item
+ * - .post-link
+ * - .scroll-link-icons
+ * - .scroll-link-icon
+ * - .scroll-link-icon-text
+ * - .post-tags
+ * - .post-tag
+ * - .post-tag-link
+ * - .prev-next
+ * - .prev-next-post
+ * - .prev-post
+ * - .category-post-link
+ * - .collection-post-list-item
+ * - .collection-post-date
+ */
+
+
+// extensions
+
+%post-meta {
+  font-family: $main-text-font-family;
+  font-size: $post-meta-font-size;
+  font-style: italic;
+  @include screen-f {
+    font-size: $post-meta-font-size-f;
+  }
+}
+
+%post-link-list-item {
+  list-style: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: $post-link-normal-color;
+
+  &:hover {
+    color: $post-link-highlight-color;
+  }
+}
+
+%post-link {
+  font-size: $post-link-font-size;
+  text-decoration: none;
+  @include screen-f {
+    font-size: $post-link-font-size-f;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+// implementation
+
+.post-container {
+  display: flex;
+  justify-content: flex-start;
+  @include screen-c {
+    flex-direction: column;
+  }
+}
+
+.post {
+  width: $normal-post-width;
+  @include screen-b {
+    width: $normal-post-width-b;
+  }
+  @include screen-c {
+    width: $normal-post-width-c;
+  }
+}
+
+.post-links {
+  padding-top: 1rem;
+  width: $post-link-width;
+  @include screen-c {
+    width: $normal-post-width-c;
+    padding-top: 0;
+  }
+}
+
+.post-horizontal-padding {
+  width: $horizontal-padding-width;
+  @include screen-b {
+    width: $horizontal-padding-width-b;
+  }
+}
+
+.post-vertical-padding {
+  padding: 0.5rem 0;
+}
+
+.blog-posts {
+  padding-bottom: 0;
+}
+
+.post-title {
+  padding-bottom: 0.25em;
+  line-height: 1.1;
+}
+
+.upper-post-meta {
+  @extend %post-meta;
+  padding: 0 0 2em 0;
+}
+
+.post-snippet-meta {
+  @extend %post-meta;
+  padding: 0 0 1em 0;
+}
+
+.post-snippet {
+  list-style: none;
+  padding-bottom: 1.5rem;
+}
+
+.lower-post-meta-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.post-link-heading {
+  font-family: $post-link-heading-font-family;
+}
+
+.post-top-links {
+  @include screen-c {
+    padding-bottom: 0;
+  }
+}
+
+.blog-link-list-item {
+  @extend %post-link-list-item;
+  @include screen-c {
+    display: inline-block;
+    padding-right: 1rem;
+    font-size: 1.25rem;
+  }
+}
+
+.blog-link {
+  @extend %post-link;
+}
+
+.post-link-list-item {
+  @extend %post-link-list-item;
+  padding: 0;
+  border-bottom: $post-link-border-size solid $post-link-line-color;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.post-link {
+  @extend %post-link;
+  font-style: italic;
+}
+
+.scroll-link-icons {
+  @include ease-in-out(opacity, $scroll-link-fade-duration);
+  display: block;
+  padding-left: 8rem;
+  padding-top: 12rem;
+  opacity: 0;
+  top: 0;
+  pointer-events: none;
+  @include screen-c {
+    display: none;
+  }
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.scroll-link-icon {
+  padding-bottom: 1em;
+  list-style: none;
+}
+
+.scroll-link-icon-text {
+  @include ease-in-out(color);
+  font-size: 0.8rem;
+  color: $post-side-link-color;
+
+  &:hover {
+    color: $post-side-link-hover-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.post-tags {
+  padding: 0;
+}
+
+.post-tag {
+  list-style: none;
+  display: inline-block;
+  margin: 0.25em 0.25em;
+  padding: 0.25em;
+  line-height: 1;
+  background-color: $text-background-color;
+}
+
+.post-tag-link {
+  color: $post-tag-color;
+  font-weight: $bold-lora-weight;
+
+  &:hover {
+    color: $post-tag-hover-color;
+  }
+}
+
+.prev-next {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.prev-next-post {
+  @include ease-in-out;
+  cursor: pointer;
+  pointer-events: all;
+  margin: 2em 0.25em;
+  padding: 1em;
+  border: $post-next-prev-border-size solid $post-next-prev-border-color;
+  font-family: $post-next-prev-font-family;
+  font-size: $post-next-prev-font-size;
+  color: $post-next-prev-font-color;
+  background: $post-next-prev-background-color;
+  @include screen-f {
+    font-size: $post-next-prev-font-size-f;
+  }
+
+  &:hover {
+    color: $post-next-prev-hover-font-color;
+    background: $post-next-prev-hover-background-color;
+  }
+}
+
+.prev-post {
+  margin-right: auto;
+}
+
+.collection-post-link {
+  font-style: italic;
+
+  &:hover {
+    text-decoration: none;
+    color: $main-font-color;
+  }
+}
+
+.collection-post-list-item {
+  list-style-type: circle;
+  color: $post-link-normal-color;
+
+  &:hover {
+    list-style-type: disc;
+    color: $main-font-color;
+  }
+}
+
+.collection-post-date {
+  font-style: normal;
+  color: $main-font-color;
+  font-size: $post-meta-font-size;
+  @include screen-f {
+    font-size: $post-meta-font-size-f;
+  }
+}

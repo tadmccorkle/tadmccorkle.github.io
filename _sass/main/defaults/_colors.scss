@@ -1,0 +1,108 @@
+// ---------------------------------------------------------------
+// File: _colors.scss
+// Author: Tad McCorkle
+// Colors used throughout the site are defined here.
+// ---------------------------------------------------------------
+
+// Main Theme Background Colors:
+// - #4ca9d0 - turquoise
+// - #23435c - dark slate gray 
+// - #dbdce0 - light steel blue
+// - #7791a3 - light slate gray
+// - #794c3c - dark olive green (brown)
+
+// reasonable inverted colors
+// $main-font-color: invert($main-font-color);
+// $main-background-color: desaturate(lighten(invert($main-background-color), 5%), 20%);
+// $content-border-color: invert($content-border-color);
+
+// primary font colors
+$a: #333;
+$b: #4ca9d0;
+$c: #cc3300;
+$main-font-color                        : $a                !default;
+$highlight-font-color                   : $b                !default;
+$cancel-font-color                      : $c                !default;
+
+
+// background and border colors
+$a: #FFF;
+$b: #dbdce0;
+$c: #4ca9d0;
+$main-background-color                  : $a                !default;
+$content-border-color                   : $b                !default;
+$page-border-color                      : $c                !default;
+$text-background-color                  : lighten($b, 10%)  !default;
+
+// header colors
+$a: $main-font-color;
+$b: $highlight-font-color;
+$c: $content-border-color;
+$header-logo-font-color                 : $a                !default;
+$header-link-font-color                 : $a                !default;
+$header-link-active-underline-color     : $b                !default;
+$header-link-inactive-underline-color   : $c                !default;
+$header-link-arrow-color                : $b                !default;
+
+// hamburger menu colors
+$a: $main-font-color;
+$hamburger-menu-color                   : $a                !default;
+
+// footer colors
+$a: $main-font-color;
+$footer-link-font-color                 : $a                !default;
+
+// main page colors
+$a: $highlight-font-color;
+$b: $main-font-color;
+$c: $content-border-color;
+$link-font-color                        : $a                !default;
+$link-hover-font-color                  : $b                !default;
+$image-border-color                     : $b                !default;
+$table-header-border-color              : $a                !default;
+$table-content-border-color             : $c                !default;
+$table-footer-border-color              : $b                !default;
+
+// about page colors
+
+// contact page colors
+$a: $content-border-color;
+$b: $main-font-color;
+$contact-field-border-color             : $a                !default;
+$contact-field-font-color               : $b                !default;
+
+// posts page colors
+$a: $link-font-color;
+$b: $link-hover-font-color;
+$c: $content-border-color;
+$d: $main-font-color;
+$e: $highlight-font-color;
+$post-link-normal-color                 : $a                !default;
+$post-link-highlight-color              : $b                !default;
+$post-link-line-color                   : $c                !default;
+$post-tag-color                         : $d                !default;
+$post-tag-hover-color                   : lighten($d, 25%)  !default;
+$post-side-link-color                   : $c                !default;
+$post-side-link-hover-color             : $e                !default;
+$post-next-prev-border-color            : $c                !default;
+$post-next-prev-font-color              : $d                !default;
+$post-next-prev-background-color        : lighten($c, 10%)  !default;
+$post-next-prev-hover-font-color        : lighten($c, 10%)  !default;
+$post-next-prev-hover-background-color  : lighten($d, 10%)  !default;
+$category-heading-color                 : $d                !default;
+
+// comment section
+$a: $content-border-color;
+$b: $main-font-color;
+$c: $highlight-font-color;
+$comment-field-border-color             : $a                !default;
+$comment-field-font-color               : $b                !default;
+$comment-field-focus-border-color       : $c                !default;
+
+// submit button
+$a: $content-border-color;
+$b: $main-font-color;
+$submit-font-color                      : $b                !default;
+$submit-background-color                : lighten($a, 10%)  !default;
+$submit-hover-font-color                : lighten($a, 10%)  !default;
+$submit-hover-background-color          : lighten($b, 10%)  !default;

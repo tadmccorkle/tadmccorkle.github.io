@@ -1,0 +1,37 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description }}">
+  <title>{% if page.title %}{% assign title = ' | ' %}{{ title | prepend: site.title | append: page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="shortcut icon" href="{{ '/assets/images/favicon/favicon.ico?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon/favicon-16x16.png?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon/favicon-32x32.png?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ 'assets/images/favicon/android-chrome-192x192.png?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="icon" type="image/png" sizes="384x384" href="{{ 'assets/images/favicon/android-chrome-384x384.png?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/favicon/apple-touch-icon.png?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="mask-icon" href="{{ '/assets/images/favicon/safari-pinned-tab.svg?v=' | append: site.github.build_revision | relative_url }}" color="#ffffff">
+  <link rel="manifest" href="{{ '/assets/images/favicon/site.webmanifest?v=' | append: site.github.build_revision | relative_url }}">
+  <meta name="msapplication-config" content="{{ '/assets/images/favicon/browserconfig.xml?v=' | append: site.github.build_revision | relative_url }}">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="theme-color" content="#ffffff">
+  {% if page.comments %}<script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endif %}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  {% if page.mathjax %}<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>{% endif %}
+  {% seo title=false %}
+  {% feed_meta %}
+  <!-- in case of ludites -->
+  <!--[if lt IE 9]>
+    <script>
+      document.createElement("article");
+      document.createElement("aside");
+      document.createElement("footer");
+      document.createElement("header");
+      document.createElement("nav");
+      document.createElement("section");
+      document.createElement("time");
+    </script>
+  <![endif]-->
+</head>

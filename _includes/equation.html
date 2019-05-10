@@ -1,0 +1,6 @@
+<p style="padding-bottom:0">
+  {% assign equations = include.equations | split: '\?/' %}
+  {% for equation in equations %}
+    $${{ equation }}$$
+  {% endfor %}
+</p>

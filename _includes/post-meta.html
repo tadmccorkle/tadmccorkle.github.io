@@ -1,0 +1,12 @@
+<div class="upper-post-meta">
+  {% assign category_slug = page.category | slugify %}
+  posted in
+  <a href="{{ site.category_url | append: category_slug }}">
+    {{ page.category }}
+  </a>
+  on {{ page.date | date: "%B %d, %Y" }}
+  {% if page.last_updated %}
+    <span>|</span>
+    last updated: {{ page.last_updated | date: "%B %d, %Y" }}
+  {% endif %}
+</div>

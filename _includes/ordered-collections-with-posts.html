@@ -1,0 +1,54 @@
+{% capture low_collection %}
+  {% for item in include.collection %}
+    {{ item[0] | downcase }},
+  {% endfor %}
+{% endcapture %}
+{% assign low_collection = low_collection | split: ',' | sort %}
+
+{% capture sorted_collection %}
+  {% for i in low_collection %}
+    {% assign strip_i = i | strip %}
+    {% for j in include.collection %}
+      {% assign low_j = j[0] | downcase %}
+      {% if strip_i == low_j %}
+        {{ j[0] }},
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endcapture %}
+{% assign sorted_collection = sorted_collection | split: ',' %}
+
+<ul class="no-indentation">
+  {% for i in sorted_collection %}
+    {% assign item_name = i | strip %}
+    {% unless item_name == '' %}
+      <li class="post-tag">
+        <a class="post-tag-link" href="#{{ item_name | slugify }}">
+          {{ item_name }}
+        </a>
+      </li>
+    {% endunless %}
+  {% endfor %}
+</ul>
+<hr>
+{% for i in sorted_collection %}
+  {% assign item_name = i | strip %}
+  {% assign item_slug = item_name | slugify %}
+  <h2 id="{{ item_slug }}" class="post-title">
+    {% if include.url %}
+      <a href="{{ include.url | append: item_slug }}">
+        {{ item_name }}
+      </a>
+    {% else %}
+      {{ item_name }}
+    {% endif %}
+  </h2>
+  <ul>
+    {% for item in include.collection %}
+      {% if item[0] == item_name %}
+        {% assign posts = item[1] %}
+        {% include post-list.html posts=posts %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endfor %}
