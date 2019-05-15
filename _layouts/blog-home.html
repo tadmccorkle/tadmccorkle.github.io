@@ -26,7 +26,7 @@ layout: blog
     {% if site.categories contains page.title %}
       <ul class="blog-posts no-indentation">
         {% assign posts = site.categories[page.title] %}
-        {% assign base_url = site.category_url | append: page.title | append: '/' %}
+        {% assign base_url = site.category_url | append: page.title | downcase | append: '/' %}
         {% include pagination.html posts=posts base_url=base_url %}
       </ul>
     {% else %}
