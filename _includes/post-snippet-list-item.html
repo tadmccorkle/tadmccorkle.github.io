@@ -1,0 +1,9 @@
+<li class="post-snippet">
+  <h2 id="{{ post.title | slugify }}" class="post-title">
+    <a href="{{ post.url }}">
+      {{ post.title }}
+    </a>
+  </h2>
+  {% include post-snippet-meta.html %}
+  {{ post.excerpt }}
+</li>

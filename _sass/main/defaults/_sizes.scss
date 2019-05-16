@@ -1,0 +1,159 @@
+// ---------------------------------------------------------------
+// File: _sizes.scss
+// Author: Tad McCorkle
+// Sizes (dimensions, font sizes, etc.) used throughout the site
+// are defined here.
+// ---------------------------------------------------------------
+
+// widths and heights (not line height - see font sizes below)
+
+$max-page-width                 : 1000px  !default;
+
+// hamburger menu widths and heights
+$hamburger-patty-width          : 30px    !default;
+$hamburger-patty-height         : 1px     !default;
+$hamburger-patty-spacing        : 10px    !default;
+
+// about page widths and heights
+$about-image-width              : 114px   !default;
+$about-image-width-c            : 122px   !default;
+$about-image-width-d            : 108px   !default;
+$about-image-width-f            : 110px   !default;
+
+// contact page widths and heights
+$max-contact-page-width         : 80%     !default;
+$contact-input-field-width      : 75%     !default;
+$contact-input-field-height     : 2em     !default;
+$contact-message-field-width    : 100%    !default;
+$contact-message-field-height   : 15em    !default;
+
+// posts page widths and heights
+$normal-post-width              : 70%     !default;
+$normal-post-width-b            : 75%     !default;
+$normal-post-width-c            : 100%    !default;
+$horizontal-padding-width       : 10%     !default;
+$horizontal-padding-width-b     : 5%      !default;
+$post-link-width                : 20%     !default;
+
+// comment section heights and heights
+$comment-input-field-height     : 2em     !default;
+$comment-message-field-height   : 15em    !default;
+
+
+// font sizes
+
+// header font sizes
+$site-title-font-size           : 3.5rem  !default;
+$site-title-font-size-f         : 3rem    !default;
+$site-tagline-font-size         : 2rem    !default;
+$site-tagline-font-size-f       : 1.7rem  !default;
+$header-link-font-size          : 1.9rem  !default;
+$header-link-font-size-f        : 1.6rem  !default;
+
+// footer font sizes
+$normal-footer-link-font-size   : 1.7rem  !default;
+$normal-footer-link-font-size-f : 1.5rem  !default;
+$social-footer-link-font-size   : 2.4rem  !default;
+$social-footer-link-font-size-f : 2rem    !default;
+$copyright-font-size            : 1.4rem  !default;
+$copyright-font-size-f          : 1.2rem  !default;
+
+// main page font sizes
+$heading-letter-spacing         : -1px    !default;
+$h1-font-size                   : 3.6rem  !default;
+$h1-font-size-f                 : 3.1rem  !default;
+$h2-font-size                   : 3.2rem  !default;
+$h2-font-size-f                 : 2.75rem !default;
+$h3-font-size                   : 2.8rem  !default;
+$h3-font-size-f                 : 2.4rem  !default;
+$h4-font-size                   : 2.4rem  !default;
+$h4-font-size-f                 : 2.1rem  !default;
+$h5-font-size                   : 2rem    !default;
+$h5-font-size-f                 : 1.7rem  !default;
+$h6-font-size                   : 1.8rem  !default;
+$h6-font-size-f                 : 1.5rem  !default;
+$p-font-size                    : 1.8rem  !default;
+$p-font-size-c                  : 1.9rem  !default;
+$p-font-size-d                  : 1.7rem  !default;
+$p-font-size-f                  : 1.5rem  !default;
+$p-line-height                  : 1.7     !default;
+$code-font-size                 : 1.4rem  !default;
+$code-font-size-f               : 1.2rem  !default;
+$inline-code-font-size          : 0.95em  !default;
+$code-line-height               : 1.5     !default;
+$caption-font-size              : 1.4rem  !default;
+$caption-font-size-f            : 1.2rem  !default;
+$table-header-font-size         : 1.5rem  !default;
+$table-header-font-size-f       : 1.3rem  !default;
+$table-content-font-size        : 1.4rem  !default;
+$table-content-font-size-f      : 1.2rem  !default;
+
+// about page font sizes
+$site-intro-font-size           : 3.2rem  !default;
+$site-intro-font-size-f         : 3rem    !default;
+$site-intro-padding-size        : 0.75em  !default;
+
+// contact page font sizes
+$contact-label-font-size        : 1.6rem  !default;
+$contact-label-font-size-c      : 1.7rem  !default;
+$contact-label-font-size-d      : 1.5rem  !default;
+$contact-label-font-size-f      : 1.4rem  !default;
+$contact-submit-font-size       : 1.5rem  !default;
+$contact-submit-font-size-f     : 1.3rem  !default;
+
+// posts page font sizes
+$post-link-font-size            : 1.7rem  !default;
+$post-link-font-size-f          : 1.5rem  !default;
+$post-meta-font-size            : 1.5rem  !default;
+$post-meta-font-size-f          : 1.3rem  !default;
+$post-next-prev-font-size       : 1.5rem  !default;
+$post-next-prev-font-size-f     : 1.3rem  !default;
+
+// comment section font sizes
+$comment-font-size              : 1.7rem  !default;
+$comment-font-size-d            : 1.5rem  !default;
+$comment-font-size-f            : 1.4rem  !default;
+$comment-small-font-size        : 1.5rem  !default;
+$comment-small-font-size-d      : 1.4rem  !default;
+$comment-small-font-size-f      : 1.3rem  !default;
+$comment-label-font-size        : 1.6rem  !default;
+$comment-label-font-size-c      : 1.7rem  !default;
+$comment-label-font-size-d      : 1.5rem  !default;
+$comment-label-font-size-f      : 1.3rem  !default;
+$comment-submit-font-size       : 1.5rem  !default;
+$comment-submit-font-size-f     : 1.2rem  !default;
+
+
+// borders
+
+// page border sizes
+$page-border-small-size         : 2px     !default;
+$page-border-large-size         : 8px     !default;
+$content-border-size            : 1px     !default;
+$code-border-radius             : 8px     !default;
+$image-border-size              : 1px     !default;
+
+// about page border sizes
+
+// contact page border sizes
+$contact-field-border-size      : 1px     !default;
+$contact-field-border-radius    : 2px     !default;
+
+// posts page border sizes
+$post-link-border-size          : 1px     !default;
+$post-next-prev-border-size     : 1px     !default;
+
+// comment section border sizes
+$comment-field-border-size      : 1px     !default;
+$comment-field-border-radius    : 2px     !default;
+
+
+// other
+
+$side-padding-size              : 3rem    !default;
+$side-padding-size-c            : 1.5rem  !default;
+$side-padding-size-e            : 1rem    !default;
+$heading-padding-size           : 0.25em   !default;
+$footer-bottom-padding-size     : 2.5rem  !default;
+$p-padding-bottom               : 1em     !default;
+$pre-padding-bottom             : 1.5em   !default;

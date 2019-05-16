@@ -1,0 +1,41 @@
+---
+layout: blog
+---
+
+<header>
+  <h1>
+    {% if site.categories contains page.title %}
+      Category:{{ page.title }}
+    {% else %}
+      {{ page.title }}
+    {% endif %}
+  </h1>
+</header>
+<section>
+  {{ content }}
+  {% if page.title == site.tag_title %}
+    {% include ordered-collections-with-posts.html collection=site.tags %}
+  {% elsif page.title == site.category_title %}
+    {% include ordered-collections-with-posts.html collection=site.categories url=site.category_url %}
+  {% elsif page.title == site.living_title %}
+    <hr>
+    {% assign living_posts = site.tags[site.living_tag] %}
+    {% include post-list.html posts=living_posts last_update=true %}
+  {% else %}
+    <hr>
+    {% if site.categories contains page.title %}
+      <ul class="blog-posts no-indentation">
+        {% assign posts = site.categories[page.title] %}
+        {% assign current_category = page.title | slugify | downcase %}
+        {% assign base_url = site.category_url | append: current_category | append: '/' %}
+        {% include pagination.html posts=posts base_url=base_url %}
+      </ul>
+    {% else %}
+      <ul class="blog-posts no-indentation">
+        {% assign posts = site.posts %}
+        {% assign base_url = site.blog %}
+        {% include pagination.html posts=posts base_url=base_url %}
+      </ul>
+    {% endif %}
+  {% endif %}
+</section>

@@ -1,0 +1,34 @@
+// ---------------------------------------------------------------
+// File: _fonts.scss
+// Author: Tad McCorkle
+// Fonts used throughout the site are defined here.
+// ---------------------------------------------------------------
+
+$a: 'Montserrat', 'Lora', 'Arial', sans-serif;
+$b: 'Open Sans', 'Lora', 'Lucida Sans', 'Helvetica', 'Verdana', 'Arial', sans-serif;
+$c: 'Lora', 'Lucida Bright', 'Georgia', 'Palatino Linotype', 'Palatino', serif;
+$d: 'Consolas', monospace;
+
+// header fonts
+$header-logo-font-family        : $a      !default;
+$header-links-font-family       : $b      !default;
+
+// footer fonts
+$footer-links-font-family       : $b      !default;
+
+// main page fonts
+$heading-font-family            : $a      !default;
+$secondary-heading-font-family  : $b      !default;
+$main-text-font-family          : $c      !default;
+$code-font-family               : $d      !default;
+
+// about page fonts
+$site-intro-font-family         : $c      !default;
+
+// contact page fonts
+$label-font-family              : $b      !default;
+$text-input-font-family         : $b      !default;
+
+// posts page fonts
+$post-link-heading-font-family  : $b      !default;
+$post-next-prev-font-family     : $b      !default;
