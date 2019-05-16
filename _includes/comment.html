@@ -34,7 +34,8 @@
   </div>
 
   {% capture i %}{{ include.index }}{% endcapture %}
-  {% assign replies = site.data.comments[page.slug] | where_exp: 'comment', 'comment.replying_to == i' %}
+  {% assign page_slug = page.slug | replace: '.', '' %}
+  {% assign replies = site.data.comments[page_slug] | where_exp: 'comment', 'comment.replying_to == i' %}
   {% assign replies_by_date = replies | sort: 'date' %}
   {% for reply in replies_by_date %}
     {% assign       index = forloop.index | prepend: '-' | prepend: include.index %}

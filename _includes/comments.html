@@ -1,11 +1,12 @@
 <section>
-  {% if site.data.comments[page.slug] %}
+  {% assign page_slug = page.slug | replace: '.', '' %}
+  {% if site.data.comments[page_slug] %}
     <hr>
     <div>
       <h2>
         Comments
       </h2>
-      {% assign comments = site.data.comments[page.slug] | where_exp: 'comment', 'comment.replying_to == ""' %}
+      {% assign comments = site.data.comments[page_slug] | where_exp: 'comment', 'comment.replying_to == ""' %}
       {% assign comments_by_date = comments | sort: 'date' %}
       {% for comment in comments_by_date %}
         {% assign       index = forloop.length | plus: 1 | minus: forloop.index %}
