@@ -173,7 +173,7 @@ student_github: https://github.com/toastytad
 google_analytics: UA-131396488-1
 
 # comments
-staticman: https://api.staticman.net/v3/entry/github/tadmccorkle/tadmccorkle.github.io/master/comments
+comment_bot: https://tadmccorkle-comments.firebaseapp.com/entry/tadmccorkle/tadmccorkle.github.io/master/comments
 reCaptcha:
   siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
   secret: "GqDIVHDsB7wanK4h2ixPokbGoaGJq//oaGapBnZH/BuzPZVXNl1sf+dB1JmEWJS0MHam88z0Fblgroz1/83FLyee0KpPlJdTXg/HxdR8C/ULEtUaqQiA8T5X5A8XAU3A8vSJrbehT6DQ4KpoITnm3jEJ9TNltR7C40/wymTJ53w=" # !

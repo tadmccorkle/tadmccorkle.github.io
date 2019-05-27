@@ -1,7 +1,7 @@
 ---
 ---
 
-NOTE: This site is still a work in progress. Many of the links are broken, and none of the blog posts are "official" posts. All pages can largely be viewed as tests and placeholders, although the structure/layout of the site is mostly finalized. I intended to wait until I completed the site before pushing it to GitHub, but I need to test the Staticman comments, so, now it's here. I would say this testing period won't last very long, but then I'd probably be a liar. I may take it down again before finally making it offically live. Stay tuned for (hopefully not far off) future updates!
+NOTE: This site is still a work in progress. Many of the links are broken, and none of the blog posts are "official" posts. All pages can largely be viewed as tests and placeholders, although the structure/layout of the site is mostly finalized. I intended to wait until I completed the site before pushing it to GitHub, but I need to test the Comment Bot (Staticman) comments, so, now it's here. I would say this testing period won't last very long, but then I'd probably be a liar. I may take it down again before finally making it offically live. Stay tuned for (hopefully not far off) future updates!
 
 ---
 

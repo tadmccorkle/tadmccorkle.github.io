@@ -30,7 +30,7 @@
 })(jQuery);
 
 /**
- * Staticman comment replies.
+ * Comment Bot comment replies.
  * - from: https://github.com/mmistakes/made-mistakes-jekyll
  * - portions of this code modified from:
  *   https://core.svn.wordpress.org/trunk/wp-includes/js/comment-reply.js
