@@ -20,7 +20,7 @@
   </small>
 </h3>
 
-<form id="comment-form" class="comment-form" action="{{ site.staticman }}" method="POST">
+<form id="comment-form" class="comment-form" action="{{ site.comment_bot }}" method="POST">
   <input type="hidden" name="options[slug]" value="{{ page_slug }}">
   <input type="hidden" name="options[origin]" value="{{ page.url | absolute_url }}">
   <input type="hidden" name="options[parent]" value="{{ page.url | absolute_url }}">
