@@ -5,7 +5,7 @@ comments:
   allowedFields: ["name", "email", "message", "replying_to"] # *
   requiredFields: ["name", "message"]
 
-  branch: "master" # *
+  branch: "master" # edit*
   commitMessage: "New comment."
   path: "_data/comments/{options.slug}" # *
   filename: "comment-{@timestamp}" # *
