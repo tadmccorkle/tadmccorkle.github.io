@@ -39,7 +39,7 @@ comments:
 
   transforms:
     email: md5
-
+line
   reCaptcha: # copied from _config.yml
     enabled: true
     siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
