@@ -30,10 +30,10 @@ comments:
     enabled: true
 
     # Mailgun API key
-    apiKey: "gRrXk2F8WsxQE5RJnMpq+v88YBTQPNYmQBmY7M5c5zgBUq3GrxuUlCuEUXgV7g2996J+8e6FLs5yqarvwZSNXrHoc6Tz8kfaok+pYAom//IyFXUQih1Fes7Q4ijXkoV6XDs72pnj4WwrFHE7gFqPmCYiGGAjL0ZbG3K7op91a9w=" # !
+    apiKey: "B9pkoKuMNLHD8z+x5ftQoj6cHQAWRKcH9+QT80smcrYgVFFE52SipCTqDSC/SEDPY/V9+7nKG/YuFvqAFwXyuUWD/CbsPYrKCsOvXK3l9TkcFD9AG7P6pNMTbriQgsrGrnjzFXxYcYjdV1xC1saFbGfGjDl+TcC3SvuTcQZ2MOAvZksoJdiE8LuUYxtEhY3cNuk/DpKVglhG161YHKjnwZ7fPGLSyxrZ0jn7Lgb71UmCPsbhV4W2aE+DDnx3hudTdMkrvSUntikZaPYZ4GnW+FfVT5Wu99et/GlcVfCMZcuunlNY0PPiCDFG0I2IOzT3HbOmZdUhiW1XkZFOeF3+9w==" # !
 
     # Mailgun domain
-    domain: "SgKlxFqzl3JdLsW8vhFBW4BCctefcenKdudh+4lWZyPc1g+gKHSUcoivPB/UraLj7a71SldhmWZkaF4JwKSb5uD835/D6s0np5aoP013t9RZBFf3zpjRypH0Kl5gxJCK+RvqMXwrDoIsH7qj00dM0StUQwkIu9LdAC4bhP6dPA8=" # !
+    domain: "xDDZVshGZrmt4ctxS7MnToWBBGEx61SYvCCsXyokB+pG72idcH/WJLgD/RI6tN2Am75T7Sdj1ddwXzh9Hb+v98yyNJOka8kRK8DdmQpFKxZW7ThcJJEFyWufZ4fsobe2GaNlfhkBdekksHYTV6sGV/mrEd95jUUQE08/OBRPACHJ0oNWvWm6AaCfOOqYbbLklTZRNRBDdASc61BigReguHtv1RiyIs1mN3CotzNraXe/A+0FbBCg9xr35nIQ0zjjOVSD2WiTLK6CkG7WHlKcu20UYFYgMTozQsnJbg7vIYsiiSY+LRvSHoTWx9MeWYknYOqYGnKJis8AG3EVEtQPYg==" # !
 
     fromAddress: tad@mg.tadmccorkle.com
 
@@ -43,4 +43,4 @@ comments:
   reCaptcha: # copied from _config.yml
     enabled: true
     siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
-    secret: "GqDIVHDsB7wanK4h2ixPokbGoaGJq//oaGapBnZH/BuzPZVXNl1sf+dB1JmEWJS0MHam88z0Fblgroz1/83FLyee0KpPlJdTXg/HxdR8C/ULEtUaqQiA8T5X5A8XAU3A8vSJrbehT6DQ4KpoITnm3jEJ9TNltR7C40/wymTJ53w=" # !
+    secret: "RPHFcuDwKNkk+W1yjjIFQHMVgPXR0jBGzsr04ouR7wbom+1RKZQT9a0XPj3UCj1vC4HOKI3qs8nzqhuSb9bH8/RAM3F65FHmESbrdt9oGG2bcLm6T/xvyujfeoivZ3dy+PLfQ/d0lUkdpqQvQxocEtDpG/0S1nZScMgE81AbniO6bjEhYNAvkYKLkRkleTMLWmrJ/nturFHruHTV33hYE9RUaWOo8jh/DEJsN5ZZM1Wvet0/NbsRMRhghWR7plhMhSFYBogRr5PXe8L6zsa3lt1yLPJaAFmGNjzrauPItxt8lYwe4C0j35PEBFYh3C5x9taXCTvZ1zRSeZ5jR02CVw==" # !
