@@ -1,7 +1,0 @@
-_id: 9bd867e0-72c7-11e9-b246-1996700d46d5
-_parent: /blog/posts/another-long-test/
-replying_to: '2'
-name: Corrected Tad
-email: cbefc70eee16f4d2a5c846a383f0fa38
-message: "# Yes\r\nI think I fixed it.\r\n\r\n## But\r\nI do want to try some other things:\r\n- like lists\r\n- like this one\r\n\r\nOr:\r\n1. this one\r\n2. with numbers\r\n\r\nMaybe hr?\r\n\r\n---\r\n\r\nDoes `code` work?\r\n\r\n```python\r\ndef this_is_a_stretch():\r\n   i = 1\r\n```\r\n\r\nI'll be surprised if that turns out okay.\r\n\r\nI guess [links](/), too."
-date: '2019-05-10T02:02:06.433Z'

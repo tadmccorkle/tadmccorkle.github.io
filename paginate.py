@@ -1,7 +1,7 @@
 """This file paginates the blog posts for this site.
 
 This file contains a script that creates the directory structure needed for
-tadmcorkle.com's custom pagination.
+custom jekyll pagination without a plugin.
 - Execute via 'python paginate.py [-h/--help] [-d/--drafts]'
 - Do not import as module
 - Arguments:
@@ -17,15 +17,15 @@ import shutil
 
 
 def get_files(dir):
-    """Returns the files in the specified directory and its subdirectories.
+    """Get the files in the specified directory and its subdirectories.
 
     Parameters:
         dir (str): The directory to search
 
     Returns:
         list: A list of the files in the specified directory
-    """
 
+    """
     files = list()
     with os.scandir(dir) as entries:
         for entry in entries:
@@ -37,14 +37,14 @@ def get_files(dir):
 
 
 def delete_subdirs(dir):
-    """Deletes the subdirectories of the specified directory.
+    """Delete the subdirectories of the specified directory.
 
     Parameters:
         dir (str): The directory to search
 
     NOTE: Does not delete files within the specified directory.
-    """
 
+    """
     with os.scandir(dir) as entries:
         for entry in entries:
             if entry.is_dir():
@@ -52,15 +52,15 @@ def delete_subdirs(dir):
 
 
 def get_category(post):
-    """Gets the post category from the front matter of the specified post.
+    """Get the post category from the front matter of the specified post.
 
     Parameters:
         post (str): The file path of the post
 
     Returns:
         str: The category name of the post
-    """
 
+    """
     # get the front matter of the post
     front_matter = list()
     with open(post) as f:
@@ -79,7 +79,7 @@ def get_category(post):
 
 
 def add_front_matter_file(dir, title, page_num):
-    """Adds a file with front matter needed for pagination.
+    """Add a file with front matter needed for pagination.
 
     Parameters:
         dir (str)       : The directory that needs the file added
@@ -88,8 +88,8 @@ def add_front_matter_file(dir, title, page_num):
 
     NOTE: 'dir' is created in this function. Only its parent
         directory should exist
-    """
 
+    """
     os.mkdir(dir)
     with open(f'{dir}index.md', 'w') as f:
         f.writelines('\n'.join([
@@ -101,14 +101,14 @@ def add_front_matter_file(dir, title, page_num):
 
 
 def paginate_category(category, num_pages):
-    """Creates pagination directory structure for categories.
+    """Create pagination directory structure for categories.
 
     Parameters:
         category (str)  : The category as it appears in the site
         num_pages (int) : The number of pages needed to paginate the posts in
             the category
-    """
 
+    """
     category_dir = f'_category/{"-".join(category.lower().split())}/'
     if os.path.exists(category_dir):
         shutil.rmtree(category_dir)
@@ -122,7 +122,7 @@ def paginate_category(category, num_pages):
 
 
 def main():
-
+    """Pagination script."""
     # set up command line/terminal arguments
     parser = argparse.ArgumentParser(
         description='A script that creates the directory structure needed for '
