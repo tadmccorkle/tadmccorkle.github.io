@@ -180,7 +180,7 @@ reCaptcha: # siteKey and secret must match _comment-bot.yml
   secret: "RPHFcuDwKNkk+W1yjjIFQHMVgPXR0jBGzsr04ouR7wbom+1RKZQT9a0XPj3UCj1vC4HOKI3qs8nzqhuSb9bH8/RAM3F65FHmESbrdt9oGG2bcLm6T/xvyujfeoivZ3dy+PLfQ/d0lUkdpqQvQxocEtDpG/0S1nZScMgE81AbniO6bjEhYNAvkYKLkRkleTMLWmrJ/nturFHruHTV33hYE9RUaWOo8jh/DEJsN5ZZM1Wvet0/NbsRMRhghWR7plhMhSFYBogRr5PXe8L6zsa3lt1yLPJaAFmGNjzrauPItxt8lYwe4C0j35PEBFYh3C5x9taXCTvZ1zRSeZ5jR02CVw=="
 
 # mailing list
-mailing_list: https://tadmccorkle-comments.firebaseapp.com/email/tadmccorkle/tadmccorkle.github.io/master
+mailing_list: https://tadmccorkle-comments.firebaseapp.com/email/tadmccorkle/tadmccorkle.github.io/master/subscriptions
 mailing_list_path: /blog/subscribe-via-email
 
 # contact form
