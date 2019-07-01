@@ -29,18 +29,18 @@
   <input type="hidden" name="options[reCaptcha][secret]" value="{{ site.reCaptcha.secret }}">
 
   <fieldset class="comment-field">
-    <label for="name" class="comment-label-text">Name
-      <input id="name" class="comment-input" name="fields[name]" type="text" tabindex="1" required="true" placeholder="Displayed with your comment.">
+    <label for="name" class="label-text">Name
+      <input id="name" class="input" name="fields[name]" type="text" tabindex="1" required="true" placeholder="Displayed with your comment.">
     </label>
   </fieldset>
   <fieldset class="comment-field">
-    <label for="email" class="comment-label-text">Email
-      <input id="email" class="comment-input" name="fields[email]" type="email" tabindex="2" required="false" placeholder="For icon and notifications (won't be public).">
+    <label for="email" class="label-text">Email
+      <input id="email" class="input" name="fields[email]" type="email" tabindex="2" required="true" placeholder="For icon and notifications (won't be public).">
     </label>
   </fieldset>
   <fieldset class="comment-field">
-    <label for="message" class="comment-label-text">Comment
-      <textarea id="message" class="comment-message-input" name="fields[message]" tabindex="3" required="true" placeholder="What do you want to say? Markdown is supported."></textarea>
+    <label for="message" class="label-text">Comment
+      <textarea id="message" class="message-input" name="fields[message]" tabindex="3" required="true" placeholder="What do you want to say? Markdown is supported."></textarea>
     </label>
   </fieldset>
   <fieldset class="comment-field">
@@ -55,7 +55,7 @@
         </div>
       </span>
       <span class="comment-form-subscribe-message">
-        Send me comment email notifications.
+        Send me an email notification when someone comments on this post.
       </span>
     </label>
   </fieldset>
@@ -63,14 +63,25 @@
     <div class="g-recaptcha" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
   </fieldset>
   <fieldset class="comment-field">
-    <button class="comment-submit" name="submit" type="submit" data-submit="...Sending">
+    <div id="comment-submit-success" class="comment-submit-success" style="display:none;">
+      Thanks for commenting! Your comment is <a href="https://github.com/tadmccorkle/tadmccorkle.github.io/pulls" target="_blank">pending</a>. It will appear when approved.
+    </div>
+    <div id="comment-submit-failure" class="comment-submit-failure" style="display:none;">
+      Sorry, there was an error when your comment was submitted. Please try again, or <a href="/contact/">contact me</a>.
+    </div>
+    <button class="submit-btn" name="submit" type="submit" data-submit="...Sending">
       Submit
     </button>
-      <div id="comment-submit-success" class="comment-submit-response" style="display:none;">
-          Thanks for commenting! Your comment is <a href="https://github.com/tadmccorkle/tadmccorkle.github.io/pulls">pending</a>. It will appear when approved.
-      </div>
-      <div id="comment-submit-failure" class="comment-submit-response" style="display:none;">
-          Sorry, there was an error when your comment was submitted. Please try again, or <a href="/contact/">contact me</a>.
-      </div>
   </fieldset>
+
+  <!-- comment processing animation -->
+  <div id="comment-submission-processing" class="loading-spinner-container" style="display:none">
+    <div class="loading-spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
 </form>

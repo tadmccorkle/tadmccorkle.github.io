@@ -109,11 +109,9 @@
   color: $header-link-font-color;
   text-decoration: none;
   @include only-screens-ab {
-    @include underline;
+    @include underline-header-link;
   }
   @include screen-c {
-    @include ease-in(color);
-
     &:hover {
       color: $highlight-font-color;
     }

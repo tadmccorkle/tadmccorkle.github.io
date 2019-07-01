@@ -2,8 +2,8 @@
   {% if include.href %}
     <a href="{{ include.href }}">
   {% endif %}
-    <img src="{{ 'assets/images/' | append: include.src | append: '?v=' | append: site.github.build_revision | relative_url }}"
-         class="{{ include.class }} full-width" 
+    <img data-src="{{ 'assets/images/' | append: include.src | append: '?v=' | append: site.github.build_revision | relative_url }}"
+         class="{{ include.class }} full-width"
          alt="{{ include.alt }}" />
   {% if include.href %}
     </a>

@@ -1,0 +1,101 @@
+/**
+ * File: _form-elements.scss
+ * Author: Tad McCorkle
+ * File for styling the site forms.
+ *
+ * Abstract SASS Elements:
+ * - label-font
+ * - label
+ * - input
+ *
+ * Elements:
+ * - .label-text
+ * - .input
+ * - .message-input
+ * - .submit-btn
+ */
+
+
+// extensions
+
+%label-font {
+  font-family: $label-font-family;
+  font-size: $label-font-size;
+  @include screen-c {
+    font-size: $label-font-size-c;
+  }
+  @include screen-d {
+    font-size: $label-font-size-d;
+  }
+  @include screen-f {
+    font-size: $label-font-size-f;
+  }
+}
+
+%label {
+  @extend %label-font;
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+%input {
+  @include ease-in-out(border-color);
+  display: block;
+  line-height: 1.5;
+  margin-top: 0.25em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: $form-field-border-size solid $form-field-border-color;
+  font-family: $text-input-font-family;
+  color: $form-field-font-color;
+
+  &:focus {
+    outline: none;
+    border-bottom: $form-field-border-size solid $form-field-focus-border-color;
+  }
+}
+
+
+// implementation
+
+.label-text {
+  @extend %label;
+  @include underline-field;
+}
+
+.input {
+  @extend %input;
+  width: 100%;
+  height: 100%;
+}
+
+.message-input {
+  @extend %input;
+  width: 100%;
+  height: $message-field-height;
+}
+
+.submit-btn {
+  @include ease-in-out($time: 0.15s);
+  cursor: pointer;
+  pointer-events: all;
+  padding: 1em 2em;
+  border: $submit-button-border-size solid $submit-border-color;
+  border-radius: $submit-button-border-radius;
+  font-family: $label-font-family;
+  color: $submit-font-color;
+  background: $submit-background-color;
+  font-size: $submit-button-font-size;
+  letter-spacing: 2px;
+  @include screen-f {
+    font-size: $submit-button-font-size-f;
+  }
+
+  &:hover {
+    color: $submit-hover-font-color;
+    background: $submit-hover-background-color;
+  }
+}

@@ -27,6 +27,7 @@
  *   - .left, .align-left
  *   - .right, .align-right
  *   - .no-border
+ * - img[data-src]
  * - figcaption
  * - .with-caption
  * - .left-figure-caption
@@ -139,6 +140,10 @@ img {
   box-sizing: border-box;
   border: $image-border-size solid $image-border-color;
 
+  // lazy loading
+  opacity: 1;
+  transition: opacity 0.3s;
+
   &.no-border {
     border: none;
   }
@@ -150,6 +155,11 @@ img {
   &.right, &.align-right {
     margin: 5px 0 2px 15px;
   }
+}
+
+// for lazy loading
+img[data-src] {
+  opacity: 0;
 }
 
 figcaption {

@@ -17,17 +17,17 @@ mainDropDuration = (mainItemCount / (mainItemCount + socialItemCount)) * TOTAL_H
 socialDropDuration = (socialItemCount / (mainItemCount + socialItemCount)) * TOTAL_HAMBURGER_DROPDOWN_DURATION;
 
 // hamburger menu animations
-hamburger.click(function() {
+hamburger.click(function () {
   mainSiteHeaderLinks.stop(true, true);
   socialSiteHeaderLinks.stop(true, true);
   if (hamburger.hasClass(ACTIVE_CLASS_NAME)) {
     hamburger.removeClass(ACTIVE_CLASS_NAME);
-    socialSiteHeaderLinks.slideUp(socialDropDuration, 'linear', function() {
+    socialSiteHeaderLinks.slideUp(socialDropDuration, 'linear', function () {
       mainSiteHeaderLinks.slideUp(mainDropDuration, 'linear');
     });
   } else {
     hamburger.addClass(ACTIVE_CLASS_NAME);
-    mainSiteHeaderLinks.slideDown(mainDropDuration, 'linear', function() {
+    mainSiteHeaderLinks.slideDown(mainDropDuration, 'linear', function () {
       socialSiteHeaderLinks.slideDown(socialDropDuration, 'linear');
     });
   }
@@ -41,19 +41,19 @@ mainTagline = $('.main-tagline');
 elements = document.getElementsByClassName('alt-tagline');
 length = elements.length;
 $('#site-tagline').on({
-  mouseenter: function() {
+  mouseenter: function () {
     if (timeout != null) clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       mainTagline.addClass('hide');
       $('#site-tagline').find(elements[i]).addClass('show');
-      interval = setInterval(function() {
+      interval = setInterval(function () {
         $('#site-tagline').find(elements[i]).removeClass('show');
         i = (i + 1) % length;
         $('#site-tagline').find(elements[i]).addClass('show');
       }, 1250);
     }, 500);
   },
-  mouseleave: function() {
+  mouseleave: function () {
     clearTimeout(timeout);
     clearInterval(interval);
     $('#site-tagline').find(elements[i]).removeClass('show');

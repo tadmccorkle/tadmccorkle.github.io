@@ -17,20 +17,20 @@ pageTop = $(window).scrollTop();
 pageHeight = $(window).height();
 
 // from underscore.js
-getNow = Date.now || function() {
+getNow = Date.now || function () {
   return new Date().getTime();
 };
 
 // from https://codeburst.io/throttling-and-debouncing-in-javascript-b01cad5c8edf
 throttle = (func, limit) => {
   let lastFunc, lastRan;
-  return function() {
+  return function () {
     if (!lastRan) {
       func.apply(this, arguments);
       lastRan = getNow();
     } else {
       clearTimeout(lastFunc);
-      lastFunc = setTimeout(function() {
+      lastFunc = setTimeout(function () {
         if (getNow() - lastRan >= limit) {
           func.apply(this, arguments);
           lastRan = getNow();
@@ -41,7 +41,7 @@ throttle = (func, limit) => {
 }
 
 // toggles side link visibility/position based on scroll location
-checkSideLinks = function() {
+checkSideLinks = function () {
   if (pageTop < linkBottom || postBottom < pageTop + pageHeight) {
     scrollElement.removeClass('visible')
   } else {
@@ -50,21 +50,21 @@ checkSideLinks = function() {
 };
 
 // check to see if links should be shown on load
-$(document).ready(function() {
+$(document).ready(function () {
   checkSideLinks();
 });
 
 // scroll to top if button clicked
-$('#scroll-up-fade,#scroll-up-perm').click(function() {
+$('#scroll-up-fade,#scroll-up-perm').click(function () {
   canCheck = false;
   scrollElement.removeClass('visible');
-  $('html,body').animate({scrollTop:0}, 'slow', function() {
+  $('html,body').animate({scrollTop:0}, 'slow', function () {
     canCheck = true;
   });
 });
 
 // side link scroll event
-$(window).on('scroll', throttle(function() {
+$(window).on('scroll', throttle(function () {
   if (canCheck && !smallScreen) {
     pageTop = $(window).scrollTop();
     checkSideLinks();
@@ -72,7 +72,7 @@ $(window).on('scroll', throttle(function() {
 }, 100));
 
 // side link resize event
-$(window).on('resize', throttle(function() {
+$(window).on('resize', throttle(function () {
   smallScreen = $(window).width() < smallScreenSize;
   if (canCheck && !smallScreen) {
     pageHeight = $(window).height();

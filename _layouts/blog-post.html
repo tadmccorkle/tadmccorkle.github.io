@@ -12,7 +12,9 @@ layout: blog
   {{ content }}
   <div>
     <div class="lower-post-meta-icons">
-      {% include add-this.html %}
+      {% if page.share %}
+        {% include add-this.html %}
+      {% endif %}
       <a id="scroll-up-perm" class="scroll-link-icon-text not-smallest" aria-hidden="true">
         <span class="fa-stack fa-2x">
           <i class="fas fa-circle fa-stack-2x"></i>
@@ -49,7 +51,7 @@ layout: blog
         {% if page.next %}
           <a class="prev-next-post" href="{{ page.next.url }}">
             Next Post &rarr;
-          </a> 
+          </a>
         {% endif %}
       </div>
     {% endif %}

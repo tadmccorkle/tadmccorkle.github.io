@@ -1,5 +1,5 @@
 <article id="comment{% unless include.r %}{{ index | prepend: '-' }}{% else %}{{ include.index | prepend: '-' }}{% endunless %}" class="comment {{ include.class }}">
-  <img class="comment-icon" alt="gravatar" src="https://www.gravatar.com/avatar/{{ include.email }}?d=mm&s=80">
+  <img class="comment-icon" alt="gravatar" data-src="https://www.gravatar.com/avatar/{{ include.email }}?d=mm&s=80">
   <div class="comment-text-container">
     <header class="comment-meta">
       <div class="comment-name">
@@ -56,5 +56,4 @@
                             name=name
                             url=url %}
   {% endfor %}
-
 </article>

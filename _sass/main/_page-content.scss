@@ -29,6 +29,8 @@
  *     - posts
  *     - projects
  *     - comments
+ *     - form-elements
+ *     - loading
  *
  * - .page-top
  */
@@ -154,7 +156,7 @@
   a {
     color: $link-font-color;
     text-decoration: none;
-  
+
     &:hover {
       color: $link-hover-font-color;
     }
@@ -268,7 +270,9 @@
   /* import components to page content */
 
   @import
-    'components/comments'
+    'components/comments',
+    'components/form-elements',
+    'components/loading'
   ;
 }
 

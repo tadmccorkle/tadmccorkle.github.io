@@ -8,8 +8,8 @@ alt_taglines    :
   - Husband
   - Engineer
   - Developer
-  - Avid Learner
-  - Aspiring Runner
+  - Learner
+  - Runner
   - Coffee Lover
 intro           : Hi! I'm Tad. Thanks for checking out my site!
 description     : >-
@@ -66,94 +66,95 @@ living_tag      :                 "living post"
 defaults:
   -
     scope: # all about posts
-      path              : ""
-      type              : "about_posts"
+      path                : ""
+      type                : "about_posts"
     values:
-      layout            : "home"
-      permalink         : "/about/:title/"
+      layout              : "home"
+      permalink           : "/about/:title/"
   -
     scope: # all blog posts
-      path              : ""
-      type              : "posts"
+      path                : ""
+      type                : "posts"
     values:
-      layout            : "blog-post"
-      comments          : true
-      category          : "Other"
-      permalink         : "/blog/posts/:title/"
-      excerpt_separator : <!-- more -->
+      layout              : "blog-post"
+      share               : false
+      comments            : true
+      allow_new_comments  : true
+      category            : "Other"
+      permalink           : "/blog/posts/:title/"
+      excerpt_separator   : <!-- more -->
   -
     scope: # posts by category
-      path              : ""
-      type              : "category"
+      path                : ""
+      type                : "category"
     values:
-      layout            : "blog-home"
-      title             : *category_title
-      permalink         : "/blog/categories/:path"
+      layout              : "blog-home"
+      title               : *category_title
+      permalink           : "/blog/categories/:path"
   -
     scope: # posts by tag
-      path              : ""
-      type              : "tag"
+      path                : ""
+      type                : "tag"
     values:
-      layout            : "blog-home"
-      title             : *tag_title
-      permalink         : *tag_url
+      layout              : "blog-home"
+      title               : *tag_title
+      permalink           : *tag_url
   -
     scope: # living posts (have tag 'living post')
-      path              : ""
-      type              : "living"
+      path                : ""
+      type                : "living"
     values:
-      layout            : "blog-home"
-      title             : *living_title
-      permalink         : *living_url
-      redirect_from     : "/blog/living_posts/"
+      layout              : "blog-home"
+      title               : *living_title
+      permalink           : *living_url
+      redirect_from       : "/blog/living_posts/"
   -
     scope: # about/home page
-      path              : "index.md"
-      type              : "pages"
+      path                : "index.md"
+      type                : "pages"
     values:
-      layout            : "home"
-      title             : *about_title
-      permalink         : *about
-      redirect_from     : "/about/"
+      layout              : "home"
+      title               : *about_title
+      permalink           : *about
+      redirect_from       : "/about/"
   -
     scope: # blog page
-      path              : "/blog/*"
-      type              : "pages"
+      path                : "/blog/*"
+      type                : "pages"
     values:
-      layout            : "blog-home"
-      title             : *blog_title
+      layout              : "blog-home"
+      title               : *blog_title
   -
     scope: # projects page
-      path              : "projects.md"
-      type              : "pages"
+      path                : "projects.md"
+      type                : "pages"
     values:
-      layout            : "projects"
-      title             : *projects_title
-      permalink         : *projects
-      redirect_from     : "/my-projects/"
+      layout              : "projects"
+      title               : *projects_title
+      permalink           : *projects
+      redirect_from       : "/my-projects/"
   -
     scope: # contact page
-      path              : "contact.md"
-      type              : "pages"
+      path                : "contact.md"
+      type                : "pages"
     values:
-      layout            : "contact"
-      title             : *contact_title
-      permalink         : *contact
-      redirect_from     : "/contact-me/"
+      layout              : "contact"
+      title               : *contact_title
+      permalink           : *contact
+      redirect_from       : "/contact-me/"
 
 # non-plugin pagination
-num_pagination          : 2
-# num_pagination          : 15
+num_pagination            : 15
 
 # build settings
-markdown                : kramdown
+markdown                  : kramdown
 kramdown:
-  input                 : GFM
-  syntax_highlighter    : rouge
-highlighter             : rouge
+  input                   : GFM
+  syntax_highlighter      : rouge
+highlighter               : rouge
 sass:
-  sass_dir              : _sass
-  style                 : compressed
+  sass_dir                : _sass
+  style                   : compressed
 
 # atom feed
 author    : Tad McCorkle
@@ -176,7 +177,11 @@ google_analytics: UA-131396488-1
 comment_bot: https://tadmccorkle-comments.firebaseapp.com/entry/tadmccorkle/tadmccorkle.github.io/master/comments
 reCaptcha: # siteKey and secret must match _comment-bot.yml
   siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
-  secret: "RPHFcuDwKNkk+W1yjjIFQHMVgPXR0jBGzsr04ouR7wbom+1RKZQT9a0XPj3UCj1vC4HOKI3qs8nzqhuSb9bH8/RAM3F65FHmESbrdt9oGG2bcLm6T/xvyujfeoivZ3dy+PLfQ/d0lUkdpqQvQxocEtDpG/0S1nZScMgE81AbniO6bjEhYNAvkYKLkRkleTMLWmrJ/nturFHruHTV33hYE9RUaWOo8jh/DEJsN5ZZM1Wvet0/NbsRMRhghWR7plhMhSFYBogRr5PXe8L6zsa3lt1yLPJaAFmGNjzrauPItxt8lYwe4C0j35PEBFYh3C5x9taXCTvZ1zRSeZ5jR02CVw==" # !
+  secret: "RPHFcuDwKNkk+W1yjjIFQHMVgPXR0jBGzsr04ouR7wbom+1RKZQT9a0XPj3UCj1vC4HOKI3qs8nzqhuSb9bH8/RAM3F65FHmESbrdt9oGG2bcLm6T/xvyujfeoivZ3dy+PLfQ/d0lUkdpqQvQxocEtDpG/0S1nZScMgE81AbniO6bjEhYNAvkYKLkRkleTMLWmrJ/nturFHruHTV33hYE9RUaWOo8jh/DEJsN5ZZM1Wvet0/NbsRMRhghWR7plhMhSFYBogRr5PXe8L6zsa3lt1yLPJaAFmGNjzrauPItxt8lYwe4C0j35PEBFYh3C5x9taXCTvZ1zRSeZ5jR02CVw=="
+
+# mailing list
+mailing_list: https://tadmccorkle-comments.firebaseapp.com/email/tadmccorkle/tadmccorkle.github.io/
+mailing_list_path: /blog/subscribe-via-email
 
 # contact form
 formspree: https://formspree.io/tad.mccorkle@gmail.com
@@ -187,4 +192,4 @@ exclude:
   - Gemfile.lock
   - README.md
   - paginate.py
-  # - assets/images/posts/drafts
+  - assets/images/posts/drafts

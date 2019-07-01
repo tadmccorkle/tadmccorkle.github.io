@@ -3,52 +3,13 @@
  * Author: Tad McCorkle
  * File for styling the contact page.
  *
- * Abstract SASS Elements:
- * - contact-label
- * - contact-input
- *
  * Elements:
  * - .contact-container
  * - .contact-content
  * - .contact-message-container
  * - .contact-form
  * - .contact-field
- * - .contact-label
- * - .contact-message-label
- * - .contact-input
- * - .contact-message-input
- * - .submit
  */
-
-
-// extensions
-
-%contact-label {
-  display: block;
-  font-family: $label-font-family;
-  font-size: $contact-label-font-size;
-  @include screen-c {
-    font-size: $contact-label-font-size-c;
-  }
-  @include screen-d {
-    font-size: $contact-label-font-size-d;
-  }
-  @include screen-f {
-    font-size: $contact-label-font-size-f;
-  }
-}
-
-%contact-input {
-  display: block;
-  width: 100%;
-  margin-top: 0.25em;
-  padding-left: 0.25em;
-  box-sizing: border-box;
-  border: $contact-field-border-size solid $contact-field-border-color;
-  border-radius: $contact-field-border-radius;
-  font-family: $text-input-font-family;
-  color: $contact-field-font-color;
-}
 
 
 // implementation
@@ -91,48 +52,5 @@
   padding: 0 1.25rem 2rem;
   @include screen-c {
     padding: 2rem 0 0;
-  }
-}
-
-.contact-label {
-  @extend %contact-label;
-  width: $contact-input-field-width;
-}
-
-.contact-message-label {
-  @extend %contact-label;
-  width: $contact-message-field-width;
-}
-
-.contact-input {
-  @extend %contact-input;
-  height: $contact-input-field-height;
-}
-
-.contact-message-input {
-  @extend %contact-input;
-  height: $contact-message-field-height;
-  line-height: 1.5em;
-  padding-right: 0.25em;
-}
-
-.submit {
-  @include ease-in-out;
-  cursor: pointer;
-  pointer-events: all;
-  padding: 1em 2em;
-  border: $contact-field-border-size solid $contact-field-border-color;
-  border-radius: $contact-field-border-radius;
-  font-family: $label-font-family;
-  color: $submit-font-color;
-  background: $submit-background-color;
-  font-size: $contact-submit-font-size;
-  @include screen-f {
-    font-size: $contact-submit-font-size-f;
-  }
-
-  &:hover {
-    color: $submit-hover-font-color;
-    background: $submit-hover-background-color;
   }
 }

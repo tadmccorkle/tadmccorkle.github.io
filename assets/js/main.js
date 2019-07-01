@@ -19,17 +19,17 @@ mainDropDuration = (mainItemCount / (mainItemCount + socialItemCount)) * TOTAL_H
 socialDropDuration = (socialItemCount / (mainItemCount + socialItemCount)) * TOTAL_HAMBURGER_DROPDOWN_DURATION;
 
 // hamburger menu animations
-hamburger.click(function() {
+hamburger.click(function () {
   mainSiteHeaderLinks.stop(true, true);
   socialSiteHeaderLinks.stop(true, true);
   if (hamburger.hasClass(ACTIVE_CLASS_NAME)) {
     hamburger.removeClass(ACTIVE_CLASS_NAME);
-    socialSiteHeaderLinks.slideUp(socialDropDuration, 'linear', function() {
+    socialSiteHeaderLinks.slideUp(socialDropDuration, 'linear', function () {
       mainSiteHeaderLinks.slideUp(mainDropDuration, 'linear');
     });
   } else {
     hamburger.addClass(ACTIVE_CLASS_NAME);
-    mainSiteHeaderLinks.slideDown(mainDropDuration, 'linear', function() {
+    mainSiteHeaderLinks.slideDown(mainDropDuration, 'linear', function () {
       socialSiteHeaderLinks.slideDown(socialDropDuration, 'linear');
     });
   }
@@ -43,18 +43,18 @@ mainTagline = $('.main-tagline');
 elements = document.getElementsByClassName('alt-tagline');
 length = elements.length;
 $('#site-tagline').on({
-  mouseenter: function() {
+  mouseenter: function () {
     if (timeout != null) clearTimeout(timeout);
-    timeout = setTimeout(function() {
+    timeout = setTimeout(function () {
       mainTagline.addClass('hide');
       $('#site-tagline').find(elements[i]).addClass('show');
-      interval = setInterval(function() {
+      interval = setInterval(function () {
         $('#site-tagline').find(elements[i]).removeClass('show');
         i = (i + 1) % length;
         $('#site-tagline').find(elements[i]).addClass('show');
       }, 1250);
     }, 500);
-  }, mouseleave: function() {
+  }, mouseleave: function () {
     clearTimeout(timeout);
     clearInterval(interval);
     $('#site-tagline').find(elements[i]).removeClass('show');
@@ -64,7 +64,7 @@ $('#site-tagline').on({
 });
 
 // scroll to top if button clicked
-$('#scroll-up-perm').click(function() {
+$('#scroll-up-perm').click(function () {
   $('html,body').animate({scrollTop:0}, 'slow');
 });
 
@@ -79,21 +79,26 @@ $('#scroll-up-perm').click(function() {
 *********************************************************************/
 
 // Static comments
-(function($) {
-  $('#comment-form').submit(function() {
-    $('#comment-submit-success').hide();
-    $('#comment-submit-failure').hide();
+(function ($) {
+  $('#comment-form').submit(function () {
+    $('#comment-submit-success').slideUp(300);
+    $('#comment-submit-failure').slideUp(300);
+    $('#comment-submission-processing').show()
     $.ajax({
       type: $(this).attr('method'),
       url: $(this).attr('action'),
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
-      success: function() {
-        $('#comment-submit-success').show();
+      success: function () {
+        $('#comment-submission-processing').hide();
+        $('#comment-submit-success').slideDown(300);
+        $('#comment-form')[0].reset();
+        grecaptcha.reset();
       },
       error: function (e) {
         console.log(e);
-        $('#comment-submit-failure').show();
+        $('#comment-submission-processing').hide();
+        $('#comment-submit-failure').slideDown(300);
       }
     });
     return false;
@@ -107,7 +112,7 @@ $('#scroll-up-perm').click(function() {
  *   https://core.svn.wordpress.org/trunk/wp-includes/js/comment-reply.js
  */
 var addComment = {
-  moveForm: function(commentId, parentId, respondId, postId) {
+  moveForm: function (commentId, parentId, respondId, postId) {
     var div, element, firstChild, style,
     t = this,
     comment = t.I(commentId),
@@ -145,7 +150,7 @@ var addComment = {
       respond.style.paddingBottom = '3rem';
       comment.parentNode.insertBefore(respond, comment.nextSibling);
     }
-    
+
     if (post && postId) {
       post.value = postId;
     }
@@ -155,7 +160,7 @@ var addComment = {
     commentFormHeading.style.display = 'none';
     commentReplyHeading.style.display = '';
 
-    cancel.onclick = function() {
+    cancel.onclick = function () {
       var t = addComment,
       placeholder = t.I('form-placeholder'),
       respond = t.I(t.respondId);
@@ -190,10 +195,20 @@ var addComment = {
         element.focus();
         break;
       }
-    } catch(er) {} // IE 7 errors
+    } catch (er) {} // IE 7 errors
     return false;
   },
-  I: function(id) {
+  I: function (id) {
     return document.getElementById(id);
   }
 };
+
+// lazy-load images
+$(function () {
+  [].forEach.call(document.querySelectorAll('img[data-src]'), function (img) {
+    img.setAttribute('src', img.getAttribute('data-src'));
+    img.onload = function () {
+      img.removeAttribute('data-src');
+    };
+  })
+});

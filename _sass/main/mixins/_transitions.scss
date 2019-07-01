@@ -17,26 +17,32 @@
   transition: $prop $time ease-in-out;
 }
 
-@mixin underline {
+@mixin underline($color: $main-font-color, $bottom: -2px, $height: 2px,
+                 $origin: center center, $time: $transition-duration) {
   &:before {
-    @include ease-in-out;
+    @include ease-in-out($time: $time);
     content: '';
     cursor: default;
     pointer-events: none;
     position: absolute;
     left: 0;
-    bottom: -0.4em;
+    bottom: $bottom;
     width: 100%;
-    height: 2px;
-    background-color: $header-link-inactive-underline-color;
+    height: $height;
+    background-color: $color;
     visibility: hidden;
     transform: scaleX(0);
+    transform-origin: $origin;
   }
 
   &:hover:before {
     visibility: visible;
     transform: scaleX(1);
   }
+}
+
+@mixin underline-header-link {
+  @include underline($color: $header-link-inactive-underline-color, $bottom: -0.4em);
 
   &.active:before {
     background-color: $header-link-active-underline-color;
@@ -45,7 +51,11 @@
   }
 }
 
-@mixin underline-comment {
+@mixin underline-next-prev {
+  @include underline($time: 0.15s);
+}
+
+@mixin underline-field {
   &:before {
     @include ease-in-out;
     content: '';

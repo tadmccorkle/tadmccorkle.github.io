@@ -1,41 +1,31 @@
-# (*): Required
-# (!): Encrypted - https://tadmccorkle-comments.firebaseapp.com/encrypt/{TEXT TO BE ENCRYPTED}
+# config file for static comments
 
 comments:
-  allowedFields: ["name", "email", "message", "replying_to"] # *
+  allowedFields : ["name", "email", "message", "replying_to"]
   requiredFields: ["name", "message"]
 
-  branch: "master" # *
-  commitMessage: "New comment."
-  path: "_data/comments/{options.slug}" # *
-  filename: "comment-{@timestamp}" # *
-  format: "yaml"
-  moderation: true
+  branch        : "master"
+  commitMessage : "New comment."
+  path          : "_data/comments/{options.slug}"
+  filename      : "comment-{@timestamp}"
+  format        : "yml"
+  moderation    : true
 
-  # List of fields to be populated automatically by Comment Bot and included in
-  # the data file. Keys are the name of the field. The value can be an object
-  # with a `type` property, which configures the generated field, or any value
-  # to be used directly (e.g. a string, number or array)
   generatedFields:
     date:
       type: date
       options:
         format: "iso8601"
 
-  # Name of the site. Used in notification emails.
-  name: "tadmccorkle.com"
+  mailingList: "i3DiMFZMtKKrhGEFWVB55Y5y3cHiSuSbUGkk+5V+hdf1wSD7WQ7Cg5DJazfb69MLoDQX3N4EIteTSEgZnT+IEsW6WmLbs7KznMMnVRV+C9KXDdUkZsLmDd9lFBfvvVgQZBKoj6AvW9sC1D7aCMHzkEH8jELPEE1kmRWG6PztitM+Jh5WnNffVDlMnD14pcenw2juE/ScAepPoirx0GmOE9hMPpIFSXFwI+un6t9mX9txrQZBIn5TJy43skUB/2aDztt1N2NEMo/m3asLix7lQMVlPVa9+BlptpVNFPlXgXRnLwRUvrLFIkyq66ey4009pX/yRJrxhsbNJrxqco0wNQ=="
 
-  allowedOrigins: ["tadmccorkle.com"]
   notifications:
     enabled: true
-
-    # Mailgun API key
-    apiKey: "B9pkoKuMNLHD8z+x5ftQoj6cHQAWRKcH9+QT80smcrYgVFFE52SipCTqDSC/SEDPY/V9+7nKG/YuFvqAFwXyuUWD/CbsPYrKCsOvXK3l9TkcFD9AG7P6pNMTbriQgsrGrnjzFXxYcYjdV1xC1saFbGfGjDl+TcC3SvuTcQZ2MOAvZksoJdiE8LuUYxtEhY3cNuk/DpKVglhG161YHKjnwZ7fPGLSyxrZ0jn7Lgb71UmCPsbhV4W2aE+DDnx3hudTdMkrvSUntikZaPYZ4GnW+FfVT5Wu99et/GlcVfCMZcuunlNY0PPiCDFG0I2IOzT3HbOmZdUhiW1XkZFOeF3+9w==" # !
-
-    # Mailgun domain
-    domain: "xDDZVshGZrmt4ctxS7MnToWBBGEx61SYvCCsXyokB+pG72idcH/WJLgD/RI6tN2Am75T7Sdj1ddwXzh9Hb+v98yyNJOka8kRK8DdmQpFKxZW7ThcJJEFyWufZ4fsobe2GaNlfhkBdekksHYTV6sGV/mrEd95jUUQE08/OBRPACHJ0oNWvWm6AaCfOOqYbbLklTZRNRBDdASc61BigReguHtv1RiyIs1mN3CotzNraXe/A+0FbBCg9xr35nIQ0zjjOVSD2WiTLK6CkG7WHlKcu20UYFYgMTozQsnJbg7vIYsiiSY+LRvSHoTWx9MeWYknYOqYGnKJis8AG3EVEtQPYg==" # !
-
+    apiKey: "B9pkoKuMNLHD8z+x5ftQoj6cHQAWRKcH9+QT80smcrYgVFFE52SipCTqDSC/SEDPY/V9+7nKG/YuFvqAFwXyuUWD/CbsPYrKCsOvXK3l9TkcFD9AG7P6pNMTbriQgsrGrnjzFXxYcYjdV1xC1saFbGfGjDl+TcC3SvuTcQZ2MOAvZksoJdiE8LuUYxtEhY3cNuk/DpKVglhG161YHKjnwZ7fPGLSyxrZ0jn7Lgb71UmCPsbhV4W2aE+DDnx3hudTdMkrvSUntikZaPYZ4GnW+FfVT5Wu99et/GlcVfCMZcuunlNY0PPiCDFG0I2IOzT3HbOmZdUhiW1XkZFOeF3+9w=="
+    domain: "xDDZVshGZrmt4ctxS7MnToWBBGEx61SYvCCsXyokB+pG72idcH/WJLgD/RI6tN2Am75T7Sdj1ddwXzh9Hb+v98yyNJOka8kRK8DdmQpFKxZW7ThcJJEFyWufZ4fsobe2GaNlfhkBdekksHYTV6sGV/mrEd95jUUQE08/OBRPACHJ0oNWvWm6AaCfOOqYbbLklTZRNRBDdASc61BigReguHtv1RiyIs1mN3CotzNraXe/A+0FbBCg9xr35nIQ0zjjOVSD2WiTLK6CkG7WHlKcu20UYFYgMTozQsnJbg7vIYsiiSY+LRvSHoTWx9MeWYknYOqYGnKJis8AG3EVEtQPYg=="
     fromAddress: tad@mg.tadmccorkle.com
+    name: "tadmccorkle.com"
+    commentSectionID: "comment-section"
 
   transforms:
     email: md5
@@ -43,4 +33,4 @@ comments:
   reCaptcha: # siteKey and secret must match _config.yml
     enabled: true
     siteKey: "6LdgeZUUAAAAAPMIFQXbNmX9StHiqIPTyg0SsiVG"
-    secret: "RPHFcuDwKNkk+W1yjjIFQHMVgPXR0jBGzsr04ouR7wbom+1RKZQT9a0XPj3UCj1vC4HOKI3qs8nzqhuSb9bH8/RAM3F65FHmESbrdt9oGG2bcLm6T/xvyujfeoivZ3dy+PLfQ/d0lUkdpqQvQxocEtDpG/0S1nZScMgE81AbniO6bjEhYNAvkYKLkRkleTMLWmrJ/nturFHruHTV33hYE9RUaWOo8jh/DEJsN5ZZM1Wvet0/NbsRMRhghWR7plhMhSFYBogRr5PXe8L6zsa3lt1yLPJaAFmGNjzrauPItxt8lYwe4C0j35PEBFYh3C5x9taXCTvZ1zRSeZ5jR02CVw==" # !
+    secret: "RPHFcuDwKNkk+W1yjjIFQHMVgPXR0jBGzsr04ouR7wbom+1RKZQT9a0XPj3UCj1vC4HOKI3qs8nzqhuSb9bH8/RAM3F65FHmESbrdt9oGG2bcLm6T/xvyujfeoivZ3dy+PLfQ/d0lUkdpqQvQxocEtDpG/0S1nZScMgE81AbniO6bjEhYNAvkYKLkRkleTMLWmrJ/nturFHruHTV33hYE9RUaWOo8jh/DEJsN5ZZM1Wvet0/NbsRMRhghWR7plhMhSFYBogRr5PXe8L6zsa3lt1yLPJaAFmGNjzrauPItxt8lYwe4C0j35PEBFYh3C5x9taXCTvZ1zRSeZ5jR02CVw=="

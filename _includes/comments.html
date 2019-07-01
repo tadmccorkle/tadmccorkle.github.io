@@ -1,4 +1,4 @@
-<section>
+<section id="comment-section">
   {% assign page_slug = page.slug | replace: '.', '' %}
   {% if site.data.comments[page_slug] %}
     <hr>
@@ -29,7 +29,9 @@
       {% endfor %}
     </div>
   {% endif %}
-  <div id="respond" class="full-width">
-    {% include comment-form.html %}
-  </div>
+  {% if page.allow_new_comments %}
+    <div id="respond" class="full-width respond">
+      {% include comment-form.html %}
+    </div>
+  {% endif %}
 </section>

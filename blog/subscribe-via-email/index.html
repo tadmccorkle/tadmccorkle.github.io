@@ -1,0 +1,42 @@
+---
+comments: true
+---
+
+<p>
+  Submit your email if you want to be updated periodically of my posts. I won't notify the email list more than once per week.
+</p>
+
+<div class="respond">
+  <form id="comment-form" class="comment-form" action="{{ site.mailing_list }}" method="POST">
+    <fieldset class="comment-field">
+      <label for="email" class="label-text">Email
+        <input id="email" class="input" name="fields[email]" type="email" tabindex="1" required="true">
+      </label>
+    </fieldset>
+    <fieldset class="comment-field">
+      <div class="g-recaptcha" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
+    </fieldset>
+    <fieldset class="comment-field">
+      <div id="comment-submit-success" class="comment-submit-success" style="display:none;">
+        Thanks! Your email was successfully added to the site mailing list.
+      </div>
+      <div id="comment-submit-failure" class="comment-submit-failure" style="display:none;">
+        Sorry, there was an error adding your email to the site mailing list. Please try again, or <a href="/contact/">contact me</a>.
+      </div>
+      <button class="submit-btn" name="submit" type="submit" data-submit="...Sending">
+        Submit
+      </button>
+    </fieldset>
+
+    <!-- submission processing animation -->
+    <div id="comment-submission-processing" class="loading-spinner-container" style="display:none">
+      <div class="loading-spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+    </div>
+  </form>
+</div>

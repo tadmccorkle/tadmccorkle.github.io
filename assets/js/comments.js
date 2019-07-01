@@ -8,21 +8,26 @@
 *********************************************************************/
 
 // Static comments
-(function($) {
-  $('#comment-form').submit(function() {
-    $('#comment-submit-success').hide();
-    $('#comment-submit-failure').hide();
+(function ($) {
+  $('#comment-form').submit(function () {
+    $('#comment-submit-success').slideUp(300);
+    $('#comment-submit-failure').slideUp(300);
+    $('#comment-submission-processing').show()
     $.ajax({
       type: $(this).attr('method'),
       url: $(this).attr('action'),
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
-      success: function() {
-        $('#comment-submit-success').show();
+      success: function () {
+        $('#comment-submission-processing').hide();
+        $('#comment-submit-success').slideDown(300);
+        $('#comment-form')[0].reset();
+        grecaptcha.reset();
       },
       error: function (e) {
         console.log(e);
-        $('#comment-submit-failure').show();
+        $('#comment-submission-processing').hide();
+        $('#comment-submit-failure').slideDown(300);
       }
     });
     return false;
@@ -36,7 +41,7 @@
  *   https://core.svn.wordpress.org/trunk/wp-includes/js/comment-reply.js
  */
 var addComment = {
-  moveForm: function(commentId, parentId, respondId, postId) {
+  moveForm: function (commentId, parentId, respondId, postId) {
     var div, element, firstChild, style,
     t = this,
     comment = t.I(commentId),
@@ -74,7 +79,7 @@ var addComment = {
       respond.style.paddingBottom = '3rem';
       comment.parentNode.insertBefore(respond, comment.nextSibling);
     }
-    
+
     if (post && postId) {
       post.value = postId;
     }
@@ -84,7 +89,7 @@ var addComment = {
     commentFormHeading.style.display = 'none';
     commentReplyHeading.style.display = '';
 
-    cancel.onclick = function() {
+    cancel.onclick = function () {
       var t = addComment,
       placeholder = t.I('form-placeholder'),
       respond = t.I(t.respondId);
@@ -119,10 +124,10 @@ var addComment = {
         element.focus();
         break;
       }
-    } catch(er) {} // IE 7 errors
+    } catch (er) {} // IE 7 errors
     return false;
   },
-  I: function(id) {
+  I: function (id) {
     return document.getElementById(id);
   }
 };

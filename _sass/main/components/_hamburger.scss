@@ -9,6 +9,8 @@
  */
 
 
+// implementation
+
 .hamburger {
   cursor: default;
   pointer-events: none;
@@ -29,6 +31,10 @@
     opacity: 1;
     background-color: $hamburger-menu-color;
     transition: $hamburger-dropdown-duration;
+  }
+
+  &:hover:not(.active) .patty {
+    transform: scaleX(1.2);
   }
 
   &.active .patty {

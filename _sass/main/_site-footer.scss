@@ -77,7 +77,7 @@
 }
 
 .footer-link-text {
-  @include ease-in(color);
+  // @include ease-in(color);
   font-family: $footer-links-font-family;
   color: $footer-link-font-color;
   text-decoration: none;

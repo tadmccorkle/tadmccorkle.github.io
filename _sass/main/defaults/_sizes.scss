@@ -35,9 +35,13 @@ $horizontal-padding-width       : 10%     !default;
 $horizontal-padding-width-b     : 5%      !default;
 $post-link-width                : 20%     !default;
 
-// comment section heights and heights
+// comment section widths and heights
 $comment-input-field-height     : 2em     !default;
 $comment-message-field-height   : 15em    !default;
+
+// form widths and heights
+$input-field-height        : 2em     !default;
+$message-field-height      : 15em    !default;
 
 
 // font sizes
@@ -94,12 +98,6 @@ $site-intro-font-size-f         : 3rem    !default;
 $site-intro-padding-size        : 0.75em  !default;
 
 // contact page font sizes
-$contact-label-font-size        : 1.6rem  !default;
-$contact-label-font-size-c      : 1.7rem  !default;
-$contact-label-font-size-d      : 1.5rem  !default;
-$contact-label-font-size-f      : 1.4rem  !default;
-$contact-submit-font-size       : 1.5rem  !default;
-$contact-submit-font-size-f     : 1.3rem  !default;
 
 // posts page font sizes
 $post-link-font-size            : 1.7rem  !default;
@@ -116,12 +114,20 @@ $comment-font-size-f            : 1.4rem  !default;
 $comment-small-font-size        : 1.5rem  !default;
 $comment-small-font-size-d      : 1.4rem  !default;
 $comment-small-font-size-f      : 1.3rem  !default;
-$comment-label-font-size        : 1.6rem  !default;
-$comment-label-font-size-c      : 1.7rem  !default;
-$comment-label-font-size-d      : 1.5rem  !default;
-$comment-label-font-size-f      : 1.3rem  !default;
-$comment-submit-font-size       : 1.5rem  !default;
-$comment-submit-font-size-f     : 1.2rem  !default;
+$comment-label-font-size                : 1.6rem  !default;
+$comment-label-font-size-c              : 1.7rem  !default;
+$comment-label-font-size-d              : 1.5rem  !default;
+$comment-label-font-size-f              : 1.3rem  !default;
+
+// form font sizes
+$label-font-size                : 1.6rem  !default;
+$label-font-size-c              : 1.7rem  !default;
+$label-font-size-d              : 1.5rem  !default;
+$label-font-size-f              : 1.3rem  !default;
+
+// button font sizes
+$submit-button-font-size        : 1.5rem  !default;
+$submit-button-font-size-f      : 1.2rem  !default;
 
 
 // borders
@@ -137,15 +143,20 @@ $image-border-size              : 1px     !default;
 
 // contact page border sizes
 $contact-field-border-size      : 1px     !default;
-$contact-field-border-radius    : 2px     !default;
+$contact-field-border-radius    : 0px     !default;
 
 // posts page border sizes
 $post-link-border-size          : 1px     !default;
-$post-next-prev-border-size     : 1px     !default;
+$post-next-prev-border-size     : 2px     !default;
 
 // comment section border sizes
-$comment-field-border-size      : 1px     !default;
-$comment-field-border-radius    : 2px     !default;
+$form-field-border-size         : 1px     !default;
+
+// form
+
+// button border sizes
+$submit-button-border-size      : 2px     !default;
+$submit-button-border-radius    : 0px     !default;
 
 
 // other

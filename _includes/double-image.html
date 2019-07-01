@@ -2,7 +2,7 @@
   {% if include.left_href %}
     <a href="{{ include.left_href }}">
   {% endif %}
-    <img src="{{ 'assets/images/' | append: include.left_src | append: '?v=' | append: site.github.build_revision | relative_url }}"
+    <img data-src="{{ 'assets/images/' | append: include.left_src | append: '?v=' | append: site.github.build_revision | relative_url }}"
           class="{{ include.left_class }} inline-block"
           alt="{{ include.left_alt }}" />
   {% if include.left_href %}
@@ -11,7 +11,7 @@
   {% if include.right_href %}
     <a href="{{ include.right_href }}">
   {% endif %}
-    <img src="{{ 'assets/images/' | append: include.right_src | append: '?v=' | append: site.github.build_revision | relative_url }}"
+    <img data-src="{{ 'assets/images/' | append: include.right_src | append: '?v=' | append: site.github.build_revision | relative_url }}"
           class="{{ include.right_class }} inline-block"
           alt="{{ include.right_alt }}" />
   {% if include.right_href %}

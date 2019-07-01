@@ -6,7 +6,7 @@
 
 // Main Theme Background Colors:
 // - #4ca9d0 - turquoise
-// - #23435c - dark slate gray 
+// - #23435c - dark slate gray
 // - #dbdce0 - light steel blue
 // - #7791a3 - light slate gray
 // - #794c3c - dark olive green (brown)
@@ -84,11 +84,8 @@ $post-tag-color                         : $d                !default;
 $post-tag-hover-color                   : lighten($d, 25%)  !default;
 $post-side-link-color                   : $c                !default;
 $post-side-link-hover-color             : $e                !default;
-$post-next-prev-border-color            : $c                !default;
 $post-next-prev-font-color              : $d                !default;
-$post-next-prev-background-color        : lighten($c, 10%)  !default;
-$post-next-prev-hover-font-color        : lighten($c, 10%)  !default;
-$post-next-prev-hover-background-color  : lighten($d, 10%)  !default;
+$post-next-prev-hover-font-color        : $a                !default;
 $category-heading-color                 : $d                !default;
 
 // comment section
@@ -99,10 +96,19 @@ $comment-field-border-color             : $a                !default;
 $comment-field-font-color               : $b                !default;
 $comment-field-focus-border-color       : $c                !default;
 
-// submit button
+// form elements
 $a: $content-border-color;
 $b: $main-font-color;
+$c: $highlight-font-color;
+$form-field-border-color                : $a                !default;
+$form-field-font-color                  : $b                !default;
+$form-field-focus-border-color          : $c                !default;
+
+// submit button
+$a: $main-background-color;
+$b: $main-font-color;
 $submit-font-color                      : $b                !default;
-$submit-background-color                : lighten($a, 10%)  !default;
-$submit-hover-font-color                : lighten($a, 10%)  !default;
-$submit-hover-background-color          : lighten($b, 10%)  !default;
+$submit-background-color                : $a                !default;
+$submit-border-color                    : $b                !default;
+$submit-hover-font-color                : $a                !default;
+$submit-hover-background-color          : $b                !default;

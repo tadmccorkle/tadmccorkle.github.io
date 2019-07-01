@@ -212,6 +212,7 @@
 
 .scroll-link-icon-text {
   @include ease-in-out(color);
+  margin-left: auto;
   font-size: 0.8rem;
   color: $post-side-link-color;
 
@@ -253,23 +254,26 @@
 }
 
 .prev-next-post {
-  @include ease-in-out;
+  // @include underline-next-prev;
   cursor: pointer;
   pointer-events: all;
   margin: 2em 0.25em;
-  padding: 1em;
-  border: $post-next-prev-border-size solid $post-next-prev-border-color;
+  padding-bottom: 0.5em;
+  position: relative;
+  border-bottom: $post-next-prev-border-size;
+  border-style: solid;
+  border-color: $post-next-prev-font-color;
   font-family: $post-next-prev-font-family;
   font-size: $post-next-prev-font-size;
   color: $post-next-prev-font-color;
-  background: $post-next-prev-background-color;
+  font-style: italic;
   @include screen-f {
     font-size: $post-next-prev-font-size-f;
   }
 
   &:hover {
-    color: $post-next-prev-hover-font-color;
-    background: $post-next-prev-hover-background-color;
+    color: $post-link-normal-color;
+    border-color: $post-link-normal-color;
   }
 }
 
