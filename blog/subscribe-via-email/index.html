@@ -9,6 +9,9 @@ comments: true
 
 <div class="respond">
   <form id="comment-form" class="comment-form" action="{{ site.mailing_list }}" method="POST">
+    <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ site.reCaptcha.siteKey }}">
+    <input type="hidden" name="options[reCaptcha][secret]" value="{{ site.reCaptcha.secret }}">
+
     <fieldset class="comment-field">
       <label for="email" class="label-text">Email
         <input id="email" class="input" name="fields[email]" type="email" tabindex="1" required="true">
