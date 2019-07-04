@@ -137,11 +137,13 @@ td {
 
 img {
   max-width: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: $image-border-size solid $image-border-color;
 
   // lazy loading
   opacity: 1;
+  -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
 
   &.no-border {

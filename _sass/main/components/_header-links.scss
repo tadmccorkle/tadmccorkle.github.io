@@ -30,7 +30,9 @@
   }
   @include screen-c {
     display: none;
-    flex: 100%;
+    -webkit-box-flex: 100%;
+        -ms-flex: 100%;
+            flex: 100%;
   }
 }
 
@@ -53,14 +55,17 @@
 .main-site-header-links {
   @extend %header-links;
   @include only-screen-a {
-    align-self: flex-end;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
   }
 }
 
 .social-site-header-links {
   @extend %header-links;
   @include only-screen-b {
-    flex: 100%;
+    -webkit-box-flex: 100%;
+        -ms-flex: 100%;
+            flex: 100%;
   }
 
   // show header links when active
@@ -69,14 +74,16 @@
     @include only-screens-ab {
       cursor: pointer;
       pointer-events: all;
-      box-sizing: content-box;
+      -webkit-box-sizing: content-box;
+              box-sizing: content-box;
       width: 1em;
       padding-left: 1em;
       opacity: 1;
     }
     @include only-screen-b {
       height: 1em;
-      transform: scale(1, 1);
+      -webkit-transform: scale(1, 1);
+              transform: scale(1, 1);
     }
   }
 }
@@ -99,7 +106,8 @@
   }
   @include only-screen-b {
     height: 0;
-    transform: scale(0, 0);
+    -webkit-transform: scale(0, 0);
+            transform: scale(0, 0);
   }
 }
 

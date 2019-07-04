@@ -52,10 +52,18 @@
 // implementation
 
 .comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
 .comment-parent {
@@ -64,8 +72,11 @@
 }
 
 .comment-child {
-  flex: none;
-  box-sizing: border-box;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 100%;
   padding-left: 8rem;
   padding-top: 3rem;
@@ -84,7 +95,9 @@
 }
 
 .comment-text-container {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   vertical-align: top;
   padding-left: 1rem;
 }
@@ -159,7 +172,8 @@
     display: none;
 
     &:checked + .comment-form-subscribe-check {
-      transform: rotateY(180deg);
+      -webkit-transform: rotateY(180deg);
+              transform: rotateY(180deg);
     }
   }
 }
@@ -167,27 +181,32 @@
 .comment-form-subscribe-check {
   display: inline-block;
   vertical-align: middle;
+  -webkit-transition: all .3s ease;
   transition: all .3s ease;
-  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
   position: relative;
   width: 2.5rem;
   height: 2.5rem;
 
   &:hover > .comment-form-subscribe-check-front {
-    transform: scaleX(0.9) scaleY(0.9);
+    -webkit-transform: scaleX(0.9) scaleY(0.9);
+            transform: scaleX(0.9) scaleY(0.9);
   }
 }
 
 .comment-form-subscribe-check-front,
 .comment-form-subscribe-check-back {
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .comment-form-subscribe-check-front {
@@ -197,7 +216,8 @@
 }
 
 .comment-form-subscribe-check-back {
-  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
   background: $comment-field-focus-border-color;
   border: 1px solid $comment-field-focus-border-color;
   text-align: center;

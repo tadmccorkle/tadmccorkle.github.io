@@ -46,7 +46,8 @@
   margin-top: 0.25em;
   padding-left: 0.25em;
   padding-right: 0.25em;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: none;
   border-bottom: $form-field-border-size solid $form-field-border-color;
   font-family: $text-input-font-family;

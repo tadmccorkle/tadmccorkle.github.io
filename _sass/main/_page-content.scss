@@ -64,8 +64,11 @@
 // implementation
 
 .page-content {
-  flex: 1;
-  box-sizing: content-box;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   margin: auto;
   padding-bottom: 2.5rem;
   text-align: left;

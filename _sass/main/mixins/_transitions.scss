@@ -6,14 +6,17 @@
 // ---------------------------------------------------------------
 
 @mixin ease-in($prop: all, $time: $transition-duration) {
+  -webkit-transition: $prop $time ease-in;
   transition: $prop $time ease-in;
 }
 
 @mixin ease-out($prop: all, $time: $transition-duration) {
+  -webkit-transition: $prop $time ease-out;
   transition: $prop $time ease-out;
 }
 
 @mixin ease-in-out($prop: all, $time: $transition-duration) {
+  -webkit-transition: $prop $time ease-in-out;
   transition: $prop $time ease-in-out;
 }
 
@@ -31,13 +34,16 @@
     height: $height;
     background-color: $color;
     visibility: hidden;
-    transform: scaleX(0);
-    transform-origin: $origin;
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+    -webkit-transform-origin: $origin;
+            transform-origin: $origin;
   }
 
   &:hover:before {
     visibility: visible;
-    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
   }
 }
 
@@ -47,7 +53,8 @@
   &.active:before {
     background-color: $header-link-active-underline-color;
     visibility: visible;
-    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
   }
 }
 
@@ -68,12 +75,14 @@
     height: 2px;
     background-color: $comment-field-focus-border-color;
     visibility: hidden;
-    transform: scaleX(0);
+    -webkit-transform: scaleX(0);
+            transform: scaleX(0);
   }
 
   &:focus-within:before {
     visibility: visible;
-    transform: scaleX(1);
+    -webkit-transform: scaleX(1);
+            transform: scaleX(1);
   }
 }
 
@@ -89,17 +98,20 @@
     top: 0;
     color: $header-link-arrow-color;
     visibility: hidden;
-    transform: $inactive-transform;
+    -webkit-transform: $inactive-transform;
+            transform: $inactive-transform;
   }
 
   &:hover:after {
     visibility: visible;
-    transform: $active-transform;
+    -webkit-transform: $active-transform;
+            transform: $active-transform;
   }
 
   &.active:after {
     visibility: visible;
-    transform: $active-transform;
+    -webkit-transform: $active-transform;
+            transform: $active-transform;
   }
 }
 

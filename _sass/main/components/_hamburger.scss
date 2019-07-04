@@ -30,16 +30,19 @@
     margin: $hamburger-patty-spacing 0;
     opacity: 1;
     background-color: $hamburger-menu-color;
+    -webkit-transition: $hamburger-dropdown-duration;
     transition: $hamburger-dropdown-duration;
   }
 
   &:hover:not(.active) .patty {
-    transform: scaleX(1.2);
+    -webkit-transform: scaleX(1.2);
+            transform: scaleX(1.2);
   }
 
   &.active .patty {
     &:nth-child(1) {
-      transform: translate(0, $hamburger-patty-spacing + $hamburger-patty-height) rotate(-45deg);
+      -webkit-transform: translate(0, $hamburger-patty-spacing + $hamburger-patty-height) rotate(-45deg);
+              transform: translate(0, $hamburger-patty-spacing + $hamburger-patty-height) rotate(-45deg);
     }
 
     &:nth-child(2) {
@@ -47,7 +50,8 @@
     }
 
     &:nth-child(3) {
-      transform: translate(0, -($hamburger-patty-spacing + $hamburger-patty-height)) rotate(45deg);
+      -webkit-transform: translate(0, -($hamburger-patty-spacing + $hamburger-patty-height)) rotate(45deg);
+              transform: translate(0, -($hamburger-patty-spacing + $hamburger-patty-height)) rotate(45deg);
     }
   }
 }
