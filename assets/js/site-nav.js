@@ -1,3 +1,5 @@
+// NOTE: MAY BE OUTDATED FROM MAIN.JS
+
 const ACTIVE_CLASS_NAME = 'active';
 const TOTAL_HAMBURGER_DROPDOWN_DURATION = 300; // length for scss transition
 

@@ -29,10 +29,7 @@
     display: inline-block !important;
   }
   @include screen-c {
-    display: none;
-    -webkit-box-flex: 100%;
-        -ms-flex: 100%;
-            flex: 100%;
+    text-align: center;
   }
 }
 
@@ -41,9 +38,6 @@
   vertical-align: middle;
   padding: 0.5em;
   font-size: $header-link-font-size;
-  @include screen-c {
-    display: block;
-  }
   @include screen-f {
     font-size: $header-link-font-size-f;
   }
@@ -67,10 +61,33 @@
         -ms-flex: 100%;
             flex: 100%;
   }
+  @include screen-c {
+    display: none;
+    height: 0;
+  }
 
   // show header links when active
-  &.active .social-site-header-link,
-  .social-site-header-link:focus-within {
+  &.active > .social-site-header-link {
+    @include only-screens-ab {
+      cursor: pointer;
+      pointer-events: all;
+      -webkit-box-sizing: content-box;
+              box-sizing: content-box;
+      width: 1em;
+      padding-left: 1em;
+      opacity: 1;
+    }
+    @include only-screen-b {
+      height: 1em;
+      -webkit-transform: scale(1, 1);
+              transform: scale(1, 1);
+    }
+  }
+
+  // show header links when active
+  // must keep separate from above for MS
+  // Edge compatibility
+  > .social-site-header-link:focus-within {
     @include only-screens-ab {
       cursor: pointer;
       pointer-events: all;
@@ -120,8 +137,9 @@
     @include underline-header-link;
   }
   @include screen-c {
+    color: $highlight-font-color;
     &:hover {
-      color: $highlight-font-color;
+      color: $header-link-font-color;
     }
   }
 }

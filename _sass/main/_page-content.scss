@@ -246,7 +246,10 @@
   hr {
     margin-top: 0;
     margin-bottom: $p-padding-bottom;
-    border: 0.5px solid $content-border-color;
+    border-color: $content-border-color;
+    border-bottom-width: 0.5px;
+    border-top-width: 0;
+    border-style: solid;
     font-size: $p-font-size;
     @include screen-c {
       font-size: $p-font-size-c;

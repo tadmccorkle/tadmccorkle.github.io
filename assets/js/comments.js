@@ -1,3 +1,5 @@
+// NOTE: MAY BE OUTDATED FROM MAIN.JS
+
 /********************************************************************
  * All code below taken from
  * https://github.com/eduardoboucas/popcorn/blob/gh-pages/js/main.js,
