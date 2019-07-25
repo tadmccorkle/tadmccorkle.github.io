@@ -5,24 +5,11 @@
  * to the about page.
  *
  * Elements:
- * - .site-intro
  * - .about-img
  */
 
 
 // implementation
-
-.site-intro {
-  font-family: $site-intro-font-family;
-  font-size: $site-intro-font-size;
-  text-align: center;
-  padding-top: $site-intro-padding-size;
-  padding-bottom: $site-intro-padding-size;
-  border-bottom: $content-border-size solid $content-border-color;
-  @include screen-f {
-    font-size: $site-intro-font-size-f;
-  }
-}
 
 .about-img {
   width: $about-image-width;

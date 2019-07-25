@@ -52,24 +52,34 @@ $('#scroll-up-perm').click(function () {
 // Static comments
 (function ($) {
   $('#comment-form').submit(function () {
-    $('#comment-submit-success').slideUp(300);
-    $('#comment-submit-failure').slideUp(300);
-    $('#comment-submission-processing').show()
+    succ = $('#comment-submit-success');
+    fail = $('#comment-submit-failure');
+    proc = $('#comment-submission-processing');
+    esub = $('#email-submission');
+    succ.slideUp(300);
+    fail.slideUp(300);
+    proc.show();
     $.ajax({
       type: $(this).attr('method'),
       url: $(this).attr('action'),
       data: $(this).serialize(),
       contentType: 'application/x-www-form-urlencoded',
       success: function () {
-        $('#comment-submission-processing').hide();
-        $('#comment-submit-success').slideDown(300);
+        if ($('#comment-form-subscribe').prop('checked')
+            && $('#email').val()) {
+          esub.show();
+        } else {
+          esub.hide();
+        }
+        proc.hide();
+        succ.slideDown(300);
         $('#comment-form')[0].reset();
         grecaptcha.reset();
       },
       error: function (e) {
         console.log(e);
-        $('#comment-submission-processing').hide();
-        $('#comment-submit-failure').slideDown(300);
+        proc.hide();
+        fail.slideDown(300);
       }
     });
     return false;

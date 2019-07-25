@@ -1,4 +1,4 @@
-# config file for entire blog
+# config file for site
 
 # site settings
 title           : Tad McCorkle
@@ -11,7 +11,6 @@ alt_taglines    :
   - Learner
   - Runner
   - Coffee Lover
-intro           : Hi! I'm Tad. Thanks for checking out my site!
 description     : >-
   A site about my adventures in programming, entertainment,
   and whatever else I feel like talking about. By Tad McCorkle.
@@ -40,7 +39,9 @@ collections:
     output: true
 
 # main pages
-about           : &about          "/"
+home            : &home           "/"
+home_title      : &home_title     "Home"
+about           : &about          "/about/"
 about_title     : &about_title    "About"
 blog            : &blog           "/blog/"
 blog_title      : &blog_title     "The Blog"
@@ -69,7 +70,7 @@ defaults:
       path                : ""
       type                : "about_posts"
     values:
-      layout              : "home"
+      layout              : "about"
       permalink           : "/about/:title/"
   -
     scope: # all blog posts
@@ -109,14 +110,21 @@ defaults:
       permalink           : *living_url
       redirect_from       : "/blog/living_posts/"
   -
-    scope: # about/home page
+    scope: # home page
       path                : "index.md"
       type                : "pages"
     values:
       layout              : "home"
+      title               : *home_title
+      permalink           : *home
+  -
+    scope: # about page
+      path                : "about.md"
+      type                : "pages"
+    values:
+      layout              : "about"
       title               : *about_title
       permalink           : *about
-      redirect_from       : "/about/"
   -
     scope: # blog page
       path                : "/blog/*"
@@ -181,7 +189,7 @@ reCaptcha: # siteKey and secret must match _comment-bot.yml
 
 # mailing list
 mailing_list: https://tadmccorkle-comments.firebaseapp.com/email/tadmccorkle/tadmccorkle.github.io/master/comments
-mailing_list_path: /blog/subscribe-via-email
+mailing_list_path: /blog/subscribe
 
 # contact form
 formspree: https://formspree.io/tad.mccorkle@gmail.com

@@ -14,6 +14,10 @@ $hamburger-patty-width          : 30px    !default;
 $hamburger-patty-height         : 1px     !default;
 $hamburger-patty-spacing        : 10px    !default;
 
+// home page widths and heights
+$max-home-page-width            : 750px   !default;
+$max-site-intro-width           : 400px   !default;
+
 // about page widths and heights
 $about-image-width              : 114px   !default;
 $about-image-width-c            : 122px   !default;
@@ -40,8 +44,8 @@ $comment-input-field-height     : 2em     !default;
 $comment-message-field-height   : 15em    !default;
 
 // form widths and heights
-$input-field-height        : 2em     !default;
-$message-field-height      : 15em    !default;
+$input-field-height             : 2em     !default;
+$message-field-height           : 15em    !default;
 
 
 // font sizes
@@ -95,7 +99,6 @@ $table-content-font-size-f      : 1.2rem  !default;
 // about page font sizes
 $site-intro-font-size           : 3.2rem  !default;
 $site-intro-font-size-f         : 3rem    !default;
-$site-intro-padding-size        : 0.75em  !default;
 
 // contact page font sizes
 
@@ -114,10 +117,10 @@ $comment-font-size-f            : 1.4rem  !default;
 $comment-small-font-size        : 1.5rem  !default;
 $comment-small-font-size-d      : 1.4rem  !default;
 $comment-small-font-size-f      : 1.3rem  !default;
-$comment-label-font-size                : 1.6rem  !default;
-$comment-label-font-size-c              : 1.7rem  !default;
-$comment-label-font-size-d              : 1.5rem  !default;
-$comment-label-font-size-f              : 1.3rem  !default;
+$comment-label-font-size        : 1.6rem  !default;
+$comment-label-font-size-c      : 1.7rem  !default;
+$comment-label-font-size-d      : 1.5rem  !default;
+$comment-label-font-size-f      : 1.3rem  !default;
 
 // form font sizes
 $label-font-size                : 1.6rem  !default;
@@ -161,10 +164,11 @@ $submit-button-border-radius    : 0px     !default;
 
 // other
 
+$site-intro-padding-size        : 2.5em   !default;
 $side-padding-size              : 3rem    !default;
 $side-padding-size-c            : 1.5rem  !default;
 $side-padding-size-e            : 1rem    !default;
-$heading-padding-size           : 0.25em   !default;
+$heading-padding-size           : 0.25em  !default;
 $footer-bottom-padding-size     : 2.5rem  !default;
 $p-padding-bottom               : 1em     !default;
 $pre-padding-bottom             : 1.5em   !default;

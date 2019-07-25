@@ -1,16 +1,15 @@
----
-layout: blog
-comments: true
----
-
 <p>
-  Submit your email if you want to be updated periodically of my posts. I won't notify the email list more than once per week.
+  Submit your email if you want to be updated periodically of my posts and updates to this site. I won't notify the email list more than once per week.
 </p>
 
 <div class="respond">
   <form id="comment-form" class="comment-form" action="{{ site.mailing_list }}" method="POST">
-    <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ site.reCaptcha.siteKey }}">
-    <input type="hidden" name="options[reCaptcha][secret]" value="{{ site.reCaptcha.secret }}">
+
+    <fieldset class="no-vis-or-sr">
+      <label for="username" class="no-vis-or-sr">Do not enter anything into this field if you want your submission processed.
+        <input id="username" class="no-vis-or-sr" name="fields[username]" type="text" tabindex="-1" autocomplete="off">
+      </label>
+    </fieldset>
 
     <fieldset class="comment-field">
       <label for="email" class="label-text">Email
@@ -18,14 +17,11 @@ comments: true
       </label>
     </fieldset>
     <fieldset class="comment-field">
-      <div class="g-recaptcha" data-sitekey="{{ site.reCaptcha.siteKey }}"></div>
-    </fieldset>
-    <fieldset class="comment-field">
       <div id="comment-submit-success" class="comment-submit-success" style="display:none;">
-        Thanks! Your email was successfully added to the site mailing list.
+        Thanks! A confirmation email has been sent to your email address.
       </div>
       <div id="comment-submit-failure" class="comment-submit-failure" style="display:none;">
-        Sorry, there was an error adding your email to the site mailing list. Please try again, or <a href="/contact/">contact me</a>.
+        Sorry, there was an error processing your submission. Please try again, or <a href="/contact/">contact me</a>.
       </div>
       <button class="submit-btn" name="submit" type="submit" data-submit="...Sending">
         Submit

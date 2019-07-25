@@ -1,0 +1,45 @@
+/**
+ * File: _home.scss
+ * Author: Tad McCorkle
+ * File for styling elements specific
+ * to the home page.
+ *
+ * Elements:
+ * - .home-container
+ * - .site-intro
+ * - .greeting
+ * - .home-social-list-item
+ */
+
+
+// implementation
+
+.home-container {
+  margin: auto;
+  max-width: $max-home-page-width;
+}
+
+.site-intro {
+  margin: auto;
+  max-width: $max-site-intro-width;
+  padding-top: $site-intro-padding-size;
+  text-align: center;
+}
+
+.greeting {
+  font-family: $site-intro-font-family;
+  font-size: $site-intro-font-size;
+  font-weight: $bold-lora-weight;
+  text-align: center;
+  @include screen-f {
+    font-size: $site-intro-font-size-f;
+  }
+}
+
+.home-social-list-item {
+  list-style-type: circle;
+
+  &:hover {
+    list-style-type: disc;
+  }
+}

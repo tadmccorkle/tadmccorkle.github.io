@@ -71,19 +71,17 @@ body {
 p,
 li {
   font-family: $main-text-font-family;
+  overflow-wrap: break-word;
 }
 
 a {
   font: inherit;
+  cursor: pointer;
 }
 
 i,
 em {
   font-style: italic;
-}
-
-a {
-  cursor: pointer;
 }
 
 b,

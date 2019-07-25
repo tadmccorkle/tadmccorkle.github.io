@@ -2,39 +2,42 @@
 layout: default
 ---
 
-{% if page.url == site.about %}
-  <section class="page-top">
-    <h1 class="site-intro">
-      {{ site.intro }}
+<article class="home-container">
+  <section class="site-intro">
+    <h1 class="greeting">
+      Hi! I'm Tad.
     </h1>
+    {{ content }}
   </section>
-{% else %}
-  <div class="page-top"></div>
-{% endif %}
-<div class="post-container">
-  <article class="post">
-    <header>
-      <h1>
-        {{ page.title }}
-      </h1>
-    </header>
-    <section class="post-content">
-      {{ content }}
-    </section>
-  </article>
-  <div class="post-horizontal-padding"></div>
-  <aside class="post-links">
-    <h5 class="post-link-heading">
-      Other Links
-    </h5>
-    <ul class="no-indentation">
-      {% for post in site.about_posts %}
-        <li class="post-link-list-item">
-          <a class="post-link" href="{{ post.url }}">
-            {{ post.title }}
-          </a>
+  <section class="site-summary">
+    <h2>
+      Recent blog posts
+    </h2>
+    {% assign recent_posts = site.posts | slice:0,5 %}
+    {% include post-list.html posts=recent_posts %}
+    <h2>
+      Subscribe to my blog
+    </h2>
+    {% include subscribe.html %}
+    <h2>
+      You can also find me here
+    </h2>
+    <ul>
+      <a href="{{ site.github }}" target="_blank">
+        <li class="home-social-list-item">
+          <i class="fab fa-github"></i> - GitHub
         </li>
-      {% endfor %}
+      </a>
+      <a href="{{ site.linkedin }}" target="_blank">
+        <li class="home-social-list-item">
+          <i class="fab fa-linkedin"></i> - LinkedIn
+        </li>
+      </a>
+      <a href="{{ site.instagram }}" target="_blank">
+        <li class="home-social-list-item">
+          <i class="fab fa-instagram"></i> - Instagram
+        </li>
+      </a>
     </ul>
-  </aside>
-</div>
+  </section>
+</article>

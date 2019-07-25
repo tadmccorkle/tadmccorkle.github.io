@@ -1,4 +1,3 @@
-
 # jekyll
 _site
 .sass-cache
@@ -7,3 +6,6 @@ Gemfile.lock
 
 # vs-code
 .vscode
+
+# email
+email/*
