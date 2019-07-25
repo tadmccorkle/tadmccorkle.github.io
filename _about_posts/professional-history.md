@@ -5,7 +5,9 @@ title: Professional History
 * __Georgia Tech Research Institute__ (January 2019 - Present)
   * Work full-time as a Research Engineer on mobile apps and electronic warfare systems.
   * Concurrently work with multiple teams across various projects.
+  * Develop .NET framework Windows desktop applications with Visual Studio / C#.
   * Work with team following the Agile Development methodology (Scrum).
+  * Develop iOS mobile apps with Objective C.
 * __Georgia Tech Research Institute__ (August 2016 - December 2018)
   * Worked part-time as a Visiting Research Student on mobile apps.
   * Gained experience in iOS mobile app development with Xamarin using the MvvmCross framework.
