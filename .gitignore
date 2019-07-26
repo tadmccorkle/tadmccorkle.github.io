@@ -9,3 +9,6 @@ Gemfile.lock
 
 # email
 email/*
+
+# other
+category_record.txt

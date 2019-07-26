@@ -13,7 +13,7 @@ layout: default
     <h2>
       Recent blog posts
     </h2>
-    {% assign recent_posts = site.posts | slice:0,5 %}
+    {% assign recent_posts = site.posts | slice:0,10 %}
     {% include post-list.html posts=recent_posts %}
     <h2>
       Subscribe to my blog
