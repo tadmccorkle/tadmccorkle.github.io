@@ -165,7 +165,7 @@ sass:
   style                   : compressed
 
 # atom feed
-author    : Tad McCorkle
+author    : tad
 feed_path : /blog/feed.xml
 feed:
   path    : /blog/feed.xml

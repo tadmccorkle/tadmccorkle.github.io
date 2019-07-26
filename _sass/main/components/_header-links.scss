@@ -84,7 +84,7 @@
     }
   }
 
-  // show header links when active
+  // show header links when focused
   // must keep separate from above for MS
   // Edge compatibility
   > .social-site-header-link:focus-within {

@@ -1,19 +1,31 @@
 <figure class="multi-center full-width">
   {% if include.left_href %}
-    <a href="{{ include.left_href }}">
+    <a href="{{ include.left_href }}"{% if include.left_target %} target="{{ include.left_target }}"{% endif %}{% if include.left_title %} title="{{ include.left_title }}"{% endif %}>
   {% endif %}
+  {% if include.left_url_src %}
+    <img data-src="{{ include.left_url_src }}"
+         class="{{ include.left_class }} inline-block"
+         alt="{{ include.left_alt }}" />
+  {% elsif include.left_src %}
     <img data-src="{{ 'assets/images/' | append: include.left_src | append: '?v=' | append: site.github.build_revision | relative_url }}"
-          class="{{ include.left_class }} inline-block"
-          alt="{{ include.left_alt }}" />
+         class="{{ include.left_class }} inline-block"
+         alt="{{ include.left_alt }}" />
+  {% endif %}
   {% if include.left_href %}
     </a>
   {% endif %}
   {% if include.right_href %}
-    <a href="{{ include.right_href }}">
+    <a href="{{ include.right_href }}"{% if include.right_target %} target="{{ include.right_target }}"{% endif %}{% if include.right_title %} title="{{ include.right_title }}"{% endif %}>
   {% endif %}
+  {% if include.left_url_src %}
+    <img data-src="{{ include.right_url_src }}"
+         class="{{ include.right_class }} inline-block"
+         alt="{{ include.right_alt }}" />
+  {% elsif include.left_src %}
     <img data-src="{{ 'assets/images/' | append: include.right_src | append: '?v=' | append: site.github.build_revision | relative_url }}"
-          class="{{ include.right_class }} inline-block"
-          alt="{{ include.right_alt }}" />
+         class="{{ include.right_class }} inline-block"
+         alt="{{ include.right_alt }}" />
+  {% endif %}
   {% if include.right_href %}
     </a>
   {% endif %}
