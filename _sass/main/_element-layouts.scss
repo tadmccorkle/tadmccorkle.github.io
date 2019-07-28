@@ -163,6 +163,10 @@
   display: none;
 }
 
+.ellipsis {
+  text-overflow: ellipsis;
+}
+
 // for screen readers
 .sr-visible {
   position:absolute;

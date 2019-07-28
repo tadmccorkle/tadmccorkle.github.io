@@ -1,5 +1,5 @@
 ---
-title: 'Comma-Separated Pseudo-Classes'
+title: 'Be Aware of Comma-Separated Pseudo-Classes'
 date: 2019-07-26
 category: Programming
 tags:
@@ -104,4 +104,4 @@ The `:focus-within` animation still doesn't work in Edge, but at least the icons
 
 ## The takeaway?
 
-If you care about browser support, be sure to check [https://caniuse.com](https://caniuse.com){:target="_blank"} before comma-separating selectors with pseudo-classes and pseudo-elements. Also, don't use Edge.
+If you care about browser support, be sure to check [https://caniuse.com](https://caniuse.com){:target="_blank"} before comma-separating selectors with [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes){:target="_blank" title="Mozilla web docs on pseudo-classes"} and/or [pseudo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements){:target="_blank" title="Mozilla web docs on pseudo-elements"}, and never comma-separate selectors with [vendor prefixes](https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix){:target="_blank" title="Mozilla web docs on vendor prefixes"}. Also, don't use Edge.
