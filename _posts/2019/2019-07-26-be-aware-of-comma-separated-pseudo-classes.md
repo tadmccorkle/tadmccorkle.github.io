@@ -48,7 +48,7 @@ I was really excited to find out about the `:focus-within` pseudo-class. My favo
 }
 ```
 
-The above works with Chrome, Firefox, and Safari, which are the browsers I use/test most frequently, but it doesn't (at the time of this writing) work with Microsoft Edge, which I usually reluctantly launch to test changes with this site. It was on one of these occasions that I realized this sad truth. Because Edge doesn't support `:focus-within`, the `.active` selector wouldn't produce the UI animation I had grown to expect after clicking "Social" in the navbar. I wasn't aware of browser behavior when it comes to unknown selectors, so I spent an afternoon Googling and tinkering with my JavaScript, HTML and CSS, all to no avail.
+The above works with Chrome, Firefox, and Safari, which are the browsers I use/test most frequently, but it doesn't (at the time of this writing) work with Microsoft Edge, which I usually reluctantly launch to test changes with this site. It was on one of these occasions that I realized this sad truth. Because Edge doesn't support `:focus-within`, the `.active` selector wouldn't produce the UI animation I had grown to expect after clicking "Social" in the navbar. I wasn't aware of browser behavior when it comes to unknown selectors, so I spent an afternoon Googling and tinkering with my JavaScript, HTML, and CSS, all to no avail.
 
 {% include image.html url_src='https://imgs.xkcd.com/comics/debugging.png'
                       class='center'
@@ -58,7 +58,7 @@ The above works with Chrome, Firefox, and Safari, which are the browsers I use/t
                       caption='<a href="https://xkcd.com/1722/" target="_blank">https://xkcd.com/1722/</a>'
                       caption_class='center-figure-caption' %}
 
-Eventually I figured out browsers don't apply styling associated with comma-separated selectors if they don't recognize one or more of the selectors. Separating the selectors fixed the issue.
+Eventually I figured out browsers don't apply styling associated with comma-separated selector groups if they don't recognize one or more of the selectors. Ungrouping the selectors fixed the issue.
 
 ```scss
 // show header links when active
