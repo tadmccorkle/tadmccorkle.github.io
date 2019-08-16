@@ -11,5 +11,6 @@ Gemfile.lock
 email/*
 
 # other
+private_drafts/*
 category_record.txt
 future_updates.txt

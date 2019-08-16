@@ -44,6 +44,7 @@
   letter-spacing: $heading-letter-spacing;
   padding: $heading-padding-size 0;
   font-weight: normal;
+  overflow-wrap: break-word;
 }
 
 %list {

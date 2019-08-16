@@ -9,7 +9,7 @@ tags:
 excerpt: <p>The <code>:focus-within</code> pseudo-class is one of my favorite things to use in CSS, but placing it with comma-separated selectors can cause problems.</p>
 ---
 
-Chris Coyier of [css-tricks.com](https://css-tricks.com){:target="_blank"} beat me to this topic earlier this week. Check out [his post](https://css-tricks.com/dont-comma-separate-focus-within-if-you-need-deep-browser-support/){:target="_blank"} if you're interested - he also includes a nifty use-case for CSS mixins that I didn't think of.
+Chris Coyier of [css-tricks.com](https://css-tricks.com) beat me to this topic earlier this week. Check out [his post](https://css-tricks.com/dont-comma-separate-focus-within-if-you-need-deep-browser-support/) if you're interested - he also includes a nifty use-case for CSS mixins that I didn't think of.
 
 ## Focus-Within
 
@@ -54,8 +54,7 @@ The above works with Chrome, Firefox, and Safari, which are the browsers I use/t
                       class='center'
                       alt='xkcd 1722'
                       href='https://xkcd.com/1722/'
-                      target='_blank'
-                      caption='<a href="https://xkcd.com/1722/" target="_blank">https://xkcd.com/1722/</a>'
+                      caption='<a href="https://xkcd.com/1722/">https://xkcd.com/1722/</a>'
                       caption_class='center-figure-caption' %}
 
 Eventually I figured out browsers don't apply styling associated with comma-separated selector groups if they don't recognize one or more of the selectors. Ungrouping the selectors fixed the issue.
@@ -104,4 +103,4 @@ The `:focus-within` animation still doesn't work in Edge, but at least the icons
 
 ## The takeaway?
 
-If you care about browser support, be sure to check [https://caniuse.com](https://caniuse.com){:target="_blank"} before comma-separating selectors with [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes){:target="_blank" title="Mozilla web docs on pseudo-classes"} and/or [pseudo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements){:target="_blank" title="Mozilla web docs on pseudo-elements"}, and never comma-separate selectors with [vendor prefixes](https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix){:target="_blank" title="Mozilla web docs on vendor prefixes"}. Also, don't use Edge.
+If you care about browser support, be sure to check [https://caniuse.com](https://caniuse.com) before comma-separating selectors with [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes){title="Mozilla web docs on pseudo-classes"} and/or [pseudo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements){title="Mozilla web docs on pseudo-elements"}, and never comma-separate selectors with [vendor prefixes](https://developer.mozilla.org/en-US/docs/Glossary/Vendor_Prefix){title="Mozilla web docs on vendor prefixes"}. Also, don't use Edge.
