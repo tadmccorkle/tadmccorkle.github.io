@@ -3,7 +3,7 @@ layout: blog-post
 title: Demo
 category: Draft
 permalink: /demo/
-mathjax: true
+katex: true
 excerpt: <p>This is an excerpt from the demo post.</p>
 ---
 

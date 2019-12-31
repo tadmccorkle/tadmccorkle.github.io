@@ -2,10 +2,12 @@
 _site
 .sass-cache
 .jekyll-metadata
-Gemfile.lock
 
 # vs-code
 .vscode
+
+# python
+__pycache__/
 
 # email
 email/*

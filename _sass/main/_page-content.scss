@@ -178,15 +178,15 @@
 
         > li {
           list-style-type: lower-alpha;
+
+          > ol > li {
+            list-style-type: lower-roman;
+          }
         }
       }
 
       > ul {
         @extend %nested-list;
-
-        > li {
-          list-style-type: circle;
-        }
       }
     }
   }
@@ -199,10 +199,6 @@
 
       > ol {
         @extend %nested-list;
-
-        > li {
-          list-style-type: lower-alpha;
-        }
       }
 
       > ul {
@@ -210,6 +206,10 @@
 
         > li {
           list-style-type: circle;
+
+          > ul > li {
+            list-style-type: square;
+          }
         }
       }
     }

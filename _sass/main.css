@@ -1,0 +1,2753 @@
+@charset "UTF-8";
+/**
+ * File: main.scss
+ * Author: Tad McCorkle
+ * File for major styling imports.
+ *
+ * All SASS imports occur in this file in the following order:
+ * - Web/Other Fonts
+ * - Styling Reset
+ * - Defaults
+ *   - Colors
+ *   - Durations
+ *   - Font Families
+ *   - Sizes
+ * - Mixins
+ *   - Media Queries
+ *     - screen-f: <->
+ *     - screen-e: <-->
+ *     - screen-d: <--->
+ *     - screen-c: <---->
+ *     - screen-b: <----->
+ *     - screen-a: <------>
+ *       NOTE: a is default
+ *   - Transitions
+ * - Main Layout/Content
+ *   - Base
+ *   - Site Content
+ *   - Site Header
+ *   - Page Content
+ *   - Site Footer
+ *   - Syntax Highlighting
+ *   - Element Layouts
+ */
+/* --- imported fonts - Montserrat, Open Sans, and Lora --- */
+/* --- reset styling --- */
+/**
+ * This file is based off two resets:
+ * - meyerweb.com v2.0
+ * - normalize.css v8.0.1
+ *
+ * - Unwanted parts of each were removed.
+ */
+/**
+ * http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain)
+ */
+/* normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+main, article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+main, article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+hr {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+a {
+  background-color: transparent;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+img {
+  border-style: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+legend {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+summary {
+  display: list-item;
+}
+
+template {
+  display: none;
+}
+
+[hidden] {
+  display: none;
+}
+
+/* --- import main site styling --- */
+/**
+ * File: _base.scss
+ * Author: Tad McCorkle
+ * File for base element styling.
+ *
+ * Abstract SASS Elements:
+ * - caption
+ *
+ * Elements:
+ * - html
+ * - body
+ * - p
+ * - li
+ * - a
+ * - i, em
+ * - b, strong
+ * - h1, h2, h3, h4, h5, h6
+ *   - b
+ *   - strong
+ * - table
+ * - th
+ * - tbody
+ *   - tr
+ * - td
+ * - img
+ *   - .no-border
+ *   - .left, .align-left
+ *   - .right, .align-right
+ * - img[data-src]
+ * - figcaption
+ * - .with-caption
+ * - .left-figure-caption
+ * - .center-figure-caption
+ * - .left-table-caption
+ * - .center-table-caption
+ * - .right-table-caption
+ * - .screen-c
+ */
+figcaption, .left-table-caption, .center-table-caption, .right-table-caption {
+  width: 95%;
+  margin: auto;
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 360px) {
+  figcaption, .left-table-caption, .center-table-caption, .right-table-caption {
+    font-size: 1.2rem;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1rem;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background-color: #FFF;
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+li {
+  font-family: "Lora", "Lucida Bright", "Georgia", "Palatino Linotype", "Palatino", serif;
+  overflow-wrap: break-word;
+}
+
+a {
+  font: inherit;
+  cursor: pointer;
+}
+
+i,
+em {
+  font-style: italic;
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+
+h1 > b, h1 > strong, h2 > b, h2 > strong, h3 > b, h3 > strong,
+h4 > b,
+h4 > strong, h5 > b, h5 > strong, h6 > b, h6 > strong {
+  font-weight: 500;
+}
+
+table {
+  margin: auto;
+  width: 95%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  font-style: italic;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #4ca9d0;
+  padding: 0.6em 0.5em;
+}
+
+@media screen and (max-width: 360px) {
+  th {
+    font-size: 1.3rem;
+  }
+}
+
+tbody tr {
+  border-bottom: 1px solid #dbdce0;
+}
+
+tbody tr:hover {
+  background-color: #f6f7f8;
+}
+
+tbody tr:last-child {
+  border-bottom: 1px solid #333;
+}
+
+td {
+  padding: 0.4em 0.5em;
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 360px) {
+  td {
+    font-size: 1.2rem;
+  }
+}
+
+img {
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+img.no-border {
+  border: none;
+}
+
+img.left, img.align-left {
+  margin: 5px 15px 2px 0;
+}
+
+img.right, img.align-right {
+  margin: 5px 0 2px 15px;
+}
+
+img[data-src] {
+  opacity: 0;
+}
+
+figcaption {
+  padding-top: 0.5em;
+}
+
+.with-caption {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.left-figure-caption {
+  text-align: left;
+}
+
+.center-figure-caption {
+  text-align: center;
+}
+
+.left-table-caption {
+  text-align: left;
+}
+
+.center-table-caption {
+  text-align: center;
+}
+
+.right-table-caption {
+  text-align: center;
+}
+
+.screen-c {
+  display: none;
+}
+
+@media screen and (max-width: 880px) {
+  .screen-c {
+    display: initial;
+  }
+}
+
+/**
+ * File: _site-content.scss
+ * Author: Tad McCorkle
+ * File for styling the container for the header,
+ * footer, and page content.
+ *
+ * Elements:
+ * - .site-content
+ *   - .not-smallest
+ */
+.site-content {
+  min-height: 100vh;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-top: 2px solid #4ca9d0;
+  border-bottom: 2px solid #4ca9d0;
+  padding: 0 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background-color: #FFF;
+  color: #333;
+}
+
+@media screen and (max-width: 880px) {
+  .site-content {
+    padding: 0 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .site-content {
+    padding: 0 1rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .site-content .not-smallest {
+    display: none;
+  }
+}
+
+/**
+ * File: _site-header.scss
+ * Author: Tad McCorkle
+ * File for styling the site header.
+ *
+ * Elements:
+ * - .header-container
+ * - .site-nav
+ * - .site-header-logo
+ * - .site-title
+ * - .site-tagline
+ * - .main-tageline
+ *   - .hide
+ * - .alt-tagline
+ *   - .show
+ *
+ * Imports:
+ * - Hamburger Menu
+ * - Header Links
+ */
+.header-container {
+  margin: auto;
+  max-width: 1000px;
+}
+
+.site-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  padding: 3rem 0;
+  border-bottom: 1px solid #dbdce0;
+}
+
+@media screen and (max-width: 960px) {
+  .site-nav {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 881px) and (max-width: 960px) {
+  .site-nav {
+    padding-bottom: 1.1rem;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .site-nav {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+.site-header-logo {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+@media screen and (max-width: 880px) {
+  .site-header-logo {
+    text-align: center;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.site-title {
+  -webkit-transition: color 0.25s ease-in;
+  transition: color 0.25s ease-in;
+  font-family: "Montserrat", "Lora", "Arial", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: -1px;
+  color: #333;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 360px) {
+  .site-title {
+    font-size: 3rem;
+  }
+}
+
+.site-title:hover {
+  color: #4ca9d0;
+}
+
+.site-tagline {
+  position: relative;
+  font-family: "Montserrat", "Lora", "Arial", sans-serif;
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 880px) {
+  .site-tagline {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .site-tagline {
+    font-size: 1.7rem;
+  }
+}
+
+.main-tagline {
+  -webkit-transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
+  opacity: 1;
+}
+
+.main-tagline.hide {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.alt-tagline {
+  -webkit-transition: opacity 0.25s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.alt-tagline.show {
+  opacity: 1;
+  position: relative;
+  pointer-events: all;
+  visibility: visible;
+}
+
+/* import components to site header */
+/**
+ * File: _header-links.scss
+ * Author: Tad McCorkle
+ * File for styling the site header links.
+ *
+ * Abstract SASS Elements:
+ * - header-links
+ * - header-link
+ *
+ * Elements:
+ * - .main-site-header-links
+ * - .social-site-header-links
+ * - .main-site-header-link
+ * - .social-site-header-link
+ * - .header-link-text
+ * - .transition-item
+ * - .transition-item-text
+ * - .social-name
+ */
+.main-site-header-links, .social-site-header-links {
+  cursor: default;
+  list-style: none;
+  text-align: right;
+}
+
+@media screen and (min-width: 881px) {
+  .main-site-header-links, .social-site-header-links {
+    display: inline-block !important;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .main-site-header-links, .social-site-header-links {
+    text-align: center;
+  }
+}
+
+.main-site-header-link, .social-site-header-link {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.5em;
+  font-size: 1.9rem;
+}
+
+@media screen and (max-width: 360px) {
+  .main-site-header-link, .social-site-header-link {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .main-site-header-links {
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+  }
+}
+
+@media screen and (min-width: 881px) and (max-width: 960px) {
+  .social-site-header-links {
+    -webkit-box-flex: 100%;
+    -ms-flex: 100%;
+    flex: 100%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .social-site-header-links {
+    display: none;
+    height: 0;
+  }
+}
+
+@media screen and (min-width: 881px) {
+  .social-site-header-links.active > .social-site-header-link {
+    cursor: pointer;
+    pointer-events: all;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 1em;
+    padding-left: 1em;
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 881px) and (max-width: 960px) {
+  .social-site-header-links.active > .social-site-header-link {
+    height: 1em;
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+@media screen and (min-width: 881px) {
+  .social-site-header-links > .social-site-header-link:focus-within {
+    cursor: pointer;
+    pointer-events: all;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 1em;
+    padding-left: 1em;
+    opacity: 1;
+  }
+}
+
+@media screen and (min-width: 881px) and (max-width: 960px) {
+  .social-site-header-links > .social-site-header-link:focus-within {
+    height: 1em;
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1);
+  }
+}
+
+@media screen and (min-width: 881px) {
+  .social-site-header-link {
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    cursor: default;
+    pointer-events: none;
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
+    letter-spacing: 0;
+    opacity: 0;
+  }
+}
+
+@media screen and (min-width: 881px) and (max-width: 960px) {
+  .social-site-header-link {
+    height: 0;
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0);
+  }
+}
+
+.header-link-text {
+  position: relative;
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  color: #333;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 881px) {
+  .header-link-text:before {
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    content: '';
+    cursor: default;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    bottom: -0.4em;
+    width: 100%;
+    height: 2px;
+    background-color: #dbdce0;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+  }
+  .header-link-text:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+  .header-link-text.active:before {
+    background-color: #4ca9d0;
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .header-link-text {
+    color: #4ca9d0;
+  }
+  .header-link-text:hover {
+    color: #333;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .transition-item {
+    display: none;
+  }
+}
+
+.transition-item-text {
+  position: relative;
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  color: #333;
+}
+
+@media screen and (min-width: 961px) {
+  .transition-item-text:after {
+    -webkit-transition: all 0.25s ease-in;
+    transition: all 0.25s ease-in;
+    content: ">";
+    cursor: default;
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    right: -1em;
+    top: 0;
+    color: #4ca9d0;
+    visibility: hidden;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+  }
+  .transition-item-text:hover:after {
+    visibility: visible;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+  .transition-item-text.active:after {
+    visibility: visible;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@media screen and (min-width: 881px) and (max-width: 960px) {
+  .transition-item-text:after {
+    -webkit-transition: all 0.25s ease-in;
+    transition: all 0.25s ease-in;
+    content: "▼";
+    cursor: default;
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    right: -0.9em;
+    top: 0;
+    color: #4ca9d0;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+  }
+  .transition-item-text:hover:after {
+    visibility: visible;
+    -webkit-transform: scaleX(0.6);
+    transform: scaleX(0.6);
+  }
+  .transition-item-text.active:after {
+    visibility: visible;
+    -webkit-transform: scaleX(0.6);
+    transform: scaleX(0.6);
+  }
+}
+
+.transition-item-text:hover {
+  cursor: pointer;
+}
+
+.social-name {
+  display: none;
+}
+
+@media screen and (max-width: 880px) {
+  .social-name {
+    display: initial;
+  }
+}
+
+/**
+ * File: _page-content.scss
+ * Author: Tad McCorkle
+ * File for styling the primary page content.
+ *
+ * Abstract SASS Elements:
+ * - heading
+ * - list
+ *   - .no-indentation
+ * - nested-list
+ *
+ * Elements:
+ * - .page-content
+ *   - h1, h2, h3
+ *   - h4, h5, h6
+ *   - p, a
+ *   - ul, ol, li
+ *   - .bottom-caption
+ *   - figure
+ *   - table
+ *     - .with-caption
+ *   - blockquote
+ *   - q
+ *   - hr
+ *
+ *   - Imports:
+ *     - about
+ *     - contact
+ *     - home
+ *     - posts
+ *     - projects
+ *     - comments
+ *     - form-elements
+ *     - loading
+ *
+ * - .page-top
+ */
+.page-content h1, .page-content h2, .page-content h3, .page-content h4, .page-content h5, .page-content h6 {
+  font-family: "Montserrat", "Lora", "Arial", sans-serif;
+  letter-spacing: -1px;
+  padding: 0.25em 0;
+  font-weight: normal;
+  overflow-wrap: break-word;
+}
+
+.page-content ol, .page-content ul {
+  padding-bottom: 1.5rem;
+  padding-left: 2.5rem;
+  list-style-type: decimal;
+}
+
+.page-content ol.no-indentation, .page-content ul.no-indentation {
+  padding-left: 0;
+}
+
+.page-content ol > li > ol, .page-content ol > li > ul, .page-content ul > li > ol, .page-content ul > li > ul {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.page-content {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: auto;
+  padding-bottom: 2.5rem;
+  text-align: left;
+  width: 100%;
+  max-width: 1000px;
+  /* import specific page stylings within .page-content */
+  /**
+ * File: _about.scss
+ * Author: Tad McCorkle
+ * File for styling elements specific
+ * to the about page.
+ *
+ * Elements:
+ * - .about-img
+ */
+  /**
+ * File: _contact.scss
+ * Author: Tad McCorkle
+ * File for styling the contact page.
+ *
+ * Elements:
+ * - .contact-container
+ * - .contact-content
+ * - .contact-message-container
+ * - .contact-form
+ * - .contact-field
+ */
+  /**
+ * File: _home.scss
+ * Author: Tad McCorkle
+ * File for styling elements specific
+ * to the home page.
+ *
+ * Elements:
+ * - .home-container
+ * - .site-intro
+ * - .greeting
+ * - .home-social-list-item
+ */
+  /**
+ * File: _posts.scss
+ * Author: Tad McCorkle
+ * File for styling post-specific content.
+ *
+ * Abstract SASS Elements:
+ * - post-meta
+ * - post-link-list-item
+ * - post-link
+ *
+ * Elements:
+ * - .post-container
+ * - .post
+ * - .post-links
+ * - .post-horizontal-padding
+ * - .post-vertical-padding
+ * - .blog-posts
+ * - .post-title
+ * - .upper-post-meta
+ * - .post-snippet-meta
+ * - .post-snippet
+ * - .lower-post-meta-icons
+ * - .post-link-heading
+ * - .post-top-links
+ * - .blog-link-list-item
+ * - .blog-link
+ * - .post-link-list-item
+ * - .post-link
+ * - .scroll-link-icons
+ * - .scroll-link-icon
+ * - .scroll-link-icon-text
+ * - .post-tags
+ * - .post-tag
+ * - .post-tag-link
+ * - .prev-next
+ * - .prev-next-post
+ * - .prev-post
+ * - .category-post-link
+ * - .collection-post-list-item
+ * - .collection-post-date
+ */
+  /**
+ * File: _projects.scss
+ * Author: Tad McCorkle
+ * File for styling the projects page.
+ */
+  /* projects page not yet implemented */
+  /* import components to page content */
+  /**
+ * File: _comment.scss
+ * Author: Tad McCorkle
+ * File for styling the comment section.
+ *
+ * Abstract SASS Elements:
+ * - comment-label-font
+ *
+ * Elements:
+ * - .comment
+ * - .comment-parent
+ * - .comment-child
+ * - .comment-icon
+ * - .comment-text-container
+ * - .comment-meta
+ * - .comment-name
+ * - .comment-message
+ * - .comment-reply
+ * - .respond
+ * - .comment-form
+ * - .comment-field
+ * - .comment-label-check
+ * - .comment-form-subscribe-check
+ * - .comment-form-subscribe-check-front
+ * - .comment-form-subscribe-check-back
+ *   - svg
+ *     - path
+ * - .comment-form-subscribe-message
+ * - .comment-submit-success
+ * - .comment-submit-failure
+ * - .comment-cancel
+ */
+  /**
+ * File: _form-elements.scss
+ * Author: Tad McCorkle
+ * File for styling the site forms.
+ *
+ * Abstract SASS Elements:
+ * - label-font
+ * - label
+ * - input
+ *
+ * Elements:
+ * - .label-text
+ * - .input
+ * - .message-input
+ * - .submit-btn
+ */
+  /**
+ * File: _loading.scss
+ * CSS animations for loading icons.
+ * Source: https://github.com/richleland/pygments-css
+ *
+ * Elements:
+ * - .loading-spinner
+ *   - div
+ *   - .rect2
+ *   - .rect3
+ *   - .rect4
+ *   - .rect5
+ */
+}
+
+.page-content h1 {
+  font-size: 3.6rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content h1 {
+    font-size: 3.1rem;
+  }
+}
+
+.page-content h2 {
+  font-size: 3.2rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content h2 {
+    font-size: 2.75rem;
+  }
+}
+
+.page-content h3 {
+  font-size: 2.8rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content h3 {
+    font-size: 2.4rem;
+  }
+}
+
+.page-content h4 {
+  font-size: 2.4rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content h4 {
+    font-size: 2.1rem;
+  }
+}
+
+.page-content h5 {
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content h5 {
+    font-size: 1.7rem;
+  }
+}
+
+.page-content h6 {
+  font-size: 1.8rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content h6 {
+    font-size: 1.5rem;
+  }
+}
+
+.page-content p,
+.page-content li {
+  font-size: 1.8rem;
+  line-height: 1.7;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content p,
+  .page-content li {
+    font-size: 1.9rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .page-content p,
+  .page-content li {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content p,
+  .page-content li {
+    font-size: 1.5rem;
+  }
+}
+
+.page-content p > a:hover,
+.page-content li > a:hover {
+  text-decoration: underline;
+}
+
+.page-content p,
+.page-content figure,
+.page-content .bottom-caption {
+  padding-bottom: 1em;
+}
+
+.page-content table {
+  margin-bottom: 1em;
+}
+
+.page-content table.with-caption {
+  margin-bottom: 0;
+}
+
+.page-content a {
+  color: #4ca9d0;
+  text-decoration: none;
+}
+
+.page-content a:hover {
+  color: #333;
+}
+
+.page-content ol > li {
+  list-style-type: decimal;
+}
+
+.page-content ol > li > ol > li {
+  list-style-type: lower-alpha;
+}
+
+.page-content ol > li > ul > li {
+  list-style-type: circle;
+}
+
+.page-content ul > li {
+  list-style-type: disc;
+}
+
+.page-content ul > li > ol > li {
+  list-style-type: lower-alpha;
+}
+
+.page-content ul > li > ul > li {
+  list-style-type: circle;
+}
+
+.page-content blockquote {
+  border-left: 3px solid #4ca9d0;
+  background-color: #f6f7f8;
+  padding: 1.5rem 2.5rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.page-content blockquote > h1, .page-content blockquote > h2, .page-content blockquote > h3,
+.page-content blockquote > h4, .page-content blockquote > h5, .page-content blockquote > h6 {
+  padding-top: 0;
+  letter-spacing: -1px;
+}
+
+.page-content blockquote > p {
+  padding: 0;
+}
+
+.page-content q {
+  display: inline;
+}
+
+.page-content q:before {
+  content: open-quote;
+}
+
+.page-content q:after {
+  content: close-quote;
+}
+
+.page-content hr {
+  margin-top: 0;
+  margin-bottom: 1em;
+  border-color: #dbdce0;
+  border-bottom-width: 0.5px;
+  border-top-width: 0;
+  border-style: solid;
+  font-size: 1.8rem;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content hr {
+    font-size: 1.9rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .page-content hr {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content hr {
+    font-size: 1.5rem;
+  }
+}
+
+.page-content .about-img {
+  width: 114px;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .about-img {
+    width: 122px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .page-content .about-img {
+    width: 108px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .about-img {
+    width: 110px;
+  }
+}
+
+.page-content .contact-container {
+  margin: auto;
+  max-width: 80%;
+  text-align: center;
+}
+
+.page-content .contact-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .contact-content {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.page-content .contact-message-container {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .contact-message-container {
+    display: block;
+    padding-right: 0;
+  }
+}
+
+.page-content .contact-form {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: inline-block;
+  text-align: left;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .contact-form {
+    display: block;
+  }
+}
+
+.page-content .contact-field {
+  padding: 0 1.25rem 2rem;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .contact-field {
+    padding: 2rem 0 0;
+  }
+}
+
+.page-content .home-container {
+  margin: auto;
+  max-width: 750px;
+}
+
+.page-content .site-intro {
+  margin: auto;
+  max-width: 400px;
+  padding-top: 2.5em;
+  text-align: center;
+}
+
+.page-content .greeting {
+  font-family: "Lora", "Lucida Bright", "Georgia", "Palatino Linotype", "Palatino", serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .greeting {
+    font-size: 3rem;
+  }
+}
+
+.page-content .home-social-list-item {
+  list-style-type: circle;
+}
+
+.page-content .home-social-list-item:hover {
+  list-style-type: disc;
+}
+
+.page-content .upper-post-meta, .page-content .post-snippet-meta {
+  font-family: "Lora", "Lucida Bright", "Georgia", "Palatino Linotype", "Palatino", serif;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .upper-post-meta, .page-content .post-snippet-meta {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .blog-link-list-item, .page-content .post-link-list-item {
+  list-style: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #4ca9d0;
+}
+
+.page-content .blog-link-list-item:hover, .page-content .post-link-list-item:hover {
+  color: #333;
+}
+
+.page-content .blog-link, .page-content .post-link {
+  font-size: 1.7rem;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .blog-link, .page-content .post-link {
+    font-size: 1.5rem;
+  }
+}
+
+.page-content .blog-link:hover, .page-content .post-link:hover {
+  text-decoration: none;
+}
+
+.page-content .post-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .post-container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+.page-content .post {
+  width: 70%;
+}
+
+@media screen and (max-width: 960px) {
+  .page-content .post {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .post {
+    width: 100%;
+  }
+}
+
+.page-content .post-links {
+  padding-top: 1rem;
+  width: 20%;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .post-links {
+    width: 100%;
+    padding-top: 0;
+  }
+}
+
+.page-content .post-horizontal-padding {
+  width: 10%;
+}
+
+@media screen and (max-width: 960px) {
+  .page-content .post-horizontal-padding {
+    width: 5%;
+  }
+}
+
+.page-content .post-vertical-padding {
+  padding: 0.5rem 0;
+}
+
+.page-content .blog-posts {
+  padding-bottom: 0;
+}
+
+.page-content .post-title {
+  padding-bottom: 0.25em;
+  line-height: 1.1;
+}
+
+.page-content .upper-post-meta {
+  padding: 0 0 2em 0;
+}
+
+.page-content .post-snippet-meta {
+  padding: 0 0 1em 0;
+}
+
+.page-content .post-snippet {
+  list-style: none;
+  padding-bottom: 1.5rem;
+}
+
+.page-content .lower-post-meta-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.page-content .post-link-heading {
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .post-top-links {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .blog-link-list-item {
+    display: inline-block;
+    padding-right: 1rem;
+    font-size: 1.25rem;
+  }
+}
+
+.page-content .post-link-list-item {
+  padding: 0;
+  border-bottom: 1px solid #dbdce0;
+}
+
+.page-content .post-link-list-item:last-child {
+  border-bottom: none;
+}
+
+.page-content .post-link {
+  font-style: italic;
+}
+
+.page-content .scroll-link-icons {
+  -webkit-transition: opacity 0.15s ease-in-out;
+  transition: opacity 0.15s ease-in-out;
+  display: block;
+  padding-left: 8rem;
+  padding-top: 12rem;
+  opacity: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .scroll-link-icons {
+    display: none;
+  }
+}
+
+.page-content .scroll-link-icons.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.page-content .scroll-link-icon {
+  padding-bottom: 1em;
+  list-style: none;
+}
+
+.page-content .scroll-link-icon-text {
+  -webkit-transition: color 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out;
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: #dbdce0;
+}
+
+.page-content .scroll-link-icon-text:hover {
+  color: #4ca9d0;
+}
+
+.page-content .scroll-link-icon-text:focus {
+  outline: none;
+}
+
+.page-content .post-tags {
+  padding: 0;
+}
+
+.page-content .post-tag {
+  list-style: none;
+  display: inline-block;
+  margin: 0.25em 0.25em;
+  padding: 0.25em;
+  line-height: 1;
+  background-color: #f6f7f8;
+}
+
+.page-content .post-tag-link {
+  color: #333;
+  font-weight: 700;
+}
+
+.page-content .post-tag-link:hover {
+  color: #737373;
+}
+
+.page-content .prev-next {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.page-content .prev-next-post {
+  cursor: pointer;
+  pointer-events: all;
+  margin: 2em 0.25em;
+  padding-bottom: 0.5em;
+  position: relative;
+  border-bottom: 2px;
+  border-style: solid;
+  border-color: #333;
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  font-size: 1.5rem;
+  color: #333;
+  font-style: italic;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .prev-next-post {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .prev-next-post:hover {
+  color: #4ca9d0;
+  border-color: #4ca9d0;
+}
+
+.page-content .prev-post {
+  margin-right: auto;
+}
+
+.page-content .collection-post-link {
+  font-style: italic;
+}
+
+.page-content .collection-post-link:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+.page-content .collection-post-list-item {
+  list-style-type: circle;
+  color: #4ca9d0;
+}
+
+.page-content .collection-post-list-item:hover {
+  list-style-type: disc;
+  color: #333;
+}
+
+.page-content .collection-post-date {
+  font-style: normal;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .collection-post-date {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .comment-label-check, .page-content .comment-submit-success, .page-content .comment-submit-failure {
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .comment-label-check, .page-content .comment-submit-success, .page-content .comment-submit-failure {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .page-content .comment-label-check, .page-content .comment-submit-success, .page-content .comment-submit-failure {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .comment-label-check, .page-content .comment-submit-success, .page-content .comment-submit-failure {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
+.page-content .comment-parent {
+  padding-bottom: 3rem;
+  width: 100%;
+}
+
+.page-content .comment-child {
+  -webkit-box-flex: 0;
+  -ms-flex: none;
+  flex: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 8rem;
+  padding-top: 3rem;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .comment-child {
+    padding-left: 5rem;
+  }
+}
+
+.page-content .comment-icon {
+  width: 8rem;
+  border: none;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .comment-icon {
+    width: 5rem;
+  }
+}
+
+.page-content .comment-text-container {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  vertical-align: top;
+  padding-left: 1rem;
+}
+
+.page-content .comment-meta {
+  padding: 0 0 0.5em 0;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #dbdce0;
+  font-family: "Lora", "Lucida Bright", "Georgia", "Palatino Linotype", "Palatino", serif;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 700px) {
+  .page-content .comment-meta {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .comment-meta {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .comment-message,
+.page-content .comment-name {
+  font-family: "Lora", "Lucida Bright", "Georgia", "Palatino Linotype", "Palatino", serif;
+  font-size: 1.7rem;
+}
+
+@media screen and (max-width: 700px) {
+  .page-content .comment-message,
+  .page-content .comment-name {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .comment-message,
+  .page-content .comment-name {
+    font-size: 1.4rem;
+  }
+}
+
+.page-content .comment-name {
+  padding: 0.25em 0;
+}
+
+.page-content .comment-message {
+  padding-bottom: 0;
+}
+
+.page-content .comment-reply {
+  padding-top: 0.5em;
+  font-family: "Lora", "Lucida Bright", "Georgia", "Palatino Linotype", "Palatino", serif;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 700px) {
+  .page-content .comment-reply {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .comment-reply {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .respond {
+  position: relative;
+}
+
+.page-content .comment-form {
+  text-align: left;
+  width: 100%;
+}
+
+.page-content .comment-field {
+  padding: 0 0 2rem;
+}
+
+.page-content .comment-label-check {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  cursor: pointer;
+}
+
+.page-content .comment-label-check > input {
+  display: none;
+}
+
+.page-content .comment-label-check > input:checked + .comment-form-subscribe-check {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.page-content .comment-form-subscribe-check {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.page-content .comment-form-subscribe-check:hover > .comment-form-subscribe-check-front {
+  -webkit-transform: scaleX(0.9) scaleY(0.9);
+  transform: scaleX(0.9) scaleY(0.9);
+}
+
+.page-content .comment-form-subscribe-check-front,
+.page-content .comment-form-subscribe-check-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.page-content .comment-form-subscribe-check-front {
+  background: #FFF;
+  border: 1px solid #dbdce0;
+  z-index: 1;
+}
+
+.page-content .comment-form-subscribe-check-back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  background: #4ca9d0;
+  border: 1px solid #4ca9d0;
+  text-align: center;
+  color: #FFF;
+}
+
+.page-content .comment-form-subscribe-check-back > svg {
+  fill: none;
+  width: 50%;
+  height: 100%;
+}
+
+.page-content .comment-form-subscribe-check-back > svg > path {
+  stroke: white;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page-content .comment-form-subscribe-message {
+  padding-left: 0.5em;
+  vertical-align: middle;
+  font-style: italic;
+}
+
+.page-content .comment-submit-success {
+  padding: 0 0 2rem;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+.page-content .comment-submit-failure {
+  padding: 1em;
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  font-style: italic;
+  border-top: 2px;
+  border-bottom: 2px;
+  border-color: #FF0000;
+  border-style: solid;
+}
+
+.page-content .comment-cancel {
+  padding-left: 1em;
+  font-weight: 500;
+  color: #cc3300;
+}
+
+.page-content .label-text {
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 880px) {
+  .page-content .label-text {
+    font-size: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .page-content .label-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .label-text {
+    font-size: 1.3rem;
+  }
+}
+
+.page-content .label-text {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.page-content .input, .page-content .message-input {
+  -webkit-transition: border-color 0.25s ease-in-out;
+  transition: border-color 0.25s ease-in-out;
+  display: block;
+  line-height: 1.5;
+  margin-top: 0.25em;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #dbdce0;
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  color: #333;
+}
+
+.page-content .input:focus, .page-content .message-input:focus {
+  outline: none;
+  border-bottom: 1px solid #4ca9d0;
+}
+
+.page-content .label-text:before {
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  content: '';
+  cursor: default;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 2px;
+  background-color: #4ca9d0;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+}
+
+.page-content .label-text:focus-within:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.page-content .input {
+  width: 100%;
+  height: 100%;
+}
+
+.page-content .message-input {
+  width: 100%;
+  height: 15em;
+}
+
+.page-content .submit-btn {
+  -webkit-transition: all 0.15s ease-in-out;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  pointer-events: all;
+  padding: 1em 2em;
+  border: 2px solid #333;
+  border-radius: 0px;
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  color: #333;
+  background: #FFF;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+@media screen and (max-width: 360px) {
+  .page-content .submit-btn {
+    font-size: 1.2rem;
+  }
+}
+
+.page-content .submit-btn:hover {
+  color: #FFF;
+  background: #333;
+}
+
+.page-content .loading-spinner-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(219, 220, 224, 0.3);
+}
+
+.page-content .loading-spinner {
+  position: absolute;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
+
+.page-content .loading-spinner > div {
+  background-color: #333;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.page-content .loading-spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.page-content .loading-spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.page-content .loading-spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.page-content .loading-spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+  }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
+
+.page-top {
+  padding-bottom: 2.5rem;
+}
+
+/**
+ * File: _site-footer.scss
+ * Author: Tad McCorkle
+ * File for styling the site footer.
+ *
+ * Abstract SASS Elements:
+ * - footer-link
+ *
+ * Elements:
+ * - .footer-container
+ * - .site-footer
+ * - .main-site-footer-link
+ * - .social-site-footer-link
+ * - .footer-link-text
+ * - .copyright
+ */
+.main-site-footer-link, .social-site-footer-link {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.5em;
+}
+
+@media screen and (max-width: 880px) {
+  .main-site-footer-link, .social-site-footer-link {
+    display: block;
+  }
+}
+
+.footer-container {
+  margin: auto;
+  padding-bottom: 2.5rem;
+  max-width: 1000px;
+}
+
+.site-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid #dbdce0;
+}
+
+@media screen and (max-width: 880px) {
+  .site-footer {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
+
+.main-site-footer-link {
+  font-size: 1.7rem;
+  font-style: italic;
+}
+
+@media screen and (max-width: 880px) {
+  .main-site-footer-link {
+    padding-left: 0.75em;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .main-site-footer-link {
+    font-size: 1.5rem;
+  }
+}
+
+.social-site-footer-link {
+  font-size: 2.4rem;
+}
+
+@media screen and (max-width: 880px) {
+  .social-site-footer-link {
+    padding-bottom: 0.2em;
+    padding-right: 0.75em;
+    letter-spacing: 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .social-site-footer-link {
+    font-size: 2rem;
+  }
+}
+
+.footer-link-text {
+  font-family: "Open Sans", "Lora", "Lucida Sans", "Helvetica", "Verdana", "Arial", sans-serif;
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-link-text:hover {
+  color: #4ca9d0;
+}
+
+.copyright {
+  padding-top: 1.25em;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 880px) {
+  .copyright {
+    -webkit-box-flex: 100%;
+    -ms-flex: 100%;
+    flex: 100%;
+    padding-right: 1.5em;
+    text-align: right;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .copyright {
+    font-size: 1.2rem;
+  }
+}
+
+/**
+ * File: _syntax-highlighting.scss
+ * Various themes for rouge syntax highlighting:
+ * - B/W
+ * - Friendly
+ * - Monokai
+ * - Trac
+ * Source: https://github.com/richleland/pygments-css
+ *
+ * Also styling for following tags:
+ * - pre
+ * - code
+ * - pre > code
+ * - p > code
+ */
+.highlight {
+  /* Comment */
+  /* Error */
+  /* Keyword */
+  /* Comment.Hashbang */
+  /* Comment.Multiline */
+  /* Comment.PreprocFile */
+  /* Comment.Single */
+  /* Comment.Special */
+  /* Generic.Emph */
+  /* Generic.Heading */
+  /* Generic.Prompt */
+  /* Generic.Strong */
+  /* Generic.Subheading */
+  /* Keyword.Constant */
+  /* Keyword.Declaration */
+  /* Keyword.Namespace */
+  /* Keyword.Reserved */
+  /* Literal.String */
+  /* Name.Class */
+  /* Name.Entity */
+  /* Name.Exception */
+  /* Name.Namespace */
+  /* Name.Tag */
+  /* Operator.Word */
+  /* Literal.String.Affix */
+  /* Literal.String.Backtick */
+  /* Literal.String.Char */
+  /* Literal.String.Delimiter */
+  /* Literal.String.Doc */
+  /* Literal.String.Double */
+  /* Literal.String.Escape */
+  /* Literal.String.Heredoc */
+  /* Literal.String.Interpol */
+  /* Literal.String.Other */
+  /* Literal.String.Regex */
+  /* Literal.String.Single */
+  /* Literal.String.Symbol */
+}
+
+.highlight .hll {
+  background-color: #ffffcc;
+}
+
+.highlight .c {
+  font-style: italic;
+}
+
+.highlight .err {
+  border: 1px solid #FF0000;
+}
+
+.highlight .k {
+  font-weight: bold;
+}
+
+.highlight .ch {
+  font-style: italic;
+}
+
+.highlight .cm {
+  font-style: italic;
+}
+
+.highlight .cpf {
+  font-style: italic;
+}
+
+.highlight .c1 {
+  font-style: italic;
+}
+
+.highlight .cs {
+  font-style: italic;
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gh {
+  font-weight: bold;
+}
+
+.highlight .gp {
+  font-weight: bold;
+}
+
+.highlight .gs {
+  font-weight: bold;
+}
+
+.highlight .gu {
+  font-weight: bold;
+}
+
+.highlight .kc {
+  font-weight: bold;
+}
+
+.highlight .kd {
+  font-weight: bold;
+}
+
+.highlight .kn {
+  font-weight: bold;
+}
+
+.highlight .kr {
+  font-weight: bold;
+}
+
+.highlight .s {
+  font-style: italic;
+}
+
+.highlight .nc {
+  font-weight: bold;
+}
+
+.highlight .ni {
+  font-weight: bold;
+}
+
+.highlight .ne {
+  font-weight: bold;
+}
+
+.highlight .nn {
+  font-weight: bold;
+}
+
+.highlight .nt {
+  font-weight: bold;
+}
+
+.highlight .ow {
+  font-weight: bold;
+}
+
+.highlight .sa {
+  font-style: italic;
+}
+
+.highlight .sb {
+  font-style: italic;
+}
+
+.highlight .sc {
+  font-style: italic;
+}
+
+.highlight .dl {
+  font-style: italic;
+}
+
+.highlight .sd {
+  font-style: italic;
+}
+
+.highlight .s2 {
+  font-style: italic;
+}
+
+.highlight .se {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.highlight .sh {
+  font-style: italic;
+}
+
+.highlight .si {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.highlight .sx {
+  font-style: italic;
+}
+
+.highlight .sr {
+  font-style: italic;
+}
+
+.highlight .s1 {
+  font-style: italic;
+}
+
+.highlight .ss {
+  font-style: italic;
+}
+
+code,
+pre {
+  font-family: "Consolas", monospace;
+  background: #f6f7f8;
+}
+
+code {
+  padding: 1px 4px;
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 360px) {
+  code {
+    font-size: 1.2rem;
+  }
+}
+
+pre {
+  padding: 1.25rem;
+  margin-bottom: 1.5em;
+  overflow-x: auto;
+}
+
+pre > code {
+  display: block;
+  border: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+p > code {
+  font-size: 0.95em;
+}
+
+/**
+ * File: _element-layouts.scss
+ * Author: Tad McCorkle
+ * File for layout styling, mostly to
+ * be used in markdown files.
+ *
+ * Elements:
+ * - .limit-width-10e/r
+ * - .limit-width-20e/r
+ * - .limit-width-30e/r
+ * - .limit-width-40e/r
+ * - .limit-width-50e/r
+ * - .full-width
+ * - .limit-height-10e/r
+ * - .limit-height-20e/r
+ * - .limit-height-30e/r
+ * - .limit-height-40e/r
+ * - .limit-height-50e/r
+ * - .left, .align-left
+ * - .right, .align-right
+ * - .center
+ * - .multi-center
+ * - .fixed
+ * - .absolute
+ * - .relative
+ * - .block
+ * - .inline
+ * - .inline-block
+ * - .hidden
+ * - .sr-visible
+ */
+.limit-width-10e {
+  max-width: 10em;
+}
+
+.limit-width-20e {
+  max-width: 20em;
+}
+
+.limit-width-30e {
+  max-width: 30em;
+}
+
+.limit-width-40e {
+  max-width: 40em;
+}
+
+.limit-width-50e {
+  max-width: 50em;
+}
+
+.limit-width-10r {
+  max-width: 10rem;
+}
+
+.limit-width-20r {
+  max-width: 20rem;
+}
+
+.limit-width-30r {
+  max-width: 30rem;
+}
+
+.limit-width-40r {
+  max-width: 40rem;
+}
+
+.limit-width-50r {
+  max-width: 50rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.limit-height-10e {
+  max-height: 10em;
+}
+
+.limit-height-20e {
+  max-height: 20em;
+}
+
+.limit-height-30e {
+  max-height: 30em;
+}
+
+.limit-height-40e {
+  max-height: 40em;
+}
+
+.limit-height-50e {
+  max-height: 50em;
+}
+
+.limit-height-10r {
+  max-height: 10rem;
+}
+
+.limit-height-20r {
+  max-height: 20rem;
+}
+
+.limit-height-30r {
+  max-height: 30rem;
+}
+
+.limit-height-40r {
+  max-height: 40rem;
+}
+
+.limit-height-50r {
+  max-height: 50rem;
+}
+
+.left, .align-left {
+  float: left;
+}
+
+.right, .align-right {
+  float: right;
+}
+
+.center {
+  display: block;
+  margin: auto;
+}
+
+.multi-center {
+  text-align: center;
+  margin: auto;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+}
+
+.sr-visible {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.no-vis-or-sr {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: -1;
+}
+/*# sourceMappingURL=main.css.map */
