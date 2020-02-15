@@ -1,6 +1,7 @@
 ---
 title: 'Cyclic Redundancy Check'
 date: 2019-12-31
+last_updated: 2020-02-15
 category: Math
 tags:
   - error-detection
@@ -10,7 +11,7 @@ _excerpt: <p></p>
 katex: true
 ---
 
-I was introduced to the [cyclic redundancy check](https://en.wikipedia.org/wiki/Cyclic_redundancy_check){:title="Wikipedia.com - 'Cyclic redundancy check'"} (CRC) at work a few months ago. I soon found out they were used in a variety of areas, which sparked my interest. I ended up reading a good bit about them, so I thought I'd document some of what I've learned here.<!-- more --> This post will be long, but it doesn't attempt to cover all topics associated with CRCs. I don't have the level of knowledge required to do that, and, even if I did, there are far too many concepts to do so in a reasonable amount of time. I only intend to provide a basic intro to the concepts around CRCs.
+I was introduced to the [cyclic redundancy check](https://en.wikipedia.org/wiki/Cyclic_redundancy_check){:title="Wikipedia.com - 'Cyclic redundancy check'"} (CRC) at work a few months ago. I soon found out they're used in a variety of areas, which sparked my interest. I ended up reading a good bit about them, so I thought I'd document some of what I've learned here.<!-- more --> This post will be long, but it doesn't attempt to cover all topics associated with CRCs. I don't have the level of knowledge required to do that, and, even if I did, there are far too many concepts to do so in a reasonable amount of time. I only intend to provide a basic intro to the concepts around CRCs.
 
 - [What is a CRC?](#what-is-a-crc)
 - [The math behind a CRC](#the-math-behind-a-crc)
@@ -263,7 +264,7 @@ Why, so far, have I referred to CRCs in two ways: _n_-bit CRC and CRC-*n*? CRCs 
 - A generator polynomial of degree 16 (\\(x^{16} + ...\\)), which corresponds to a binary length of 17 bits (_n+1_)
 - A binary CRC value with a length of 16 bits (_n_)
 
-If you take a look at the [common CRCs on Wikipedia](https://en.wikipedia.org/wiki/Cyclic_redundancy_check#Polynomial_representations_of_cyclic_redundancy_checks), though, you'll probably notice that there are multiple versions of most _n_-bit CRCs. To further confuse things, the polynomials can be represented in multiple ways.
+If you take a look at the [common CRCs on Wikipedia](https://en.wikipedia.org/wiki/Cyclic_redundancy_check#Polynomial_representations_of_cyclic_redundancy_checks), though, you'll probably notice that there are multiple versions of most _n_-bit CRCs, and, to further confuse things, the polynomials can be represented in multiple ways.
 
 The reason for the multiple versions of particular _n_-bit CRCs is because different organizations and applications perform them in different ways. The most common difference comes from the use of different generator polynomials of the same degree. Even when the same polynomial is used, one application might XOR the final CRC with a specific, non-zero value, while another might reverse the bits of the CRC value after calculations are completed. The most common CRCs are typically named based on the person or organization that popularized their use (ex. the CRC-32K named after [Philip Koopman](https://users.ece.cmu.edu/~koopman/)). Minor parameter changes (that is, parameters other than the generator polynomial) can be made to improve specific error detection characteristics of a given polynomial or decrease the implementation complexity for a specific piece of hardware; other times, parameters are changed as a matter of style. Common parameters that distinguish different _n_-bit CRCs are:
 
@@ -343,7 +344,7 @@ I'll start with an implementation of [the first CRC calculation algorithm I demo
    2. Right-shift the polynomial value once.
 4. Return the final shifted data value.
 
-Here's how it can be implemented in Python:
+Here's how it can be implemented in Python [Edit: Before looking at this implementation, please note that it <em>should not</em> be used in practice. I'm not recommending it. It's completely dependent on characteristics of Python, and it won't work if it's ported to other languages like C, C++, etc. I'm including it just to bridge the gap between the algorithm I introduced earlier, which I think is relatively easy to grasp, and the implementations of the algorithms I'll show next.]:
 
 ```python
 def get_crc(data: bytearray, poly: int) -> int:
@@ -368,7 +369,7 @@ The code above returns in the correct CRC value for both large and small generat
 '0xc566'
 ```
 
-The primary problem with this implementation is that it doesn't easily support the addition of all the common CRC parameters. Most are trivial to implement, but adding support for an initial CRC value quickly becomes more trouble than it's worth. This capability is easier to implement if we make certain assumptions, but these assumptions aren't even necessary for shift register software implementations.
+The primary problems with this implementation is that it doesn't easily support the addition of all the common CRC parameters and it is heavily dependent on characteristics of the Python language. Most parameters are trivial to implement, but adding support for an initial CRC value quickly becomes more trouble than it's worth. This capability is easier to implement if we make certain assumptions, but these assumptions aren't even necessary for shift register software implementations.
 
 ### Shift register in software
 
@@ -665,7 +666,7 @@ This function is capable of computing a bunch of popular CRC algorithms.
 '0x7f6bd7de'
 ```
 
-This implementation is great, but it still requires iteration over every bit of every byte of data. There's one more CRC software implementation I want to cover that only requires iteration over every byte of data.
+This implementation is great, but it still requires iteration over <em>every bit</em> of <em>every byte</em> of data. There's one more CRC software implementation I want to cover that only requires iteration over <em>every byte</em> of data.
 
 ### Table lookup
 
