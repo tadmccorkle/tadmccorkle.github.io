@@ -1,0 +1,5 @@
+/* display for katex */
+
+.math-display {
+	overflow-x: auto;
+}

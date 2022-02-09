@@ -1,18 +1,9 @@
-# jekyll
-_site
-.sass-cache
-.jekyll-metadata
-
-# vs-code
-.vscode
-
-# python
-__pycache__/
-
-# email
-email/*
-
-# other
-private_drafts/*
-category_record.txt
-future_updates.txt
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+*.log
