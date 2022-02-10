@@ -1,5 +1,6 @@
 <script>
 	import "../app.css";
+	import { page } from "$app/stores";
 	import * as info from "$lib/info";
 	import Footer from "$lib/Footer.svelte";
 	import Header from "$lib/Header.svelte";
@@ -7,7 +8,7 @@
 
 <svelte:head>
 	<meta name="description" content={info.description} />
-	<link rel="canonical" href={info.canonical} />
+	<link rel="canonical" href="{info.url}{$page.url.pathname}" />
 	<link
 		type="application/atom+xml"
 		rel="alternate"

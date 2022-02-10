@@ -52,7 +52,11 @@ export function getMetadata(file) {
 		throw Error(`Post in ${file} is missing yaml metadata.`);
 	}
 
-	return yaml.load(tree.children[0].value);
+	const metadata = yaml.load(tree.children[0].value);
+	metadata.date?.setUTCHours(12, 0, 0, 0);
+	metadata.updated?.setUTCHours(12, 0, 0, 0);
+
+	return metadata;
 }
 
 export function process(file) {

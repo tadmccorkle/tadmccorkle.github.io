@@ -1,5 +1,4 @@
 import { escape } from "html-escaper";
-import { format } from "date-fns";
 import { getPosts } from "$lib/postsReader";
 import { process } from "$lib/markdownConverter";
 import * as info from "$lib/info";
@@ -13,7 +12,7 @@ const render = (posts) => `<?xml version="1.0" encoding="utf-8"?>
   <id>${info.canonical}</id>
   <title>${info.name}'s Blog</title>
   <subtitle>${info.description}</subtitle>
-  <updated>${format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")}-05:00</updated>
+  <updated>${posts[0]?.metadata.updated || posts[0]?.metadata.date}</updated>
   <author>
     <name>${info.name}</name>
   </author>
@@ -25,11 +24,8 @@ const render = (posts) => `<?xml version="1.0" encoding="utf-8"?>
   <entry>
     <id>${info.url}/blog/${slug}</id>
     <title>${metadata.title}</title>
-    <published>${format(new Date(metadata.date), "yyyy-MM-dd")}T00:00:00-05:00</published>
-    <updated>${format(
-			new Date(metadata.updated || metadata.date),
-			"yyyy-MM-dd"
-		)}T00:00:00-05:00</updated>
+    <published>${metadata.date}</published>
+    <updated>${metadata.updated || metadata.date}</updated>
     <link href="${info.url}/blog/${slug}" rel="alternate" type="text/html" title="${
 				metadata.title
 			}" />
