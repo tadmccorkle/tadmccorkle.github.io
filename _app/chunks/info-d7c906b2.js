@@ -1,1 +1,0 @@
-const c="Tad McCorkle",a=`A personal website and blog by ${c}.`,o="https://tadmccorkle.com",s=`${o}/`,t="tad.mccorkle@gmail.com",e="tad.mccorkle+from-site@gmail.com";export{s as c,a as d,t as e,e as m,c as n};
