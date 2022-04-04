@@ -3,3 +3,13 @@ package.json
 yarn.lock
 .svelte-kit/
 build/
+package/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.log
+
+.github/
+.vscode/
+posts/
