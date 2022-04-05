@@ -5,6 +5,9 @@ import { defineConfig } from "vite";
 const config = {
 	kit: {
 		adapter: adapter(),
+		prerender: {
+			default: true,
+		},
 		vite: defineConfig({
 			optimizeDeps: {
 				include: ["unified > extend", "unified > is-buffer"],
