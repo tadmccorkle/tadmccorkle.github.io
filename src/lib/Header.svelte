@@ -7,7 +7,10 @@
 		<a href="/" class="home">TM</a>
 		<div>
 			<a href="/about" class="navLink" class:active={$page.url.pathname === "/about"}>About</a>
-			<a href="/blog" class="navLink" class:active={$page.url.pathname === "/blog"}>Blog</a>
+			<a href="/projects" class="navLink" class:active={$page.url.pathname === "/projects"}>
+				Projects
+			</a>
+			<a href="/" class="navLink" class:active={$page.url.pathname === "/"}>Blog</a>
 		</div>
 	</nav>
 </header>

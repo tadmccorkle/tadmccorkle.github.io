@@ -1,5 +1,3 @@
-/* display for katex */
-
-.math-display {
+.katex-display {
 	overflow-x: auto;
 }

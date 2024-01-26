@@ -1,7 +1,9 @@
 import { getMetadata } from "$lib/markdownConverter";
 import { getPosts } from "$lib/postsReader";
 
-export function get() {
+export const prerender = true;
+
+export function load() {
 	const posts = getPosts()
 		.map((f) => {
 			return {
@@ -12,7 +14,5 @@ export function get() {
 		// sorted in reverse chronological order
 		.sort((a, b) => b.metadata.date - a.metadata.date);
 
-	return {
-		body: JSON.stringify(posts),
-	};
+	return { posts };
 }

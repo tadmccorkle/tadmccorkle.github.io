@@ -38,7 +38,7 @@ const render = (pages, posts) => `<?xml version="1.0" encoding="UTF-8" ?>
 </urlset>
 `;
 
-export async function get() {
+export function GET() {
 	const headers = {
 		"Cache-Control": "max-age=0, s-maxage=3600",
 		"Content-Type": "application/xml",
@@ -52,11 +52,8 @@ export async function get() {
 			};
 		})
 		.sort((a, b) => a.metadata.date - b.metadata.date);
-	const pages = ["about", "blog"];
+	const pages = ["about", "projects"];
 	const body = render(pages, posts);
 
-	return {
-		headers,
-		body,
-	};
+	return new Response(body, { headers });
 }

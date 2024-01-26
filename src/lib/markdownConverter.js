@@ -42,7 +42,7 @@ const processor = frontmatterParser
 	.use(remarkRehype, { allowDangerousHtml: true })
 	.use(rehypeSlug)
 	.use(rehypeAutolinkHeadings)
-	.use(rehypeKatex)
+	.use(rehypeKatex, { strict: false })
 	.use(rehypeHighlight)
 	.use(rehypeStringify, { allowDangerousHtml: true });
 

@@ -1,7 +1,7 @@
 import { getMetadata, process } from "$lib/markdownConverter";
 import { getPosts } from "$lib/postsReader";
 
-export function get({ params }) {
+export function load({ params }) {
 	const posts = getPosts()
 		.map((f) => {
 			return {
@@ -16,13 +16,9 @@ export function get({ params }) {
 	const index = posts.findIndex((p) => p.slug === slug);
 	const post = process(`${slug}.md`);
 
-	const body = JSON.stringify({
+	return {
 		post,
 		previous: posts[index - 1],
 		next: posts[index + 1],
-	});
-
-	return {
-		body,
 	};
 }

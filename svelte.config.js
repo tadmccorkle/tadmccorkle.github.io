@@ -1,19 +1,17 @@
-import adapter from "@sveltejs/adapter-static";
-import { defineConfig } from "vite";
+import adapter from '@sveltejs/adapter-static';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
+	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
+	// for more information about preprocessors
+	preprocess: vitePreprocess(),
+
 	kit: {
-		adapter: adapter(),
-		prerender: {
-			default: true,
-		},
-		vite: defineConfig({
-			optimizeDeps: {
-				include: ["unified > extend", "unified > is-buffer"],
-			},
+		adapter: adapter({
+			fallback: '404.html'
 		}),
-	},
+	}
 };
 
 export default config;

@@ -1,22 +1,10 @@
-<script context="module">
-	export async function load({ params, fetch }) {
-		const { slug } = params;
-		const { post, previous, next } = await fetch(`/blog/posts/${slug}.json`).then((r) => r.json());
-		return {
-			props: {
-				post,
-				previous,
-				next,
-			},
-		};
-	}
-</script>
-
 <script>
 	import { format } from "date-fns";
 	import * as info from "$lib/info";
 
-	export let post, previous, next;
+	export let data;
+
+	const { post, previous, next } = data;
 
 	const postDate = format(new Date(post.metadata.date), "MMMM d, yyyy");
 	const updated = post.metadata.updated
@@ -29,13 +17,13 @@
 	<title>{post.metadata.title} | {info.name}</title>
 	<link
 		rel="stylesheet"
-		href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/night-owl.min.css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
 	/>
 	{#if post.metadata.katex}
 		<link
 			rel="stylesheet"
-			href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
-			integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"
+			href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+			integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
 			crossorigin="anonymous"
 		/>
 	{/if}
@@ -44,6 +32,7 @@
 <article>
 	<h1 id="post-title">{post.metadata.title}</h1>
 	<small id="post-meta">posted on {postDate}{updated ? ` | last updated ${updated}` : ""}</small>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html post.content}
 </article>
 

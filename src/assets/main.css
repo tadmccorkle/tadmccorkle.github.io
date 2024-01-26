@@ -8,11 +8,20 @@
 	--bg: #fbfbf8;
 	--primary-color: #b40;
 	--secondary-color: #dbdce0;
-	--text-color: #222;
+	--text-color: #1a1a1a;
 	--section-padding: 1em;
 
 	font-family: var(--font-body);
 	color: var(--text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #1a1a1a;
+		--primary-color: #F96743;
+		--secondary-color: #333;
+		--text-color: #fbfbf8;
+	}
 }
 
 html {
@@ -38,21 +47,13 @@ html {
 }
 
 body {
-	margin: 0;
+	margin: 0 auto;
 	padding: 0 1.5rem;
 	min-height: 100vh;
-	word-wrap: break-word;
-	background-color: var(--bg);
-	border-top: 2px solid var(--primary-color);
-	border-bottom: 2px solid var(--primary-color);
-	display: flex;
-}
-
-#svelte {
-	flex: 1;
-	margin: 0 auto;
 	max-width: 600px;
 	width: 100%;
+	word-wrap: break-word;
+	background-color: var(--bg);
 	display: flex;
 	flex-direction: column;
 }
@@ -136,7 +137,7 @@ pre {
 code {
 	font-size: var(--code-font-size);
 	font-family: var(--font-mono);
-	border-radius: 3px;
+	border-radius: 5px;
 	background-color: var(--secondary-color);
 	padding: 0.1em 0.25em;
 }

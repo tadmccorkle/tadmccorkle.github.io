@@ -42,7 +42,7 @@ const render = (posts) => `<?xml version="1.0" encoding="utf-8"?>
 		.join("")}
 </feed>`;
 
-export async function get() {
+export function GET() {
 	const headers = {
 		"Cache-Control": `max-age=0, s-max-age=${600}`,
 		"Content-Type": "application/xml",
@@ -61,8 +61,5 @@ export async function get() {
 		.sort((a, b) => b.metadata.date - a.metadata.date);
 	const body = render(posts);
 
-	return {
-		headers,
-		body,
-	};
+	return new Response(body, { headers });
 }
