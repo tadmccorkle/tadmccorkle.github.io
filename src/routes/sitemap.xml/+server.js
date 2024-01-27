@@ -3,6 +3,8 @@ import { getMetadata } from "$lib/markdownConverter";
 import { getPosts } from "$lib/postsReader";
 import * as info from "$lib/info";
 
+export const prerender = true;
+
 const render = (pages, posts) => `<?xml version="1.0" encoding="UTF-8" ?>
 <urlset
   xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"

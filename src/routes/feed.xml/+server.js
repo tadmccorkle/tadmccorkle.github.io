@@ -3,6 +3,8 @@ import { getPosts } from "$lib/postsReader";
 import { process } from "$lib/markdownConverter";
 import * as info from "$lib/info";
 
+export const prerender = true;
+
 const copyright = `Copyright © ${new Date().getFullYear()} Tad McCorkle`;
 
 const render = (posts) => `<?xml version="1.0" encoding="utf-8"?>
