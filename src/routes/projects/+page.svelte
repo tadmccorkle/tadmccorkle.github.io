@@ -6,7 +6,9 @@
 
 {#each data.projects as project}
 	<a href={project.url} class="project">
-		<h2>{project.name}</h2>
+		<h2>
+			<span class="project-name">{project.name}</span>
+		</h2>
 		<p>{project.description}</p>
 	</a>
 {/each}
@@ -19,5 +21,9 @@
 	.project:hover {
 		text-decoration: none;
 		color: var(--primary-color);
+	}
+
+	.project-name {
+		border-bottom: solid 2px var(--primary-color);
 	}
 </style>

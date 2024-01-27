@@ -1,3 +1,7 @@
 .katex-display {
 	overflow-x: auto;
 }
+
+.hscroll {
+	overflow-x: auto;
+}

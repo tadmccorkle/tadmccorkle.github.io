@@ -4,7 +4,7 @@
 
 	export let data;
 
-	const { post, previous, next } = data;
+	const { post } = data;
 
 	const postDate = format(new Date(post.metadata.date), "MMMM d, yyyy");
 	const updated = post.metadata.updated
@@ -36,29 +36,9 @@
 	{@html post.content}
 </article>
 
-<div id="other-post-links">
-	{#if previous}
-		<a href="/blog/{previous.slug}" id="prev-post-link" class="otherPostLink">← Prev Post</a>
-	{/if}
-	{#if next}
-		<a href="/blog/{next.slug}" id="next-post-link" class="otherPostLink">Next Post →</a>
-	{/if}
-</div>
-
 <style>
 	article {
 		padding: 0 0 1rem 0;
-	}
-
-	.otherPostLink {
-		text-decoration: none;
-		font-family: var(--font-heading);
-		font-size: var(--default-font-size);
-		font-style: italic;
-	}
-
-	.otherPostLink:hover {
-		color: var(--text-color);
 	}
 
 	#post-title {
@@ -71,15 +51,5 @@
 		font-style: italic;
 		font-size: var(--small-font-size);
 		padding: 0 0 1em 0;
-	}
-
-	#other-post-links {
-		padding: 0 0 2rem 0;
-		display: flex;
-		justify-content: flex-end;
-	}
-
-	#prev-post-link {
-		margin-right: auto;
 	}
 </style>

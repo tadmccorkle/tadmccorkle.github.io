@@ -6,11 +6,11 @@
 	<nav>
 		<a href="/" class="home">TM</a>
 		<div>
-			<a href="/about" class="navLink" class:active={$page.url.pathname === "/about"}>About</a>
-			<a href="/projects" class="navLink" class:active={$page.url.pathname === "/projects"}>
+			<a href="/about" class="nav-link" class:active={$page.url.pathname === "/about"}>About</a>
+			<a href="/projects" class="nav-link" class:active={$page.url.pathname === "/projects"}>
 				Projects
 			</a>
-			<a href="/" class="navLink" class:active={$page.url.pathname === "/"}>Blog</a>
+			<a href="/" class="nav-link" class:active={$page.url.pathname === "/"}>Blog</a>
 		</div>
 	</nav>
 </header>
@@ -46,7 +46,7 @@
 		letter-spacing: -4px;
 	}
 
-	.navLink {
+	.nav-link {
 		font-weight: 700;
 		font-size: 1.3rem;
 	}

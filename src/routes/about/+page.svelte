@@ -17,10 +17,10 @@
 
 	<ul>
 		<li>
-			<span role="img" aria-label="Home emoji" class="detailsIcon">🏠</span> Georgia, USA
+			<span role="img" aria-label="Home emoji" class="details-icon">🏠</span> Georgia, USA
 		</li>
 		<li>
-			<span role="img" aria-label="Email emoji" class="detailsIcon">📧</span>
+			<span role="img" aria-label="Email emoji" class="details-icon">📧</span>
 			<a href="mailto:{info.mailto}">{info.email}</a>
 		</li>
 	</ul>
@@ -32,7 +32,7 @@
 		padding: 0 0 0 1em;
 	}
 
-	.detailsIcon {
+	.details-icon {
 		padding: 0 0.5em 0 0;
 	}
 </style>

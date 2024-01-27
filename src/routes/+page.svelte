@@ -11,9 +11,11 @@
 
 <article>
 	{#each data.posts as post}
-		<a href={`/blog/${post.slug}`} class="postLink">
-			<h1 class="postTitle">{post.metadata.title}</h1>
-			<small class="postMeta"
+		<a href={`/blog/${post.slug}`} class="post-link">
+			<h1 class="post-title">
+				<span class="post-title-text">{post.metadata.title}</span>
+			</h1>
+			<small class="post-meta"
 				>posted on {format(new Date(post.metadata.date), "MMMM d, yyyy")}</small
 			>
 			<p>{post.metadata.excerpt}</p>
@@ -22,20 +24,24 @@
 </article>
 
 <style>
-	.postLink {
+	.post-link {
 		color: var(--text-color);
 	}
 
-	.postLink:hover {
+	.post-link:hover {
 		text-decoration: none;
 		color: var(--primary-color);
 	}
 
-	.postTitle {
-		padding: 0.75em 0 0 0;
+	.post-title {
+		padding: 0.75em 0 0.2em 0;
 	}
 
-	.postMeta {
+	.post-title-text {
+		border-bottom: solid 2px var(--primary-color);
+	}
+
+	.post-meta {
 		display: block;
 		font-style: italic;
 		font-size: var(--small-font-size);
