@@ -23,6 +23,16 @@
 			<span role="img" aria-label="Email emoji" class="details-icon">📧</span>
 			<a href="mailto:{info.mailto}">{info.email}</a>
 		</li>
+		<li>
+			<span role="img" aria-label="Resume emoji" class="details-icon">📄</span>
+			<a
+				href="https://docs.google.com/document/d/1GYJQnuVZojqtJawzBJLJUHh1_-aBpw9C0-xLfjjG0CY/export?format=pdf&attachment=false"
+				target="_blank"
+				rel="noreferrer"
+			>
+				Resume
+			</a>
+		</li>
 	</ul>
 </article>
 
