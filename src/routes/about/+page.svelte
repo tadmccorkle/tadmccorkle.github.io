@@ -11,8 +11,8 @@
 	<p>
 		I'm Tad McCorkle, a software engineer. I consider myself a generalist software developer, and I
 		have developed desktop, CLI, web, and mobile applications throughout my career. I work at
-		<a href="https://gtri.gatech.edu">GTRI</a> where I've specialized in developing hardware-in-the-loop
-		test software for electronic warfare systems. Most of my professional software development experience
+		<a href="https://gtri.gatech.edu">GTRI</a> where I've developed a lot of software for testing electronic
+		warfare systems with hardware-in-the-loop. Most of my professional software development experience
 		is in C# and TypeScript, but I like to explore other languages and technologies in my spare time.
 	</p>
 
