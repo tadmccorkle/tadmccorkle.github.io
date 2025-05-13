@@ -1,19 +1,19 @@
 ---
 title: 'Cyclic Redundancy Check'
 date: 2019-12-31
-updated: 2022-02-08
+updated: 2025-05-12
 excerpt: A (not so) brief introduction to CRCs.
 katex: true
 ---
 
-I was introduced to the [cyclic redundancy check](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) (CRC) at work a few months ago. I soon found out they're used in a variety of areas, which sparked my interest. I ended up reading a good bit about them, so I thought I'd document some of what I've learned here. This post will be long, but it doesn't attempt to cover all topics associated with CRCs. I don't have the level of knowledge required to do that, and, even if I did, there are far too many concepts to do so in a reasonable amount of time. I only intend to provide a basic intro to the concepts around CRCs.
+I was introduced to the [cyclic redundancy check](https://en.wikipedia.org/wiki/Cyclic_redundancy_check) (CRC) at work a few months ago. I soon found out they're used in a variety of areas, which sparked my interest. I ended up reading a good bit about them, so I thought I'd document some of what I've learned here. While this post is lengthy, it only provides a basic intro to the concepts around CRCs.
 
 - [What is a CRC?](#what-is-a-crc)
 - [The math behind a CRC](#the-math-behind-a-crc)
   - [Finite fields](#finite-fields)
   - [Representing binary data as a polynomial](#representing-binary-data-as-a-polynomial)
   - [Polynomial division of binary data](#polynomial-division-of-binary-data)
-  - [Doesn't this seem a little overly complex?](#doesnt-this-seem-a-little-overly-complex)
+  - [Doesn't this seem a little complex?](#doesnt-this-seem-a-little-complex)
   - [Selecting generator polynomials](#selecting-generator-polynomials)
     - [Polynomial degree](#polynomial-degree)
     - [Hamming distance](#hamming-distance)
@@ -29,17 +29,17 @@ I was introduced to the [cyclic redundancy check](https://en.wikipedia.org/wiki/
 
 # What is a CRC?
 
-A CRC is a fixed length code frequently used for [error detection](https://en.wikipedia.org/wiki/Error_detection_and_correction) when transmitting binary data. It's even used in the [Ethernet standard](https://en.wikipedia.org/wiki/IEEE_802.3). Their name pretty accurately describes them:
+A CRC is a fixed length code frequently used (e.g., in the [Ethernet standard](https://en.wikipedia.org/wiki/IEEE_802.3)) for [error detection](https://en.wikipedia.org/wiki/Error_detection_and_correction) when transmitting binary data. Their name pretty accurately describes them:
 
 - Cyclic - the value is obtained by cycling through the data in a message
 - Redundancy - the value is added to the message being sent without any additional information
 - Check - the value is used to verify its associated data
 
-Like the [parity bit](https://en.wikipedia.org/wiki/Parity_bit) and simple [checksums](https://en.wikipedia.org/wiki/Checksum), CRCs have the benefit of being [simple and easy to implement with hardware](https://www.youtube.com/watch?v=sNkERQlK8j8), but they offer much more error-detection capability. CRCs, depending on certain known parameters, guarantee specific [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) properties. They're also very good for detecting [burst errors](https://en.wikipedia.org/wiki/Burst_error), which are common with data transmission systems. The two most important values associated with a CRC are the data being sent and a value referred to as the CRC's generator polynomial, both of which are binary numbers. "Polynomial" is used because CRC algorithms essentially just calculate the remainder of polynomial division.
+Like the [parity bit](https://en.wikipedia.org/wiki/Parity_bit) and simple [checksums](https://en.wikipedia.org/wiki/Checksum), CRCs have the benefit of being [easy to implement with hardware](https://www.youtube.com/watch?v=sNkERQlK8j8), but they offer much more error-detection capability. CRCs, depending on certain known parameters, guarantee specific [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) properties. They're also very good for detecting [burst errors](https://en.wikipedia.org/wiki/Burst_error), which are common with data transmission systems. The two most important values associated with a CRC are the data being sent and a value referred to as the CRC's generator polynomial, both of which are binary numbers. "Polynomial" is used because CRC algorithms essentially just calculate the remainder of polynomial division.
 
 # The math behind a CRC
 
-A CRC value can be obtained by dividing useful binary data (what we want to transmit) by a fixed binary value. The remainder of the division is the CRC. This is an oversimplification of what really occurs though. Calculating the remainder of the division of two numbers is an expensive operation, particularly when working with minimal hardware systems. To be both fast and usable in simple systems (that is, to rely on simple, logical operations like bit shifting and exclusive or), CRCs cleverly take advantage of two mathematical properties:
+A CRC value can be obtained by dividing useful binary data &mdash; what we want to transmit &mdash; by a fixed binary value. The remainder of the division is the CRC. This is an oversimplification of what really occurs though. Calculating the remainder of the division of two numbers is an expensive operation, particularly when working with minimal hardware systems. To be both fast and usable in simple systems (that is, to rely on simple, logical operations like bit shifting and exclusive or), CRCs cleverly take advantage of two mathematical properties:
 
 - the Galois field, or finite field, GF(2)
 - polynomial division
@@ -68,7 +68,7 @@ The first implication shows that addition is equivalent to subtraction for GF(2)
 
 ## Representing binary data as a polynomial
 
-Earlier, I noted that CRCs make use of polynomial division, but CRCs are operations we use when transmitting binary data. This is possible because CRCs treat the data they're working with as polynomials behind the scenes. It might sound strange to do this, but we (sort of) already do this when converting binary values to their decimal equivalents. Binary data, `10010100` as an example, can be converted to its decimal equivalent as a summation of powers of 2:
+Earlier, I noted that CRCs make use of polynomial division, but CRCs are operations we use when transmitting binary data. This is possible because CRCs treat the data they're working with as polynomials behind the scenes. It might sound strange to do this, but we already do this when converting binary values to their decimal equivalents. Binary data, `10010100` as an example, can be converted to its decimal equivalent as a summation of powers of 2:
 
 $$
 \underline{10010100}_2 = \underline{\textbf{1}}\times2^7 + \underline{\textbf{0}}\times2^6 + \underline{\textbf{0}}\times2^5 + \underline{\textbf{1}}\times2^4 + \underline{\textbf{0}}\times2^3 + \underline{\textbf{1}}\times2^2 + \underline{\textbf{0}}\times2^1 + \underline{\textbf{0}}\times2^0 = 148_{10}
@@ -99,7 +99,7 @@ $$
 \end{array}
 $$
 
-The operation above shows that division of the binary number `10010100` by `101` results in `101110` (the binary form of the polynomial $x^5+x^3+x^2+x$) with a remainder of `10` (the binary form of the polynomial $x$). It's important to note that, as with normal division, subtracting the remainder, `10`, from the original dividend, `10010100`, and performing the division operation again yields a result with no remainder:
+The operation above shows that division of the binary number `10010100` by `101` results in `101110` (the binary form of the polynomial $x^5+x^3+x^2+x$) with a remainder of `10` (the binary form of the polynomial $x$). It's important to note that, as with normal division, subtracting the remainder `10` from the original dividend `10010100` and performing the division operation again yields a result with no remainder:
 
 $$
 \begin{array}{cl}
@@ -126,11 +126,11 @@ $$
 \end{array}
 $$
 
-This is essentially the process of verifying data with a CRC! More specifically, the process demonstrated above is a type of 2-bit CRC, or CRC-2, which means that the check value is 2 bits in length. How? Assume the "useful" data we need to send is `100101`. CRCs are typically calculated in systematic form, which means the useful data is embedded in the encoded data. To achieve systematic form without modifying the useful data, placeholder bits must be added. To apply a CRC-2 to `100101`, two placeholder bits need to be added, which gives `10010100`. This new value must then be divided by a generator polynomial, which is `101` in the example above. The remainder of the division, `10`, is the CRC value. By substituting the placeholder bits in the data to be sent with the CRC value, which results in `10010110`, we are effectively <em>subtracting</em> (remember GF(2)) the remainder of the division operation from the dividend. This is the value we transmit. The receiver, who also knows the generator polynomial, can perform the same polynomial division on the data it receives. If the division operation yields no remainder, the receiver can assume the data was transmitted successfully (no errors were introduced during transmission). The receiver could also perform the division operation just as the transmitter, using placeholder bits in place of the CRC value, and compare the resulting remainder with the transmitted CRC value.
+This is essentially the process of verifying data with a CRC! More specifically, the process demonstrated above is a type of 2-bit CRC, or CRC-2, which means that the check value is 2 bits in length. How? Assume the useful data we need to send is `100101`. CRCs are typically calculated in systematic form, which means the useful data is embedded in the encoded data. To achieve systematic form without modifying the useful data, placeholder bits must be added. To apply a CRC-2 to `100101`, two placeholder bits need to be added, which gives `10010100`. This new value must then be divided by a generator polynomial, which is `101` in the example above. The remainder of the division, `10`, is the CRC value. By substituting the placeholder bits in the data to be sent with the CRC value, which results in `10010110`, we are effectively <em>subtracting</em> (remember GF(2)) the remainder of the division operation from the dividend. This is the value we transmit. The receiver, who also knows the generator polynomial, can perform the same polynomial division on the data it receives. If the division operation yields no remainder, the receiver can assume the data was transmitted successfully and no errors were introduced during transmission. The receiver could also perform the division operation just as the transmitter using placeholder bits in place of the CRC value and compare the resulting remainder with the transmitted CRC value.
 
-## Doesn't this seem a little overly complex?
+## Doesn't this seem a little complex?
 
-At the beginning of the post I mentioned that CRCs had the benefit of being simple and easy to implement with hardware, but performing polynomial division in hardware, at least to me, doesn't sound like a "simple and easy" task. Luckily, there's another clever technique we can use to simplify the CRC calculation.
+At the beginning of the post I mentioned that CRCs had the benefit of being easy to implement with hardware, but performing polynomial division in hardware, at least to me, doesn't sound like a easy task. Luckily, there's another clever technique we can use to simplify the CRC calculation.
 
 CRCs don't care about the quotient obtained through polynomial division; they only need to determine the remainder. With that in mind, let's look at the operation without keeping track of the quotient:
 
@@ -219,7 +219,7 @@ The selection of a generator polynomial is the most important aspect of a CRC's 
 
 ### Hamming distance
 
-[Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) properties can get more complicated, so I'll just cover the broad strokes. The obvious question that should be answered first: "What is Hamming distance?" In the context of CRCs, we can think of Hamming distance as the number of different bits, or errors, between two binary values, the message that is sent and the message that is received. Some examples:
+[Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) properties can get more complicated, so I'll just cover the broad strokes. The obvious question that should be answered first: "What is Hamming distance?" In the context of CRCs, we can think of Hamming distance as the number of different bits, or errors, between two binary values. Some examples:
 
 :::div{.hscroll}
 |     Value Sent      |   Value Received    | Hamming Distance |
@@ -229,7 +229,7 @@ The selection of a generator polynomial is the most important aspect of a CRC's 
 | **10**0**1**1**0**1 | **01**0**0**1**1**1 |        4         |
 :::
 
-We can associate a generator polynomial with a Hamming distance of _d_ if the generator polynomial is guaranteed to detect all _d-1_ (and fewer) bit errors. Each generator polynomial has specific Hamming distance properties for data of a given length. This is dependent on many factors that I won't go into; however, I will point to [Philip Koopman's page on the best CRC polynomials](https://users.ece.cmu.edu/~koopman/crc/index.html), which catalogues the best _n_-bit polynomials that achieve specific Hamming distances for different data lengths. Koopman also has a paper that spends more time discussing Hamming distance characteristics of 32-bit CRCs, [linked here](https://users.ece.cmu.edu/~koopman/networks/dsn02/dsn02_koopman.pdf).
+We can associate a generator polynomial with a Hamming distance of _d_ if the generator polynomial is guaranteed to detect all _d-1_ (and fewer) bit errors. Each generator polynomial has specific Hamming distance properties for data of a given length. This is dependent on many factors that I won't go into; however, I will point to [Philip Koopman's page on the best CRC polynomials](https://users.ece.cmu.edu/~koopman/crc/index.html), which catalogues the best _n_-bit polynomials that achieve specific Hamming distances for different data lengths. Koopman also has [a paper that spends more time discussing Hamming distance characteristics of 32-bit CRCs](https://users.ece.cmu.edu/~koopman/networks/dsn02/dsn02_koopman.pdf).
 
 ### Burst error detection
 
@@ -243,14 +243,14 @@ CRCs are great for detecting [burst errors](https://en.wikipedia.org/wiki/Burst_
 | 100110**10111010**01 | 10101001 | 100110**00010011**01 |         8          |
 :::
 
-Assuming all generator polynomials have non-zero $x^n$ and $x^0$ terms, all _n_-bit CRCs can detect burst errors of length less than or equal to _n_. This can be proven by viewing the burst error as a polynomial, **E**. So long as **E**'s degree is less than the generator polynomial's degree, **E** can't be divided by the generator polynomial, which will result in a non-zero remainder. In other words, if the error polynomial isn't divisible by the generator polynomial, the error will be detected (this error detection characteristic extends beyond burst errors). This means _n_-bit CRCs can even detect burst errors of length _n+1_ unless the burst error's bits match the generator polynomial's bits. Due to the burst error dectection properties of CRCs, all generator polynomials should use nonzero $x^n$ and $x^0$ terms - as far as I know there are no benefits to breaking this rule.
+Assuming all generator polynomials have non-zero $x^n$ and $x^0$ terms, all _n_-bit CRCs can detect burst errors of length less than or equal to _n_. This can be proven by viewing the burst error as a polynomial, **E**. So long as **E**'s degree is less than the generator polynomial's degree, **E** can't be divided by the generator polynomial, which will result in a non-zero remainder. In other words, if the error polynomial isn't divisible by the generator polynomial, the error will be detected (this error detection characteristic extends beyond burst errors). This means _n_-bit CRCs can even detect burst errors of length _n+1_ unless the burst error's bits match the generator polynomial's bits. Due to the burst error dectection properties of CRCs, all generator polynomials should use nonzero $x^n$ and $x^0$ terms &mdash; as far as I know there are no benefits to breaking this rule.
 
 ### A final note on selection
 
 There are many other factors that can be considered when choosing a polynomial, such as:
 
 - Single-bit error detection - errors defined by the polynomial ${\bf E}=x^n$ (a single flipped bit) can always be detected so long as the generator polynomial has two bits set to `1`.
-- Two-bit error detection - errors defined by the polynomial ${\bf E}=x^n + x^m$ (two flipped bits), where _n_ and _m_ are separated by a specific number of bits, can be detected by choosing generator polynomials with specific primitive polynomials as factors (is this description nebulous enough?).
+- Two-bit error detection - errors defined by the polynomial ${\bf E}=x^n + x^m$ (two flipped bits), where _n_ and _m_ are separated by a specific number of bits, can be detected by choosing generator polynomials with specific primitive polynomials as factors.
 - Odd-bit error detection - all errors with an odd number of `1` bits (ex. `111`, `1011`, `10`, etc.) can be detected by choosing a generator polynomial that is a multiple of $x+1$ (a generator polynomial with an even number of `1` bits); however, these same generator polynomials are ~twice as likely <em>not</em> to detect errors with an even number of bits.
 
 I point all this out to further back up the statement I'm about to make: Any CRC implementation should search for and use a polynomial for which the characteristics are already known and understood. As Ross Williams says in his [painless guide to CRC error detection algorithms](http://ross.net/crc/download/crc_v3.txt), it's best "to put the fear of death into anyone who so much as toys with the idea of making up their own poly." There is likely a well-documented generator polynomial for most any use-case.
@@ -264,7 +264,7 @@ Why, so far, have I referred to CRCs in two ways: _n_-bit CRC and CRC-*n*? CRCs 
 
 If you take a look at the [common CRCs on Wikipedia](https://en.wikipedia.org/wiki/Cyclic_redundancy_check#Polynomial_representations_of_cyclic_redundancy_checks), though, you'll probably notice that there are multiple versions of most _n_-bit CRCs, and, to further confuse things, the polynomials can be represented in multiple ways.
 
-The reason for the multiple versions of particular _n_-bit CRCs is because different organizations and applications perform them in different ways. The most common difference comes from the use of different generator polynomials of the same degree. Even when the same polynomial is used, one application might XOR the final CRC with a specific, non-zero value, while another might reverse the bits of the CRC value after calculations are completed. The most common CRCs are typically named based on the person or organization that popularized their use (ex. the CRC-32K named after [Philip Koopman](https://users.ece.cmu.edu/~koopman/)). Minor parameter changes (that is, parameters other than the generator polynomial) can be made to improve specific error detection characteristics of a given polynomial or decrease the implementation complexity for a specific piece of hardware; other times, parameters are changed as a matter of style. Common parameters that distinguish different _n_-bit CRCs are:
+The reason for the multiple versions of particular _n_-bit CRCs is because different organizations and applications perform them in different ways. The most common difference comes from the use of different generator polynomials of the same degree. Even when the same polynomial is used, one application might XOR the final CRC with a specific non-zero value, while another might reverse the bits of the CRC value after calculations are completed. The most common CRCs are typically named based on the person or organization that popularized their use (e.g., the CRC-32K named after [Philip Koopman](https://users.ece.cmu.edu/~koopman/)). Minor parameter changes (that is, parameters other than the generator polynomial) can be made to improve specific error detection characteristics of a given polynomial or decrease the implementation complexity for a specific piece of hardware; other times parameters are changed as a matter of style. Common parameters that distinguish different _n_-bit CRCs are:
 
 - **Generator Polynomial** - for an _n_-bit CRC, this is a binary value of length _n+1_ that represents the CRC's divisor. Unlike the other parameters listed below, changing this parameter can dramatically alter the characteristics of a given _n_-bit CRC.
 - **Initial Value** - the inital state of the CRC value before performing the CRC computation. This parameter will probably make more sense after I discuss the [shift register implementation](#shift-register-in-software) later in this post.
@@ -306,31 +306,15 @@ Full Poly: 1000 1000 0001 0000 1
 0x8810   : 1000 1000 0001 0000
 ```
 
-The four listed above are those found in the [CRC Wikipedia article](https://en.wikipedia.org/wiki/Cyclic_redundancy_check), but there are other ways people represent them (as an example, by <em>not</em> excluding bits). I'm partial to the Normal representation because it's the most widely used ([crccalc.com](https://crccalc.com/) uses this), but understanding the Reversed and Reversed Reciprocal notations are beneficial if you want to use [Koopman's impressive CRC Polynomial catalogue](https://users.ece.cmu.edu/~koopman/crc/index.html).
+The four listed above are those found in the [CRC Wikipedia article](https://en.wikipedia.org/wiki/Cyclic_redundancy_check), but there are other ways people represent them (as an example, by <em>not</em> excluding bits). Understanding the Reversed and Reversed Reciprocal notations are beneficial if you want to use [Koopman's impressive CRC Polynomial catalogue](https://users.ece.cmu.edu/~koopman/crc/index.html).
 
 # Implementing CRCs
 
-There are a lot of ways to implement CRCs, both in hardware and in software. I want to focus on a few software implementations. Before we start, note that all software implementations I'm introducing assume the polynomial is specified with the most-significant and least-significant bits included. So, the CRC-16-CCITT polynomial (`0x1021` in Normal representation) is assumed to be passed in as `0x11021`. Additionally, all implementations are written in Python because I think it's easier to follow. This does present two complications though. Unlike integers in languages such as C, C++, etc., bit-shifting `int` values in Python adds or removes bits, and leading `0`-bits of `int` values are disregarded. For example:
-
-```c
-// C:
-uint8_t x = 0b10011001
-x << 1  // returns: 0b00110010
-x >> 1  // returns: 0b01001100
-```
-
-```python
-# python
-x = 0b10011001
-x << 1  # returns: 0b100110010
-x >> 1  # returns: 0b11001
-```
-
-The solution to these complications is simple: bit masking. The downside is the code becomes slightly more verbose, but I think it's outweighed by the readability benefit of Python.
+There are a lot of ways to implement CRCs, both in hardware and in software. I want to focus on a few software implementations. Before we start, note that all software implementations I'm introducing assume the polynomial is specified with the most-significant and least-significant bits included. So, the CRC-16-CCITT polynomial (`0x1021` in Normal representation) is assumed to be passed in as `0x11021`.
 
 ## Simple Python implementation
 
-I'll start with an implementation of [the first CRC calculation algorithm I demonstrated earlier in this post](#doesnt-this-seem-a-little-overly-complex). The algorithm is:
+I'll start with an implementation of [the first CRC calculation algorithm I demonstrated earlier in this post](#doesnt-this-seem-a-little-complex). The algorithm is:
 
 1. Convert the data bytes into a single integer value.
 2. Align the most-significant bits of the generator polynomial and the data.
@@ -342,7 +326,7 @@ I'll start with an implementation of [the first CRC calculation algorithm I demo
    2. Right-shift the polynomial value once.
 4. Return the final shifted data value.
 
-Here's how it can be implemented in Python [Edit: Before looking at this implementation, please note that it <em>should not</em> be used in practice. I'm not recommending it. It's completely dependent on characteristics of Python, and it won't work if it's ported to other languages like C, C++, etc. I'm including it just to bridge the gap between the algorithm I introduced earlier, which I think is relatively easy to grasp, and the implementations of the algorithms I'll show next.]:
+Here's a rough implementation:
 
 ```python
 def get_crc(data: bytearray, poly: int) -> int:
@@ -358,7 +342,7 @@ def get_crc(data: bytearray, poly: int) -> int:
     return crc
 ```
 
-The code above returns in the correct CRC value for both large and small generator polynomials. The code block below shows the result of the example covered in this post (data of `100101` and generator polynomial of `101`) as well as a more complex example using the CRC-16-CCITT generator polynomial.
+The code above returns in the correct CRC value for both large and small generator polynomials. The code block below shows the result of the example covered previously (data of `100101` and generator polynomial of `101`) as well as an example using the CRC-16-CCITT generator polynomial.
 
 ```python
 >>> bin(get_crc(bytearray.fromhex("25"), 0x5))
@@ -367,15 +351,12 @@ The code above returns in the correct CRC value for both large and small generat
 '0xc566'
 ```
 
-The primary problems with this implementation is that it doesn't easily support the addition of all the common CRC parameters and it is heavily dependent on characteristics of the Python language. Most parameters are trivial to implement, but adding support for an initial CRC value quickly becomes more trouble than it's worth. This capability is easier to implement if we make certain assumptions, but these assumptions aren't even necessary for shift register software implementations.
-
 ## Shift register in software
 
 CRCs are commonly implemented in hardware with [shift registers](https://en.wikipedia.org/wiki/Shift_register). Since some software implementations base their algorithm off this, it's useful to understand. I won't really get into the hardware aspect of shift registers, but if you want more information on that, just check out:
 
-- The [Wikipedia article on shift registers](https://en.wikipedia.org/wiki/Shift_register)
-- Any of the tutorials that can be found with a [Google search for "shift register"](https://www.google.com/search?q=shift+register)
 - [Ben Eater's excellent video on implementing a CRC calculation in hardware](https://www.youtube.com/watch?v=sNkERQlK8j8)
+- The [Wikipedia article on shift registers](https://en.wikipedia.org/wiki/Shift_register)
 
 For this post, it's only important that we know a shift register can be visualized as a group of storage bins to which the data we want to send queues up:
 
@@ -440,8 +421,6 @@ CRC Value:
 | --- | --- |
 ```
 
-The CRC value obtained here is the same as was obtained early on in this post. Now that this process has been visualized, we can start covering some actual software implementations.
-
 While the [simple Python implementation](#simple-python-implementation) I just went over works for CRCs of any size, there are two shift register implementations. One is used for less-than-8-bit CRCs, and another is used for greather-than-or-equal-to-8-bit CRCs. It's uncommon for CRCs smaller than 8 bits to be used, but I'll quickly cover them anyway. The shift register algorithm for small CRCs is:
 
 1. Initialize the CRC register value.
@@ -458,25 +437,25 @@ While the [simple Python implementation](#simple-python-implementation) I just w
    2. Otherwise, shift the most-significant bit out of the register and the next placeholder bit into the register.
 4. Return the final value in the register.
 
-Here's a possible way of implementing the small CRC shift register algorithm in software (note the use of bit masks to keep a consistent CRC size):
+Here's a possible way of implementing the small CRC shift register algorithm in software:
 
 ```python
 def get_small_crc_shift(data: bytearray, poly: int) -> int:
     crc = 0
     poly_length = poly.bit_length()
     msb = 1 << (poly_length - 2)
-    width = ((2 ** (poly_length - 1)) - 1)
+    width = (2 ** (poly_length - 1)) - 1
     for byte in data:
         for i in range(7, -1, -1):
             if crc & msb:
-                crc = ((crc << 1) & width)
+                crc = (crc << 1) & width
                 if byte & (1 << i):
                     crc |= 1
                 else:
                     crc &= 0xfe
                 crc ^= poly
             else:
-                crc = ((crc << 1) & width)
+                crc = (crc << 1) & width
                 if byte & (1 << i):
                     crc |= 1
                 else:
@@ -490,7 +469,7 @@ def get_small_crc_shift(data: bytearray, poly: int) -> int:
     return crc
 ```
 
-This requires much more code than the simple python implementation, but it gets the job done (at least, it does for small CRCs).
+Arguably more complicated than the simple implementation, but it works:
 
 ```python
 >>> bin(get_small_crc_shift(bytearray.fromhex("25"), 0x5))
@@ -593,20 +572,21 @@ def get_crc_shift(data: bytearray, poly: int) -> int:
         crc ^= (byte << msb_shift)
         for _ in range(8):
             if crc & msb:
-                crc = ((crc << 1) & width) ^ poly
+                crc = (crc << 1) ^ poly
             else:
-                crc = ((crc << 1) & width)
-    return crc
+                crc <<= 1
+            crc &= width
+    return crc & width
 ```
 
 This function outputs:
 
 ```python
->>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), 0x11021))
+>>> hex(get_crc_shift(bytearray.fromhex("9ea43100ab93"), 0x11021))
 '0xc566'
 ```
 
-We can modify this function to support all five common CRC parameters.
+We can modify this function to support the five common CRC parameters.
 
 ```python
 def get_reflected_bits(data: int) -> int:
@@ -620,8 +600,14 @@ def get_reflected_bits(data: int) -> int:
     rev <<= ((8 - (data.bit_length() % 8)) % 8)
     return rev
 
-def get_crc_shift(data: bytearray, poly: int, init: int, ref_in: bool,
-                  ref_out: bool, xor_out: int) -> int:
+def get_crc_shift(
+    data: bytearray,
+    poly: int,
+    init: int,
+    ref_in: bool,
+    ref_out: bool,
+    xor_out: int,
+) -> int:
     crc = init
     poly_length = poly.bit_length()
     msb = 1 << (poly_length - 2)
@@ -633,12 +619,13 @@ def get_crc_shift(data: bytearray, poly: int, init: int, ref_in: bool,
         crc ^= (byte << msb_shift)
         for _ in range(8):
             if crc & msb:
-                crc = ((crc << 1) & width) ^ poly
+                crc = (crc << 1) ^ poly
             else:
-                crc = ((crc << 1) & width)
+                crc <<= 1
+            crc &= width
     if ref_out:
         crc = get_reflected_bits(crc)
-    return crc ^ xor_out
+    return (crc ^ xor_out) & width
 ```
 
 This function is capable of computing a bunch of popular CRC algorithms.
@@ -664,11 +651,11 @@ This function is capable of computing a bunch of popular CRC algorithms.
 '0x7f6bd7de'
 ```
 
-This implementation is great, but it still requires iteration over <em>every bit</em> of <em>every byte</em> of data. There's one more CRC software implementation I want to cover that only requires iteration over <em>every byte</em> of data.
+This implementation still requires iteration over <em>every bit</em> of <em>every byte</em> of data. There's one more CRC software implementation I want to cover that only requires iteration over <em>every byte</em> of data.
 
 ## Table lookup
 
-In the last section I showed that CRC calculations can be processed a byte at a time instead of bit-by-bit. The next implementation takes advantage of that property by creating a lookup table for every possible byte of data for a given polynomial. The table can be created at the start of an application, so calculating the CRC value just becomes a series of table lookups - this gives a significant performance increase. Tables also only contain 256 bytes of data, which is negligible for almost any modern computer. Creating the lookup table for a polynomial is very similar to the shift register implementation:
+In the last section I showed that CRC calculations can be processed a byte at a time instead of bit-by-bit. The next implementation takes advantage of that property by creating a lookup table for every possible byte of data for a given polynomial. The table can be created at the start of an application, so calculating the CRC value just becomes a series of table lookups &mdash; this gives a significant performance increase. Tables also only contain 256 bytes of data. Creating the lookup table for a polynomial is very similar to the shift register implementation:
 
 ```python
 class CrcTable(dict):
@@ -683,12 +670,13 @@ def get_crc_table(poly: int) -> dict:
     width = (2 ** (poly_length - 1)) - 1
     msb_shift = poly_length - 9
     for byte in range(256):
-        crc = (byte << msb_shift)
+        crc = byte << msb_shift
         for _ in range(8):
             if crc & msb:
-                crc = ((crc << 1) & width) ^ poly
+                crc = (crc << 1) ^ poly
             else:
-                crc = ((crc << 1) & width)
+                crc <<= 1
+            crc &= width
         table[byte] = crc
     return table
 ```
@@ -711,11 +699,11 @@ And it works!
 
 ```python
 >>> table = get_crc_table(0x11021)
->>> print(hex(get_crc(bytearray.fromhex("9ea43100ab93"), table)))
-0xc566
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table))
+'0xc566'
 ```
 
-Just like with the shift register implementation, we can add support for all five CRC parameters:
+Just like with the shift register implementation, we can add support for the five common CRC parameters:
 
 ```python
 class CrcTable(dict):
@@ -724,8 +712,14 @@ class CrcTable(dict):
         self.poly = poly
 
 class CrcParameters:
-    def __init__(self, poly: int, init: int, ref_in: bool,
-                 ref_out: bool, xor_out: int):
+    def __init__(
+        self,
+        poly: int,
+        init: int,
+        ref_in: bool,
+        ref_out: bool,
+        xor_out: int,
+    ):
         self.poly = poly
         self.init = init
         self.ref_in = ref_in
@@ -750,12 +744,13 @@ def get_crc_table(params: CrcParameters) -> dict:
     width = (2 ** (poly_length - 1)) - 1
     msb_shift = poly_length - 9
     for byte in range(256):
-        crc = (byte << msb_shift)
+        crc = byte << msb_shift
         for _ in range(8):
             if crc & msb:
-                crc = ((crc << 1) & width) ^ params.poly
+                crc = (crc << 1) ^ params.poly
             else:
-                crc = ((crc << 1) & width)
+                crc <<= 1
+            crc &= width
         table[byte] = crc
     return table
 
@@ -780,21 +775,21 @@ Just like with the shift register implementation, this parameterized table looku
 >>> # CRC-8-CCITT_ITU
 ... params = CrcParameters(0x107, 0x00, False, False, 0x55)
 >>> table = get_crc_table(params)
->>> hex(get_crc_shift(bytearray.fromhex("9ea43100ab93"), table, params))
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table, params))
 '0x22'
 >>> # CRC-16-CCITT_X-25
 ... params = CrcParameters(0x11021, 0xffff, True, True, 0xffff)
 >>> table = get_crc_table(params)
->>> hex(get_crc_shift(bytearray.fromhex("9ea43100ab93"), table, params))
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table, params))
 '0xf3e7'
 >>> # CRC-32-Ethernet
 ... params = CrcParameters(0x104c11db7, 0xffffffff, True, True, 0xffffffff)
 >>> table = get_crc_table(params)
->>> hex(get_crc_shift(bytearray.fromhex("9ea43100ab93"), table, params))
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table, params))
 '0x7f6bd7de'
 ```
 
-My implementation can still be improved though. If we assume `ref_in` and `ref_out` are always the same (which is almost always the case), when both are `True` a reflected table can be generated:
+This implementation can still be improved though. If we assume `ref_in` and `ref_out` are always the same (which is almost always the case), when both are `True` a reflected table can be generated:
 
 ```python
 class CrcTable(dict):
@@ -803,12 +798,16 @@ class CrcTable(dict):
         self.poly = poly
 
 class CrcParameters:
-    def __init__(self, poly: int, init: int, ref_in: bool,
-                 ref_out: bool, xor_out: int):
+    def __init__(
+        self,
+        poly: int,
+        init: int,
+        ref_io: bool,
+        xor_out: int,
+    ):
         self.poly = poly
         self.init = init
-        self.ref_in = ref_in
-        self.ref_out = ref_out
+        self.ref_io = ref_io
         self.xor_out = xor_out
 
 def get_reflected_bits(data: int, length: int) -> int:
@@ -826,16 +825,17 @@ def get_crc_table(params: CrcParameters) -> dict:
     width = (2 ** (crc_length)) - 1
     msb_shift = crc_length - 8
     for byte in range(256):
-        if params.ref_in:
+        if params.ref_io:
             crc = get_reflected_bits(byte, crc_length)
         else:
             crc = byte << msb_shift
         for _ in range(8):
             if crc & msb:
-                crc = ((crc << 1) & width) ^ params.poly
+                crc = (crc << 1) ^ params.poly
             else:
-                crc = ((crc << 1) & width)
-        if params.ref_in:
+                crc <<= 1
+            crc &= width
+        if params.ref_io:
             crc = get_reflected_bits(crc, crc_length)
         table[byte] = crc
     return table
@@ -845,7 +845,7 @@ def get_crc(data: bytearray, table: CrcTable, params: CrcParameters) -> int:
     poly_length = params.poly.bit_length()
     width = (2 ** (poly_length - 1)) - 1
     msb_shift = poly_length - 9
-    if params.ref_out:
+    if params.ref_io:
         crc = get_reflected_bits(crc, poly_length - 1)
         for byte in data:
             b = (crc ^ byte) & 0xff
@@ -857,17 +857,35 @@ def get_crc(data: bytearray, table: CrcTable, params: CrcParameters) -> int:
     return crc ^ params.xor_out
 ```
 
-I would show the output of this `get_crc` function, but it's no different than the previous parameterized table lookup output I showed above. I think creating the reflected table is straightforward - it's just storing the reflected CRC for a given byte, which means we don't need to reflect the input byte when using the table. On the other hand, the process of using the reflected table wasn't abundantly clear to me right off the bat. It finally clicked for me when I realized the lookup table keys are associated with the <em>least</em>-significant byte in the register as opposed to the <em>most</em> significant byte (remember, everything is reflected now). If this doesn't immediately make sense, try performing a reflected calculation by hand.
+The output of the reflected table implementation is the same as the previous parameterized table lookup implementation.
+
+```python
+>>> # CRC-8-CCITT_ITU
+... params = CrcParameters(0x107, 0x00, False, 0x55)
+>>> table = get_crc_table(params)
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table, params))
+'0x22'
+>>> # CRC-16-CCITT_X-25
+... params = CrcParameters(0x11021, 0xffff, True, 0xffff)
+>>> table = get_crc_table(params)
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table, params))
+'0xf3e7'
+>>> # CRC-32-Ethernet
+... params = CrcParameters(0x104c11db7, 0xffffffff, True, 0xffffffff)
+>>> table = get_crc_table(params)
+>>> hex(get_crc(bytearray.fromhex("9ea43100ab93"), table, params))
+'0x7f6bd7de'
+```
+
+I found creating the reflected table straightforward &mdash; it's just storing the reflected CRC for a given byte, which means we don't need to reflect the input byte when using the table. On the other hand, the process of <em>using</em> the reflected table wasn't immediately clear to me. It finally clicked when I realized the lookup table keys are associated with the <em>least</em>-significant byte in the register as opposed to the <em>most</em>-significant byte (remember, everything is reflected now). If this doesn't make sense, try performing a reflected calculation by hand.
 
 The table lookup CRC implementation is far and away the best option for computing CRCs in software, especially if your application is expected to use a single CRC algorithm.
 
 # Wrapping up
 
-Hopefully this post gave a reasonably clear and easily understandable introduction to some of the concepts surrounding CRCs. Still, it was only an introduction - if this piqued your interest in CRCs or left some questions unanswered, be sure to check out my references and do some searching online for things I didn't cover.
+Hopefully this post gave a reasonably clear and easily understandable introduction to some of the concepts surrounding CRCs. Still, it was only an introduction &mdash; if this piqued your interest in CRCs or left some questions unanswered, be sure to check out my references and do some searching online for things I didn't cover.
 
 # Primary references
-
-I probably missed a few (and I'll update this list if I notice that's the case), but this list contains nearly everything I used while making this article.
 
 - [Ross Williams' excellent "A Painless Guide to CRC Error Detection Algorithms"](http://ross.net/crc/download/crc_v3.txt) (check out his site, [The CRC Pitstop](http://ross.net/crc/index.html), for a trip back to 1996)
 - [Ben Eater's YouTube playlist on error detection](https://www.youtube.com/playlist?list=PLowKtXNTBypFWff2QjXCWuSfJDWcvE0Vm)
@@ -885,7 +903,10 @@ I probably missed a few (and I'll update this list if I notice that's the case),
   - [Best CRC Polynomials](https://users.ece.cmu.edu/~koopman/crc/index.html)
   - [CRC Polynomial Zoo](https://users.ece.cmu.edu/~koopman/crc/crc32.html)
   - [32-Bit Cyclic Redundancy Codes for Internet Applications](https://users.ece.cmu.edu/~koopman/networks/dsn02/dsn02_koopman.pdf)
-- [Michael Barr's "CRC Series, Part 3: CRC Implementation Code in C/C++](https://barrgroup.com/Embedded-Systems/How-To/CRC-Calculation-C-Code) (I didn't use them much, but here's [Part 1](https://barrgroup.com/Embedded-Systems/How-To/Additive-Checksums) and [Part 2](https://barrgroup.com/Embedded-Systems/How-To/CRC-Math-Theory) as well)
-- [The Online CRC Calculator](https://crccalc.com/) (and [associated C# source code on GitHub](https://github.com/meetanthony/crccsharp))
+- Michael Barr's CRC Series:
+  - [Part 1: Additive Checksums](https://barrgroup.com/Embedded-Systems/How-To/Additive-Checksums)
+  - [Part 2: CRC Mathematics and Theory](https://barrgroup.com/Embedded-Systems/How-To/CRC-Math-Theory)
+  - [Part 3: CRC Implementation Code in C/C++](https://barrgroup.com/Embedded-Systems/How-To/CRC-Calculation-C-Code)
+- [The Online CRC Calculator](https://crccalc.com/) (and [associated source code](https://github.com/meetanthony/crccsharp))
 - [CRC RevEng Catalogue of parametrised CRC algorithms](http://reveng.sourceforge.net/crc-catalogue/)
 - [Bastian Molkenthin's "Understanding and implementing CRC calculation"](http://www.sunshine2k.de/articles/coding/crc/understanding_crc.html)
