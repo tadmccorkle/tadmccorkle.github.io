@@ -9,7 +9,7 @@
 >
   <url>
     <loc>https://tadmccorkle.com/</loc>
-    <lastmod>2024-02-17</lastmod>
+    <lastmod>2025-05-13</lastmod>
     <changefreq>monthly</changefreq>
   </url>
   
@@ -23,6 +23,10 @@
   
   <url>
     <loc>https://tadmccorkle.com/blog/posts/cyclic-redundancy-check</loc>
+  </url>
+  
+  <url>
+    <loc>https://tadmccorkle.com/blog/posts/simplifying-collection-usage-in-multithreaded-wpf</loc>
   </url>
   
 </urlset>
