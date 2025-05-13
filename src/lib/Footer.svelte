@@ -22,7 +22,6 @@
 	footer {
 		display: flex;
 		justify-content: space-between;
-		font-size: 1.1rem;
 		border-top: 1px solid var(--secondary-color);
 		padding: 1rem 0;
 	}

@@ -2,7 +2,7 @@
 	--font-body: "Source Serif Pro", Georgia, serif;
 	--font-heading: "Source Sans Pro", "Open Sans", "Segoe UI", Ubuntu, sans-serif;
 	--font-mono: "Source Code Pro", Consolas, Monaco, monospace;
-	--default-font-size: 1.1rem;
+	--default-font-size: 1rem;
 	--small-font-size: 0.95rem;
 	--code-font-size: 0.9rem;
 	--bg: #fbfbf8;
@@ -36,21 +36,15 @@ html {
 
 @media (max-width: 480px) {
 	html {
-		font-size: 0.9rem;
-	}
-}
-
-@media (max-width: 340px) {
-	html {
-		font-size: 0.85rem;
+		font-size: 1.1rem;
 	}
 }
 
 body {
 	margin: 0 auto;
-	padding: 0 1.5rem;
+	padding: 0 25px;
 	min-height: 100vh;
-	max-width: 600px;
+	max-width: 650px;
 	width: 100%;
 	word-wrap: break-word;
 	background-color: var(--bg);
@@ -86,8 +80,8 @@ ol {
 	padding: 0 0 var(--section-padding) 2.5rem;
 }
 
-li > ul,
-li > ol {
+li>ul,
+li>ol {
 	padding-bottom: 0;
 }
 
@@ -101,7 +95,7 @@ a:hover {
 }
 
 h1 {
-	font-size: 2rem;
+	font-size: 1.8rem;
 }
 
 h2 {
@@ -140,6 +134,28 @@ code {
 	border-radius: 5px;
 	background-color: var(--secondary-color);
 	padding: 0.1em 0.25em;
+}
+
+aside {
+	background-color: var(--secondary-color);
+	margin: 0 0 var(--section-padding) 0;
+	padding: var(--section-padding);
+	border-radius: 5px;
+}
+
+aside>:last-child {
+	padding-bottom: 0;
+}
+
+blockquote {
+	margin: 0 0 var(--section-padding) 0;
+	padding: var(--section-padding);
+	padding-left: calc(var(--section-padding) - 3px);
+	border-left: 3px solid var(--secondary-color);
+}
+
+blockquote>:last-child {
+	padding-bottom: 0;
 }
 
 i,

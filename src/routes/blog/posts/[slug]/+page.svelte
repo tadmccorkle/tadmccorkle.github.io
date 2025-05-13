@@ -43,7 +43,7 @@
 
 	#post-title {
 		padding: 0.5em 0 0.1rem 0;
-		font-size: 2.5rem;
+		font-size: 2rem;
 	}
 
 	#post-meta {
