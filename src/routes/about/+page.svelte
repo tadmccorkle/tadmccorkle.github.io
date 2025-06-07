@@ -9,11 +9,11 @@
 <article>
 	<h1>About</h1>
 	<p>
-		I'm Tad McCorkle, a software engineer. I consider myself a generalist software developer, and I
-		have developed desktop, CLI, web, and mobile applications throughout my career. I work at
-		<a href="https://gtri.gatech.edu">GTRI</a> where I've developed a lot of software for testing electronic
-		warfare systems with hardware-in-the-loop. Most of my professional software development experience
-		is in C# and TypeScript, but I like to explore other languages and technologies in my spare time.
+		I'm Tad McCorkle, a software engineer. I consider myself a generalist software developer, and
+		I've developed desktop, CLI, web, and mobile applications throughout my career. I work at
+		<a href="https://gtri.gatech.edu">GTRI</a> where I've developed a lot of software for integrating
+		and testing avionics and electronic warfare systems. Most of my professional software development
+		experience is in C# and TypeScript, but I like to explore and use other languages and technologies.
 	</p>
 
 	<ul>
@@ -40,7 +40,7 @@
 <style>
 	ul {
 		list-style: none;
-		padding: 0 0 0 1em;
+		padding: 0 0 var(--section-padding) 1em;
 	}
 
 	.details-icon {
