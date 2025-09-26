@@ -5,7 +5,7 @@
   <id>https://tadmccorkle.com/</id>
   <title>Tad McCorkle's Blog</title>
   <subtitle>A personal website and blog by Tad McCorkle.</subtitle>
-  <updated>Mon May 12 2025 12:00:00 GMT+0000 (Coordinated Universal Time)</updated>
+  <updated>Thu Sep 25 2025 12:00:00 GMT+0000 (Coordinated Universal Time)</updated>
   <author>
     <name>Tad McCorkle</name>
   </author>
@@ -16,7 +16,7 @@
     <id>https://tadmccorkle.com/blog/posts/simplifying-collection-usage-in-multithreaded-wpf</id>
     <title>Simplifying Collection Usage in Multithreaded WPF</title>
     <published>Mon May 12 2025 12:00:00 GMT+0000 (Coordinated Universal Time)</published>
-    <updated>Mon May 12 2025 12:00:00 GMT+0000 (Coordinated Universal Time)</updated>
+    <updated>Thu Sep 25 2025 12:00:00 GMT+0000 (Coordinated Universal Time)</updated>
     <link href="https://tadmccorkle.com/blog/posts/simplifying-collection-usage-in-multithreaded-wpf" rel="alternate" type="text/html" title="Simplifying Collection Usage in Multithreaded WPF" />
     <author>
       <name>Tad McCorkle</name>
@@ -275,23 +275,23 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We still have the problem of our view model needing to be created on the target UI thread. There is a way to allow our view model to be created on any thread and still leverage WPF&#39;s built-in collection synchronization: an &lt;a href=&quot;https://learn.microsoft.com/en-us/dotnet/desktop/wpf/properties/attached-properties-overview&quot;&gt;attached property&lt;/a&gt;. Attached properties are always evaluated on the UI thread, so we can use them to defer collection synchronization until the UI first binds to our collection.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;hljs language-csharp&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;Synchronized&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;hljs language-csharp&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;CollectionBehaviors&lt;/span&gt;
 {
-    &lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;readonly&lt;/span&gt; DependencyProperty ItemsSourceProperty =
+    &lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;readonly&lt;/span&gt; DependencyProperty SynchronizedItemsSourceProperty =
         DependencyProperty.RegisterAttached(
-            &lt;span class=&quot;hljs-string&quot;&gt;&quot;ItemsSource&quot;&lt;/span&gt;,
+            &lt;span class=&quot;hljs-string&quot;&gt;&quot;SynchronizedItemsSource&quot;&lt;/span&gt;,
             &lt;span class=&quot;hljs-keyword&quot;&gt;typeof&lt;/span&gt;(IEnumerable),
-            &lt;span class=&quot;hljs-keyword&quot;&gt;typeof&lt;/span&gt;(Synchronized),
-            &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; PropertyMetadata(&lt;span class=&quot;hljs-literal&quot;&gt;null&lt;/span&gt;, OnItemsSourceChanged));
+            &lt;span class=&quot;hljs-keyword&quot;&gt;typeof&lt;/span&gt;(CollectionBehaviors),
+            &lt;span class=&quot;hljs-keyword&quot;&gt;new&lt;/span&gt; PropertyMetadata(&lt;span class=&quot;hljs-literal&quot;&gt;null&lt;/span&gt;, OnSynchronizedItemsSourceChanged));
 
     [&lt;span class=&quot;hljs-meta&quot;&gt;AttachedPropertyBrowsableForType(typeof(ItemsControl))&lt;/span&gt;]
-    &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; IEnumerable &lt;span class=&quot;hljs-title&quot;&gt;GetItemsSource&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;DependencyObject target&lt;/span&gt;)&lt;/span&gt;
-        =&gt; (IEnumerable)target.GetValue(ItemsSourceProperty);
+    &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; IEnumerable &lt;span class=&quot;hljs-title&quot;&gt;GetSynchronizedItemsSource&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;DependencyObject target&lt;/span&gt;)&lt;/span&gt;
+        =&gt; (IEnumerable)target.GetValue(SynchronizedItemsSourceProperty);
 
-    &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;SetItemsSource&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;DependencyObject target, IEnumerable &lt;span class=&quot;hljs-keyword&quot;&gt;value&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
-        =&gt; target.SetValue(ItemsSourceProperty, &lt;span class=&quot;hljs-keyword&quot;&gt;value&lt;/span&gt;);
+    &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;SetSynchronizedItemsSource&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;DependencyObject target, IEnumerable &lt;span class=&quot;hljs-keyword&quot;&gt;value&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+        =&gt; target.SetValue(SynchronizedItemsSourceProperty, &lt;span class=&quot;hljs-keyword&quot;&gt;value&lt;/span&gt;);
 
-    &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;OnItemsSourceChanged&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;
+    &lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;OnSynchronizedItemsSourceChanged&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;
         DependencyObject d,
         DependencyPropertyChangedEventArgs e&lt;/span&gt;)&lt;/span&gt;
     {
@@ -340,13 +340,13 @@
         &lt;span class=&quot;hljs-attr&quot;&gt;xmlns:d&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;http://schemas.microsoft.com/expression/blend/2008&quot;&lt;/span&gt;
         &lt;span class=&quot;hljs-attr&quot;&gt;xmlns:mc&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot;&lt;/span&gt;
         &lt;span class=&quot;hljs-attr&quot;&gt;xmlns:local&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;clr-namespace:Examples&quot;&lt;/span&gt;
-        &lt;span class=&quot;hljs-attr&quot;&gt;xmlns:csm&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;clr-namespace:CsmLib.Wpf.Controls;assembly=CsmLib.Wpf&quot;&lt;/span&gt;
+        &lt;span class=&quot;hljs-attr&quot;&gt;xmlns:b&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;clr-namespace:CsmLib.Wpf.Behaviors;assembly=CsmLib.Wpf&quot;&lt;/span&gt;
         &lt;span class=&quot;hljs-attr&quot;&gt;mc:Ignorable&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;d&quot;&lt;/span&gt;
         &lt;span class=&quot;hljs-attr&quot;&gt;d:DataContext&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;{d:DesignInstance local:ViewModel}&quot;&lt;/span&gt;
         &lt;span class=&quot;hljs-attr&quot;&gt;Title&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;Example&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;Height&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;450&quot;&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;Width&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;800&quot;&lt;/span&gt;&gt;&lt;/span&gt;
 
     &lt;span class=&quot;hljs-comment&quot;&gt;&amp;#x3C;!-- before: &amp;#x3C;ListBox ItemsSource=&quot;{Binding Messages}&quot;/&gt;--&gt;&lt;/span&gt;
-    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;#x3C;&lt;span class=&quot;hljs-name&quot;&gt;ListBox&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;csm:Synchronized.ItemsSource&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;{Binding Messages}&quot;&lt;/span&gt;/&gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;#x3C;&lt;span class=&quot;hljs-name&quot;&gt;ListBox&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;b:CollectionBehaviors.SynchronizedItemsSource&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;{Binding Messages}&quot;&lt;/span&gt;/&gt;&lt;/span&gt;
 
 &lt;span class=&quot;hljs-tag&quot;&gt;&amp;#x3C;/&lt;span class=&quot;hljs-name&quot;&gt;Window&lt;/span&gt;&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
