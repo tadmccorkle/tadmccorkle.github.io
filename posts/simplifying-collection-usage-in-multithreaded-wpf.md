@@ -1,6 +1,7 @@
 ---
 title: 'Simplifying Collection Usage in Multithreaded WPF'
 date: 2025-05-12
+updated: 2025-09-25
 excerpt: A convenient way to avoid issues with observable collections in multithreaded WPF applications.
 ---
 
@@ -300,23 +301,23 @@ public class ViewModel
 We still have the problem of our view model needing to be created on the target UI thread. There is a way to allow our view model to be created on any thread and still leverage WPF's built-in collection synchronization: an [attached property](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/properties/attached-properties-overview). Attached properties are always evaluated on the UI thread, so we can use them to defer collection synchronization until the UI first binds to our collection.
 
 ```csharp
-public static class Synchronized
+public static class CollectionBehaviors
 {
-    public static readonly DependencyProperty ItemsSourceProperty =
+    public static readonly DependencyProperty SynchronizedItemsSourceProperty =
         DependencyProperty.RegisterAttached(
-            "ItemsSource",
+            "SynchronizedItemsSource",
             typeof(IEnumerable),
-            typeof(Synchronized),
-            new PropertyMetadata(null, OnItemsSourceChanged));
+            typeof(CollectionBehaviors),
+            new PropertyMetadata(null, OnSynchronizedItemsSourceChanged));
 
     [AttachedPropertyBrowsableForType(typeof(ItemsControl))]
-    public static IEnumerable GetItemsSource(DependencyObject target)
-        => (IEnumerable)target.GetValue(ItemsSourceProperty);
+    public static IEnumerable GetSynchronizedItemsSource(DependencyObject target)
+        => (IEnumerable)target.GetValue(SynchronizedItemsSourceProperty);
 
-    public static void SetItemsSource(DependencyObject target, IEnumerable value)
-        => target.SetValue(ItemsSourceProperty, value);
+    public static void SetSynchronizedItemsSource(DependencyObject target, IEnumerable value)
+        => target.SetValue(SynchronizedItemsSourceProperty, value);
 
-    private static void OnItemsSourceChanged(
+    private static void OnSynchronizedItemsSourceChanged(
         DependencyObject d,
         DependencyPropertyChangedEventArgs e)
     {
@@ -371,13 +372,13 @@ While our UI's XAML starts using the attached property instead of `ItemsSource` 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Examples"
-        xmlns:csm="clr-namespace:CsmLib.Wpf.Controls;assembly=CsmLib.Wpf"
+        xmlns:b="clr-namespace:CsmLib.Wpf.Behaviors;assembly=CsmLib.Wpf"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:ViewModel}"
         Title="Example" Height="450" Width="800">
 
     <!-- before: <ListBox ItemsSource="{Binding Messages}"/>-->
-    <ListBox csm:Synchronized.ItemsSource="{Binding Messages}"/>
+    <ListBox b:CollectionBehaviors.SynchronizedItemsSource="{Binding Messages}"/>
 
 </Window>
 ```
