@@ -9,11 +9,12 @@
 <article>
 	<h1>About</h1>
 	<p>
-		I'm Tad McCorkle, a software engineer. I consider myself a generalist software developer, and
-		I've developed desktop, CLI, web, and mobile applications throughout my career. I work at
-		<a href="https://gtri.gatech.edu">GTRI</a> where I've developed a lot of software for integrating
-		and testing avionics and electronic warfare systems. Most of my professional software development
-		experience is in C# and TypeScript, but I like to explore and use other languages and technologies.
+		I'm Tad McCorkle, a software developer. I'm currently working at
+		<a href="https://www.leidos.com/">Leidos</a>
+		on real-time ISR data management applications. I previously worked at
+		<a href="https://gtri.gatech.edu/">GTRI</a>
+		on applications for integrating and testing avionics and electronic warfare systems, among other
+		things.
 	</p>
 
 	<ul>
