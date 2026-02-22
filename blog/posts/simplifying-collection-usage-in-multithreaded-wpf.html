@@ -5,19 +5,19 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<link rel="icon" href="../../favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		
+		<link href="../../_app/immutable/entry/start.B6Zm7hTA.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/3G0E-ysp.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CYEMZujY.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.vaFzLM8Q.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/abmEAOcE.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/0.B2s6zRQ2.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/9aX-0KSH.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CIAdVOhT.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/4.C9_qBJei.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/sbWH3_uq.js" rel="modulepreload">
+		<title>Simplifying Collection Usage in Multithreaded WPF | Tad McCorkle</title><!-- HEAD_svelte-1eytxyh_START --><meta name="description" content="A personal website and blog by Tad McCorkle."><link rel="canonical" href="https://tadmccorkle.com/blog/posts/simplifying-collection-usage-in-multithreaded-wpf"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Tad McCorkle's Blog Feed"><link rel="sitemap" type="application/xml" title="Tad McCorkle - Sitemap" href="/sitemap.xml"><meta name="author" content="Tad McCorkle"><meta property="og:locale" content="en_US"><meta property="og:title" content="Tad McCorkle"><meta property="og:description" content="A personal website and blog by Tad McCorkle."><meta property="og:url" content="https://tadmccorkle.com/"><meta property="og:site_name" content="Tad McCorkle"><!-- HEAD_svelte-1eytxyh_END --><!-- HEAD_svelte-8dgaa3_START --><meta property="og:type" content="article"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"><!-- HEAD_svelte-8dgaa3_END -->
 		<link href="../../_app/immutable/assets/0.PNHaEdqi.css" rel="stylesheet">
 		<link href="../../_app/immutable/assets/4.CwiAQOES.css" rel="stylesheet">
-		<link rel="modulepreload" href="../../_app/immutable/entry/start.BA5GYDMj.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/D8YnCT-Y.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/C0gDBJb_.js">
-		<link rel="modulepreload" href="../../_app/immutable/entry/app.BTMr52Kh.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/IHki7fMi.js">
-		<link rel="modulepreload" href="../../_app/immutable/nodes/0.BQJAt28r.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/C3pvMd-6.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/CIAdVOhT.js">
-		<link rel="modulepreload" href="../../_app/immutable/nodes/4.BgdG4u2u.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/sbWH3_uq.js"><title>Simplifying Collection Usage in Multithreaded WPF | Tad McCorkle</title><!-- HEAD_svelte-1eytxyh_START --><meta name="description" content="A personal website and blog by Tad McCorkle."><link rel="canonical" href="https://tadmccorkle.com/blog/posts/simplifying-collection-usage-in-multithreaded-wpf"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="Tad McCorkle's Blog Feed"><link rel="sitemap" type="application/xml" title="Tad McCorkle - Sitemap" href="/sitemap.xml"><meta name="author" content="Tad McCorkle"><meta property="og:locale" content="en_US"><meta property="og:title" content="Tad McCorkle"><meta property="og:description" content="A personal website and blog by Tad McCorkle."><meta property="og:url" content="https://tadmccorkle.com/"><meta property="og:site_name" content="Tad McCorkle"><!-- HEAD_svelte-1eytxyh_END --><!-- HEAD_svelte-8dgaa3_START --><meta property="og:type" content="article"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"><!-- HEAD_svelte-8dgaa3_END -->
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">   <header><nav class="svelte-1bzmvou"><a href="/" class="home svelte-1bzmvou" data-svelte-h="svelte-phga3q">TM</a> <div><a href="/about" class="nav-link svelte-1bzmvou" data-svelte-h="svelte-xnd6pu">About</a> <a href="/projects" class="nav-link svelte-1bzmvou" data-svelte-h="svelte-1pcicv8">Projects</a> <a href="/" class="nav-link svelte-1bzmvou" data-svelte-h="svelte-hx5xq1">Blog</a></div></nav> </header> <main class="svelte-17szv2b"> <article class="svelte-cugkhp"><h1 id="post-title" class="svelte-cugkhp">Simplifying Collection Usage in Multithreaded WPF</h1> <small id="post-meta" class="svelte-cugkhp">posted on May 12, 2025 | last updated September 25, 2025</small>  <!-- HTML_TAG_START --><p>Data binding in WPF makes updating the UI in response to changes easy, so long as the UI is notified of changes by way of the <code>INotifyPropertyChanged</code> or <code>INotifyCollectionChanged</code> interface change events. For scalar properties, this is true even when an update is triggered from a background thread — the binding engine handles the property change by marshalling it (i.e., queuing a corresponding delegate) to the appropriate UI thread's dispatcher. While there's no manual marshalling or synchronization required by the application developer for scalar property updates, you'll quickly discover that this is <strong>not</strong> the case when binding an <code>ItemControl</code>'s <code>ItemsSource</code> to a dynamic collection. In fact, manual marshalling to the UI thread or additional synchronization is absolutely required in a multithreaded context.</p>
@@ -348,21 +348,21 @@
 <span class="hljs-tag">&#x3C;/<span class="hljs-name">Window</span>></span>
 </code></pre>
 <p>Now our observable collection is thread-safe for modifications, and we don't have to consider the UI thread outside of data binding.</p>
-<p>You can find full source code and an accompanying example <a href="https://github.com/tadmccorkle/CsmLib">here</a>.</p><!-- HTML_TAG_END --> </article></main> <footer class="svelte-j2m7nr"><span id="footer-copyright" class="svelte-j2m7nr"><div>Copyright © 2025 Tad McCorkle</div> <div data-svelte-h="svelte-z6584h"><a href="https://github.com/tadmccorkle/tadmccorkle.github.io/blob/master/LICENSE">All code is under MIT license</a></div></span> <span id="footer-links" class="svelte-j2m7nr" data-svelte-h="svelte-9ox39f"><a href="https://github.com/tadmccorkle" class="svelte-j2m7nr">github</a>
+<p>You can find full source code and an accompanying example <a href="https://github.com/tadmccorkle/CsmLib">here</a>.</p><!-- HTML_TAG_END --> </article></main> <footer class="svelte-j2m7nr"><span id="footer-copyright" class="svelte-j2m7nr"><div>Copyright © 2026 Tad McCorkle</div> <div data-svelte-h="svelte-z6584h"><a href="https://github.com/tadmccorkle/tadmccorkle.github.io/blob/master/LICENSE">All code is under MIT license</a></div></span> <span id="footer-links" class="svelte-j2m7nr" data-svelte-h="svelte-9ox39f"><a href="https://github.com/tadmccorkle" class="svelte-j2m7nr">github</a>
 		•
 		<a href="/feed.xml" target="_blank" rel="noopener noreferrer" class="svelte-j2m7nr">feed</a></span> </footer> 
 			
 			<script>
 				{
-					__sveltekit_2a8zgd = {
+					__sveltekit_83fp5p = {
 						base: new URL("../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../_app/immutable/entry/start.BA5GYDMj.js"),
-						import("../../_app/immutable/entry/app.BTMr52Kh.js")
+						import("../../_app/immutable/entry/start.B6Zm7hTA.js"),
+						import("../../_app/immutable/entry/app.vaFzLM8Q.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 4],

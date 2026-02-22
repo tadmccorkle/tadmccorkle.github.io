@@ -9,7 +9,7 @@
   <author>
     <name>Tad McCorkle</name>
   </author>
-  <rights>Copyright © 2025 Tad McCorkle</rights>
+  <rights>Copyright © 2026 Tad McCorkle</rights>
   <generator>SvelteKit</generator>
   
   <entry>
@@ -353,7 +353,7 @@
 &lt;p&gt;Now our observable collection is thread-safe for modifications, and we don&#39;t have to consider the UI thread outside of data binding.&lt;/p&gt;
 &lt;p&gt;You can find full source code and an accompanying example &lt;a href=&quot;https://github.com/tadmccorkle/CsmLib&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
     </content>
-    <rights>Copyright © 2025 Tad McCorkle</rights>
+    <rights>Copyright © 2026 Tad McCorkle</rights>
   </entry>
   <entry>
     <id>https://tadmccorkle.com/blog/posts/cyclic-redundancy-check</id>
@@ -1261,6 +1261,6 @@ NEXT BYTE:    10100010
 &lt;li&gt;&lt;a href=&quot;http://www.sunshine2k.de/articles/coding/crc/understanding_crc.html&quot;&gt;Bastian Molkenthin&#39;s &quot;Understanding and implementing CRC calculation&quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
     </content>
-    <rights>Copyright © 2025 Tad McCorkle</rights>
+    <rights>Copyright © 2026 Tad McCorkle</rights>
   </entry>
 </feed>
